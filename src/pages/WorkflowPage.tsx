@@ -21,6 +21,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { PromptBlock } from "@/components/PromptBlock";
 import { CopyButton } from "@/components/CopyButton";
 import { AccessNote } from "@/components/AccessNote";
+import { Tip } from "@/components/Tip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import {
