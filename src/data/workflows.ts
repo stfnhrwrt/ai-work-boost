@@ -35,6 +35,14 @@ export interface Workflow {
   improvementPrompts: string[];
   realWorldAction: string;
   timeRange: string;
+  /** Optional micro-tip shown under the prompt block */
+  promptTip?: string;
+  /** Optional micro-tip shown under the improvement prompts */
+  improvementTip?: string;
+  /** Optional micro-tip shown in the context source section */
+  contextTip?: string;
+  /** Extra tips rendered after improvement (max 1–2) */
+  extraTips?: string[];
   /** For level: "agent" — Copilot Studio agent definition */
   agent?: {
     purpose: string;
@@ -126,11 +134,15 @@ Keep it concise and executive-ready.
 
 Notes:
 [Paste calendar, key emails and Teams highlights here]`,
+    promptTip:
+      "Mention where the data comes from (calendar, emails, Teams). Copilot will pull that context automatically.",
     improvementPrompts: [
       "Make it more concise — half a page maximum.",
       "Highlight the top 3 priorities at the very top.",
       "Rewrite in a more direct, executive tone.",
     ],
+    improvementTip:
+      "You rarely get the best result in one try. Short follow-up prompts improve quality significantly.",
     realWorldAction:
       "Send the briefing to your executive in Teams or email before the day starts (ideally before 8 a.m.).",
     timeRange: "5–10 minutes",
@@ -1150,6 +1162,78 @@ Inputs:
     realWorldAction:
       "Share the kickoff doc with the team 48 hours before the kickoff meeting and use the agenda to run the session.",
     timeRange: "10 minutes",
+  },
+  {
+    id: "build-business-case",
+    roleId: "project-managers",
+    level: "advanced",
+    title: "Build a Business Case (Interactive AI)",
+    description:
+      "Co-create a structured business case with the AI. It asks you the right questions step by step, then assembles a decision-ready document.",
+    situation:
+      "You need to create a structured business case but don't have all the inputs ready. Let the AI guide you through the gaps.",
+    contextSources: [
+      "Project documents and scoping notes",
+      "Emails with sponsor and stakeholders",
+      "Stakeholder discussions and meeting notes",
+      "Existing data (cost estimates, benchmarks, market data)",
+    ],
+    contextTip:
+      "Copilot only uses data you have access to. If a key document isn't surfacing, check sharing permissions.",
+    accessNote:
+      "This workflow benefits from access to project files, sponsor emails and stakeholder conversations. Copilot can only reference what you can open.",
+    copilotPrompt: `You are a project manager assistant.
+
+Help me build a complete business case.
+
+First, ask me questions step by step to gather all required information.
+Then create a structured business case.
+
+Structure should include:
+- Problem / Opportunity
+- Objectives
+- Options (with pros / cons)
+- Costs
+- Benefits
+- Risks
+- Recommendation
+
+Use any relevant project documents, emails and stakeholder conversations I have access to as background.
+
+Start by asking the most important questions first — one or two at a time — and wait for my answers before moving on.`,
+    chatgptPrompt: `You are a project manager assistant.
+
+Help me build a complete business case.
+
+Ask me questions step by step to gather all required inputs. Wait for my answer before asking the next question.
+
+Then create a structured business case with:
+- Problem / Opportunity
+- Objectives
+- Options (with pros / cons)
+- Costs
+- Benefits
+- Risks
+- Recommendation
+
+Start by asking the most important questions first.`,
+    promptTip:
+      "Let the AI guide the process. Answer step by step instead of dumping everything at once — the questions sharpen the output.",
+    improvementPrompts: [
+      "Make it more concise — one page maximum.",
+      "Strengthen the recommendation with clearer reasoning.",
+      "Highlight the financial impact (NPV, payback period, ROI).",
+      "Challenge my assumptions and flag the weakest parts of the case.",
+    ],
+    improvementTip:
+      "You rarely get the best result in one try. Short follow-up prompts improve quality significantly.",
+    extraTips: [
+      "If you don't know an answer, give an estimate. The AI can refine it later.",
+      "Ask the AI to challenge your assumptions — it strengthens the case before stakeholders do.",
+    ],
+    realWorldAction:
+      "Use the generated business case for stakeholder presentations, steering committee decisions or funding requests.",
+    timeRange: "10–15 minutes",
   },
 ];
 
