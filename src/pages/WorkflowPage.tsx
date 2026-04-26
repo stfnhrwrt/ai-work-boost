@@ -2,7 +2,10 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
+  Bot,
   Calendar,
+  CalendarClock,
+  CheckCircle2,
   ChevronRight,
   Clock,
   FileText,
@@ -11,20 +14,29 @@ import {
   Sparkles,
   Target,
   Wand2,
+  Zap,
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PromptBlock } from "@/components/PromptBlock";
 import { CopyButton } from "@/components/CopyButton";
+import { AccessNote } from "@/components/AccessNote";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { getRole, getWorkflow, getWorkflowsByRole } from "@/data/workflows";
+import {
+  getRole,
+  getWorkflow,
+  getWorkflowsByRole,
+  LEVEL_META,
+} from "@/data/workflows";
 
 const sourceIconFor = (source: string) => {
   const s = source.toLowerCase();
-  if (s.includes("email")) return Mail;
-  if (s.includes("teams") || s.includes("chat") || s.includes("conversation")) return MessageSquare;
-  if (s.includes("calendar") || s.includes("meeting") || s.includes("stand-up")) return Calendar;
+  if (s.includes("email") || s.includes("mailbox")) return Mail;
+  if (s.includes("teams") || s.includes("chat") || s.includes("conversation"))
+    return MessageSquare;
+  if (s.includes("calendar") || s.includes("meeting") || s.includes("stand-up"))
+    return Calendar;
   return FileText;
 };
 
@@ -38,6 +50,8 @@ const WorkflowPage = () => {
   const siblings = getWorkflowsByRole(workflow.roleId);
   const currentIndex = siblings.findIndex((w) => w.id === workflow.id);
   const next = siblings[(currentIndex + 1) % siblings.length];
+  const meta = LEVEL_META[workflow.level];
+  const isAdvanced = workflow.level !== "essential";
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -57,6 +71,16 @@ const WorkflowPage = () => {
               <ChevronRight className="h-3.5 w-3.5" />
               <span className="font-medium text-foreground">{workflow.title}</span>
             </nav>
+
+            {isAdvanced && (
+              <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-foreground">
+                {workflow.level === "advanced" && <Zap className="h-3.5 w-3.5" />}
+                {workflow.level === "agent" && <Bot className="h-3.5 w-3.5" />}
+                {workflow.level === "scheduled" && <CalendarClock className="h-3.5 w-3.5" />}
+                {meta.label}
+              </span>
+            )}
+
             <h1 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               {workflow.title}
             </h1>
@@ -109,8 +133,83 @@ const WorkflowPage = () => {
             </p>
           </Section>
 
+          {/* Access Matters callout */}
+          {workflow.accessNote && <AccessNote note={workflow.accessNote} />}
+
+          {/* Agent setup (Level 2) */}
+          {workflow.agent && (
+            <Section title="Build the agent" subtitle="Setup steps in Copilot Studio" icon={Bot}>
+              <div className="mb-4 grid gap-3 sm:grid-cols-2">
+                <InfoBox label="Purpose" value={workflow.agent.purpose} />
+                <InfoBox label="Why it's powerful" value={workflow.agent.benefit} />
+              </div>
+
+              <div className="mb-5 rounded-xl border border-border bg-card p-5">
+                <h4 className="mb-3 text-sm font-semibold text-foreground">Setup steps</h4>
+                <ol className="space-y-2 text-sm text-foreground">
+                  {workflow.agent.setupSteps.map((step, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
+                        {i + 1}
+                      </span>
+                      <span className="leading-relaxed">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <div className="mb-3">
+                <h4 className="mb-2 text-sm font-semibold text-foreground">Agent instruction</h4>
+                <PromptBlock prompt={workflow.agent.instruction} />
+              </div>
+
+              <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm">
+                <span className="font-semibold text-foreground">Example trigger: </span>
+                <span className="text-muted-foreground">{workflow.agent.triggerExample}</span>
+              </div>
+            </Section>
+          )}
+
+          {/* Scheduled flow setup (Level 3) */}
+          {workflow.scheduled && (
+            <Section
+              title="Schedule the automation"
+              subtitle="Setup steps in Microsoft Power Automate"
+              icon={CalendarClock}
+            >
+              <div className="mb-4 grid gap-3 sm:grid-cols-3">
+                <InfoBox label="Purpose" value={workflow.scheduled.purpose} />
+                <InfoBox label="Schedule" value={workflow.scheduled.schedule} />
+                <InfoBox label="Output" value={workflow.scheduled.output} />
+              </div>
+
+              <div className="mb-5 rounded-xl border border-border bg-card p-5">
+                <h4 className="mb-3 text-sm font-semibold text-foreground">Setup steps</h4>
+                <ol className="space-y-2 text-sm text-foreground">
+                  {workflow.scheduled.setupSteps.map((step, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
+                        {i + 1}
+                      </span>
+                      <span className="leading-relaxed">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </Section>
+          )}
+
           {/* Tool Mode + Prompts */}
-          <Section title="Run the workflow" subtitle="Pick the tool you have access to">
+          <Section
+            title={
+              workflow.agent
+                ? "Prompt for the agent"
+                : workflow.scheduled
+                  ? "Prompt for the scheduled flow"
+                  : "Run the workflow"
+            }
+            subtitle="Pick the tool you have access to"
+          >
             <Tabs defaultValue="copilot" className="w-full">
               <TabsList className="mb-4 grid w-full max-w-md grid-cols-2">
                 <TabsTrigger value="copilot">Copilot (Recommended)</TabsTrigger>
@@ -200,6 +299,18 @@ function Section({ title, subtitle, icon: Icon, children }: SectionProps) {
       </div>
       {children}
     </section>
+  );
+}
+
+function InfoBox({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-4">
+      <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <CheckCircle2 className="h-3 w-3 text-primary" />
+        {label}
+      </div>
+      <p className="text-sm leading-relaxed text-foreground">{value}</p>
+    </div>
   );
 }
 
