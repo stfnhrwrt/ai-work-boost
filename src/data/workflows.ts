@@ -1043,6 +1043,114 @@ Notes:
       "Send the update to stakeholders or leadership via email or Teams ahead of your next checkpoint.",
     timeRange: "5–10 minutes",
   },
+  {
+    id: "steering-committee-update",
+    roleId: "project-managers",
+    level: "essential",
+    title: "Prepare a Steering Committee Update",
+    description:
+      "Build the content for your steering committee — clear status, decisions needed and asks for the sponsor.",
+    situation:
+      "You have a steering committee meeting and need to prepare a sharp update that drives decisions, not just informs.",
+    contextSources: [
+      "Project plan, RAID log and tracking documents",
+      "Recent emails with the sponsor and steering members",
+      "Last steering committee minutes",
+      "Stand-up notes and team discussions from the last sprint",
+    ],
+    copilotPrompt: `Prepare the content for my next steering committee meeting on project [Project Name].
+
+Use:
+- The project plan, RAID log and tracking documents
+- Recent emails with the sponsor and steering committee members
+- Minutes from the last steering committee
+- Stand-up notes from the last sprint
+
+Output (one slide per section):
+- Headline: 1-line status with RAG (Green / Amber / Red)
+- Progress since last steering (3 bullets)
+- Key risks and mitigations (top 3)
+- Decisions required from the committee (be explicit)
+- Specific asks of the sponsor
+- Look-ahead: next 4–6 weeks
+
+Be honest about issues. Keep total content to one page.`,
+    chatgptPrompt: `Prepare the content for a steering committee update based on the notes below.
+
+Output:
+- Headline + RAG status
+- Progress since last steering
+- Top 3 risks and mitigations
+- Decisions required from the committee
+- Asks of the sponsor
+- Look-ahead (next 4–6 weeks)
+
+Notes:
+[Paste project status, RAID log, recent updates and previous minutes]`,
+    improvementPrompts: [
+      "Tighten the decisions section — make each decision a clear yes/no question.",
+      "Add a 'what changed since last steering' callout at the top.",
+      "Rewrite the asks more assertively.",
+    ],
+    realWorldAction:
+      "Drop the content into your steering deck template. Send the deck and headline 24 hours before the meeting.",
+    timeRange: "10 minutes",
+  },
+  {
+    id: "project-kickoff",
+    roleId: "project-managers",
+    level: "essential",
+    title: "Draft a Project Kickoff",
+    description:
+      "Create a kickoff plan: scope, roles, milestones, comms cadence and a kickoff meeting agenda — all in one go.",
+    situation:
+      "A new project is starting and you need to align everyone fast — scope, roles, milestones and how you'll work together.",
+    contextSources: [
+      "The project brief or charter",
+      "Emails with the sponsor and stakeholders",
+      "Documents shared during scoping",
+      "Team availability and skills",
+    ],
+    copilotPrompt: `Help me draft a project kickoff for [Project Name].
+
+Use:
+- The project brief or charter
+- Emails with the sponsor and stakeholders during scoping
+- Documents shared during scoping
+- Team availability and roles
+
+Output:
+- One-line project purpose
+- Scope: in / out
+- Key stakeholders and their role (RACI-style)
+- Top 5 milestones with target dates
+- Communication cadence (stand-ups, status, steering)
+- Risks identified at kickoff
+- Kickoff meeting agenda (60 minutes, with timings)
+
+Make it concrete and decision-ready.`,
+    chatgptPrompt: `Draft a project kickoff plan based on the inputs below.
+
+Output:
+- Project purpose (1 line)
+- Scope (in / out)
+- Stakeholders and roles (RACI-style)
+- Top 5 milestones with dates
+- Communication cadence
+- Initial risks
+- 60-minute kickoff meeting agenda
+
+Inputs:
+[Paste project brief, scoping notes, team list and any sponsor emails]`,
+    improvementPrompts: [
+      "Make the agenda more interactive — less presenting, more discussion.",
+      "Compress the kickoff to 30 minutes.",
+      "Add a 'definition of done' section.",
+    ],
+    realWorldAction:
+      "Share the kickoff doc with the team 48 hours before the kickoff meeting and use the agenda to run the session.",
+    timeRange: "10 minutes",
+  },
 ];
 
 export const LEVEL_META: Record<
