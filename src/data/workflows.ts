@@ -35,6 +35,14 @@ export interface Workflow {
   improvementPrompts: string[];
   realWorldAction: string;
   timeRange: string;
+  /** Optional micro-tip shown under the prompt block */
+  promptTip?: string;
+  /** Optional micro-tip shown under the improvement prompts */
+  improvementTip?: string;
+  /** Optional micro-tip shown in the context source section */
+  contextTip?: string;
+  /** Extra tips rendered after improvement (max 1–2) */
+  extraTips?: string[];
   /** For level: "agent" — Copilot Studio agent definition */
   agent?: {
     purpose: string;
