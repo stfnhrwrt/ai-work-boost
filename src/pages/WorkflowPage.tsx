@@ -132,6 +132,11 @@ const WorkflowPage = () => {
               Copilot accesses these for you when used inside Microsoft 365. With ChatGPT,
               you'll paste the relevant context manually.
             </p>
+            {workflow.contextTip && (
+              <div className="mt-3">
+                <Tip>{workflow.contextTip}</Tip>
+              </div>
+            )}
           </Section>
 
           {/* Access Matters callout */}
