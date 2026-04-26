@@ -134,11 +134,15 @@ Keep it concise and executive-ready.
 
 Notes:
 [Paste calendar, key emails and Teams highlights here]`,
+    promptTip:
+      "Mention where the data comes from (calendar, emails, Teams). Copilot will pull that context automatically.",
     improvementPrompts: [
       "Make it more concise — half a page maximum.",
       "Highlight the top 3 priorities at the very top.",
       "Rewrite in a more direct, executive tone.",
     ],
+    improvementTip:
+      "You rarely get the best result in one try. Short follow-up prompts improve quality significantly.",
     realWorldAction:
       "Send the briefing to your executive in Teams or email before the day starts (ideally before 8 a.m.).",
     timeRange: "5–10 minutes",
