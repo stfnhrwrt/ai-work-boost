@@ -234,6 +234,11 @@ const WorkflowPage = () => {
                 <PromptBlock prompt={workflow.chatgptPrompt} />
               </TabsContent>
             </Tabs>
+            {workflow.promptTip && (
+              <div className="mt-4">
+                <Tip>{workflow.promptTip}</Tip>
+              </div>
+            )}
           </Section>
 
           {/* Improve Output */}
@@ -253,6 +258,18 @@ const WorkflowPage = () => {
                 </li>
               ))}
             </ul>
+            {workflow.improvementTip && (
+              <div className="mt-4">
+                <Tip>{workflow.improvementTip}</Tip>
+              </div>
+            )}
+            {workflow.extraTips && workflow.extraTips.length > 0 && (
+              <div className="mt-3 space-y-2">
+                {workflow.extraTips.map((t) => (
+                  <Tip key={t}>{t}</Tip>
+                ))}
+              </div>
+            )}
           </Section>
 
           {/* Real-World Action */}
