@@ -132,6 +132,35 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* AI Basics teaser */}
+        <section className="container mx-auto px-6 pb-16 pt-4">
+          <Link
+            to="/basics"
+            className="group block rounded-2xl border border-border bg-primary-soft p-8 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card-hover sm:p-10"
+          >
+            <div className="grid items-center gap-6 sm:grid-cols-3">
+              <div className="sm:col-span-2">
+                <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                  New · 2-minute read
+                </span>
+                <h3 className="mb-2 text-xl font-semibold text-foreground">
+                  AI Basics — How to Use AI Effectively
+                </h3>
+                <p className="text-muted-foreground">
+                  Five short blocks. Learn how to structure a prompt, why Copilot is
+                  different and the common mistakes that ruin results.
+                </p>
+              </div>
+              <div className="flex justify-start sm:justify-end">
+                <span className="inline-flex items-center gap-2 font-medium text-primary transition-transform group-hover:translate-x-0.5">
+                  Read AI Basics
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        </section>
       </main>
       <SiteFooter />
     </div>

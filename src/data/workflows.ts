@@ -789,8 +789,108 @@ Inputs:
       "Use the list as your weekly plan and post the kickoff message in your team Teams channel Monday morning.",
     timeRange: "5 minutes",
   },
+  {
+    id: "draft-difficult-message",
+    roleId: "managers",
+    level: "essential",
+    title: "Draft a Difficult Message",
+    description:
+      "Write a clear, respectful and direct message for sensitive situations — feedback, change announcements or saying no.",
+    situation:
+      "You need to deliver a difficult message — turning down a request, addressing an issue, or announcing an unpopular decision — and want it to land well.",
+    contextSources: [
+      "Recent emails or Teams chats with the recipient",
+      "Background documents about the situation",
+      "Previous decisions or commitments",
+    ],
+    copilotPrompt: `Help me draft a difficult message to [Recipient Name] about [topic].
 
-  // ───────────────────────── Project Managers ─────────────────────────
+Use:
+- Our recent emails and Teams chats with this person
+- Background documents about the situation
+- Any previous decisions or commitments related to this topic
+
+Make the message:
+- Direct and clear — no ambiguity about the decision
+- Respectful and empathetic in tone
+- Honest about reasoning, without over-explaining
+- Forward-looking (what happens next)
+
+Provide 2 versions: a slightly softer one and a slightly more direct one.`,
+    chatgptPrompt: `Draft a difficult message to a colleague based on the notes below.
+
+Make it:
+- Direct and clear
+- Respectful and empathetic
+- Honest about reasoning
+- Forward-looking
+
+Provide 2 versions (softer and more direct).
+
+Notes:
+[Paste recipient name, topic, background and any previous commitments]`,
+    improvementPrompts: [
+      "Make it more empathetic without softening the decision.",
+      "Shorten it to under 100 words.",
+      "Add a clear next step at the end.",
+    ],
+    realWorldAction:
+      "Pick the version that fits the relationship, personalize it, and send via Teams or email — don't sit on it.",
+    timeRange: "5–10 minutes",
+  },
+  {
+    id: "plan-team-offsite",
+    roleId: "managers",
+    level: "essential",
+    title: "Plan a Team Offsite or Workshop",
+    description:
+      "Build a clear agenda with objectives, sessions and outcomes for an offsite, planning day or workshop.",
+    situation:
+      "You're organizing a team offsite, planning day or workshop and need a focused agenda with real outcomes — not death by slides.",
+    contextSources: [
+      "Recent team Teams conversations and pain points",
+      "Last quarter's results and goals",
+      "Notes from previous offsites",
+      "Upcoming priorities and projects",
+    ],
+    copilotPrompt: `Plan a [half-day / full-day / 2-day] [offsite / workshop] for my team of [team description].
+
+Use:
+- Recent Teams conversations and team pain points
+- Last quarter's results and current goals
+- Notes from previous offsites
+- Our upcoming priorities and projects
+
+Output:
+- 2–3 clear objectives for the day
+- Detailed agenda with timings, session goals and format (discussion / workshop / break)
+- Pre-reads or homework for participants
+- Expected outcomes and decisions
+- Suggested icebreaker that fits this team
+
+Make it focused and outcome-driven. Avoid filler sessions.`,
+    chatgptPrompt: `Plan a team offsite or workshop based on the inputs below.
+
+Output:
+- 2–3 clear objectives
+- Detailed agenda with timings and session format
+- Pre-reads or homework
+- Expected outcomes
+- Suggested icebreaker
+
+Inputs:
+[Paste team description, duration, current goals, pain points, past offsite notes]`,
+    improvementPrompts: [
+      "Make it more interactive — fewer slides, more workshops.",
+      "Compress to a half-day version.",
+      "Add a session focused on team alignment for next quarter.",
+    ],
+    realWorldAction:
+      "Share the agenda with your team a week in advance with pre-reads, then use it as your live facilitation script on the day.",
+    timeRange: "10 minutes",
+  },
+
+
   {
     id: "project-status-summary",
     roleId: "project-managers",
@@ -942,6 +1042,114 @@ Notes:
     realWorldAction:
       "Send the update to stakeholders or leadership via email or Teams ahead of your next checkpoint.",
     timeRange: "5–10 minutes",
+  },
+  {
+    id: "steering-committee-update",
+    roleId: "project-managers",
+    level: "essential",
+    title: "Prepare a Steering Committee Update",
+    description:
+      "Build the content for your steering committee — clear status, decisions needed and asks for the sponsor.",
+    situation:
+      "You have a steering committee meeting and need to prepare a sharp update that drives decisions, not just informs.",
+    contextSources: [
+      "Project plan, RAID log and tracking documents",
+      "Recent emails with the sponsor and steering members",
+      "Last steering committee minutes",
+      "Stand-up notes and team discussions from the last sprint",
+    ],
+    copilotPrompt: `Prepare the content for my next steering committee meeting on project [Project Name].
+
+Use:
+- The project plan, RAID log and tracking documents
+- Recent emails with the sponsor and steering committee members
+- Minutes from the last steering committee
+- Stand-up notes from the last sprint
+
+Output (one slide per section):
+- Headline: 1-line status with RAG (Green / Amber / Red)
+- Progress since last steering (3 bullets)
+- Key risks and mitigations (top 3)
+- Decisions required from the committee (be explicit)
+- Specific asks of the sponsor
+- Look-ahead: next 4–6 weeks
+
+Be honest about issues. Keep total content to one page.`,
+    chatgptPrompt: `Prepare the content for a steering committee update based on the notes below.
+
+Output:
+- Headline + RAG status
+- Progress since last steering
+- Top 3 risks and mitigations
+- Decisions required from the committee
+- Asks of the sponsor
+- Look-ahead (next 4–6 weeks)
+
+Notes:
+[Paste project status, RAID log, recent updates and previous minutes]`,
+    improvementPrompts: [
+      "Tighten the decisions section — make each decision a clear yes/no question.",
+      "Add a 'what changed since last steering' callout at the top.",
+      "Rewrite the asks more assertively.",
+    ],
+    realWorldAction:
+      "Drop the content into your steering deck template. Send the deck and headline 24 hours before the meeting.",
+    timeRange: "10 minutes",
+  },
+  {
+    id: "project-kickoff",
+    roleId: "project-managers",
+    level: "essential",
+    title: "Draft a Project Kickoff",
+    description:
+      "Create a kickoff plan: scope, roles, milestones, comms cadence and a kickoff meeting agenda — all in one go.",
+    situation:
+      "A new project is starting and you need to align everyone fast — scope, roles, milestones and how you'll work together.",
+    contextSources: [
+      "The project brief or charter",
+      "Emails with the sponsor and stakeholders",
+      "Documents shared during scoping",
+      "Team availability and skills",
+    ],
+    copilotPrompt: `Help me draft a project kickoff for [Project Name].
+
+Use:
+- The project brief or charter
+- Emails with the sponsor and stakeholders during scoping
+- Documents shared during scoping
+- Team availability and roles
+
+Output:
+- One-line project purpose
+- Scope: in / out
+- Key stakeholders and their role (RACI-style)
+- Top 5 milestones with target dates
+- Communication cadence (stand-ups, status, steering)
+- Risks identified at kickoff
+- Kickoff meeting agenda (60 minutes, with timings)
+
+Make it concrete and decision-ready.`,
+    chatgptPrompt: `Draft a project kickoff plan based on the inputs below.
+
+Output:
+- Project purpose (1 line)
+- Scope (in / out)
+- Stakeholders and roles (RACI-style)
+- Top 5 milestones with dates
+- Communication cadence
+- Initial risks
+- 60-minute kickoff meeting agenda
+
+Inputs:
+[Paste project brief, scoping notes, team list and any sponsor emails]`,
+    improvementPrompts: [
+      "Make the agenda more interactive — less presenting, more discussion.",
+      "Compress the kickoff to 30 minutes.",
+      "Add a 'definition of done' section.",
+    ],
+    realWorldAction:
+      "Share the kickoff doc with the team 48 hours before the kickoff meeting and use the agenda to run the session.",
+    timeRange: "10 minutes",
   },
 ];
 

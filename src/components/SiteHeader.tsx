@@ -12,7 +12,7 @@ export function SiteHeader() {
           <span className="text-base">AI Workflows</span>
           <span className="hidden text-sm font-normal text-muted-foreground sm:inline">for Daily Work</span>
         </Link>
-        <nav className="flex items-center gap-6 text-sm">
+        <nav className="flex items-center gap-5 text-sm sm:gap-6">
           <Link to="/" className="text-muted-foreground transition-colors hover:text-foreground">
             Home
           </Link>
@@ -20,7 +20,13 @@ export function SiteHeader() {
             to="/#roles"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            All workflows
+            Workflows
+          </Link>
+          <Link
+            to="/basics"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            AI Basics
           </Link>
         </nav>
       </div>
