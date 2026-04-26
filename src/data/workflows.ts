@@ -789,8 +789,108 @@ Inputs:
       "Use the list as your weekly plan and post the kickoff message in your team Teams channel Monday morning.",
     timeRange: "5 minutes",
   },
+  {
+    id: "draft-difficult-message",
+    roleId: "managers",
+    level: "essential",
+    title: "Draft a Difficult Message",
+    description:
+      "Write a clear, respectful and direct message for sensitive situations — feedback, change announcements or saying no.",
+    situation:
+      "You need to deliver a difficult message — turning down a request, addressing an issue, or announcing an unpopular decision — and want it to land well.",
+    contextSources: [
+      "Recent emails or Teams chats with the recipient",
+      "Background documents about the situation",
+      "Previous decisions or commitments",
+    ],
+    copilotPrompt: `Help me draft a difficult message to [Recipient Name] about [topic].
 
-  // ───────────────────────── Project Managers ─────────────────────────
+Use:
+- Our recent emails and Teams chats with this person
+- Background documents about the situation
+- Any previous decisions or commitments related to this topic
+
+Make the message:
+- Direct and clear — no ambiguity about the decision
+- Respectful and empathetic in tone
+- Honest about reasoning, without over-explaining
+- Forward-looking (what happens next)
+
+Provide 2 versions: a slightly softer one and a slightly more direct one.`,
+    chatgptPrompt: `Draft a difficult message to a colleague based on the notes below.
+
+Make it:
+- Direct and clear
+- Respectful and empathetic
+- Honest about reasoning
+- Forward-looking
+
+Provide 2 versions (softer and more direct).
+
+Notes:
+[Paste recipient name, topic, background and any previous commitments]`,
+    improvementPrompts: [
+      "Make it more empathetic without softening the decision.",
+      "Shorten it to under 100 words.",
+      "Add a clear next step at the end.",
+    ],
+    realWorldAction:
+      "Pick the version that fits the relationship, personalize it, and send via Teams or email — don't sit on it.",
+    timeRange: "5–10 minutes",
+  },
+  {
+    id: "plan-team-offsite",
+    roleId: "managers",
+    level: "essential",
+    title: "Plan a Team Offsite or Workshop",
+    description:
+      "Build a clear agenda with objectives, sessions and outcomes for an offsite, planning day or workshop.",
+    situation:
+      "You're organizing a team offsite, planning day or workshop and need a focused agenda with real outcomes — not death by slides.",
+    contextSources: [
+      "Recent team Teams conversations and pain points",
+      "Last quarter's results and goals",
+      "Notes from previous offsites",
+      "Upcoming priorities and projects",
+    ],
+    copilotPrompt: `Plan a [half-day / full-day / 2-day] [offsite / workshop] for my team of [team description].
+
+Use:
+- Recent Teams conversations and team pain points
+- Last quarter's results and current goals
+- Notes from previous offsites
+- Our upcoming priorities and projects
+
+Output:
+- 2–3 clear objectives for the day
+- Detailed agenda with timings, session goals and format (discussion / workshop / break)
+- Pre-reads or homework for participants
+- Expected outcomes and decisions
+- Suggested icebreaker that fits this team
+
+Make it focused and outcome-driven. Avoid filler sessions.`,
+    chatgptPrompt: `Plan a team offsite or workshop based on the inputs below.
+
+Output:
+- 2–3 clear objectives
+- Detailed agenda with timings and session format
+- Pre-reads or homework
+- Expected outcomes
+- Suggested icebreaker
+
+Inputs:
+[Paste team description, duration, current goals, pain points, past offsite notes]`,
+    improvementPrompts: [
+      "Make it more interactive — fewer slides, more workshops.",
+      "Compress to a half-day version.",
+      "Add a session focused on team alignment for next quarter.",
+    ],
+    realWorldAction:
+      "Share the agenda with your team a week in advance with pre-reads, then use it as your live facilitation script on the day.",
+    timeRange: "10 minutes",
+  },
+
+
   {
     id: "project-status-summary",
     roleId: "project-managers",
