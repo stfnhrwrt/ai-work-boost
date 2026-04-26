@@ -61,143 +61,140 @@ export const workflows: Workflow[] = [
     id: "daily-executive-briefing",
     roleId: "executive-assistants",
     title: "Daily Executive Briefing",
-    description: "Build a one-page morning briefing covering today's meetings, key emails and priorities.",
+    description: "Build a one-page morning briefing covering today's meetings, key updates and prep notes.",
     situation:
-      "It's early morning and your executive needs a clear, concise overview of the day before they walk into back-to-back meetings.",
+      "It's early morning and your executive needs a clear, executive-ready overview of the day before back-to-back meetings.",
     contextSources: [
-      "Today's calendar events",
-      "Unread and flagged emails from the last 24 hours",
-      "Recent Teams chats with key stakeholders",
+      "Today's calendar (meetings and attendees)",
+      "Emails from the last 24–48 hours",
+      "Recent Teams conversations with key stakeholders",
       "Documents shared overnight",
     ],
-    copilotPrompt: `Create a one-page daily briefing for my executive for today.
+    copilotPrompt: `Create a daily executive briefing for today.
 
 Use:
-- Today's calendar (meetings, attendees, locations)
-- Unread and flagged emails from the last 24 hours
-- Recent Teams chats with direct reports and key stakeholders
-- Any documents shared with us in the last 24 hours
+- My executive's calendar for today (meetings and attendees)
+- Relevant emails from the last 24–48 hours
+- Important Teams conversations with direct reports and key stakeholders
 
 Structure:
 - Top 3 priorities for today
-- Schedule overview (meeting, time, who, why it matters)
-- Decisions or approvals needed today
-- Items that can be deferred
+- Meeting overview (time, attendees, purpose)
+- Key updates since yesterday
+- Risks or issues to watch
+- Preparation notes per meeting (1–2 bullets each)
 
-Keep it under one page. Use bullet points. Highlight anything time-sensitive.`,
-    chatgptPrompt: `Create a one-page daily briefing for an executive based on the notes below.
+Keep it concise, executive-ready and under one page.`,
+    chatgptPrompt: `Create a daily executive briefing based on the notes below.
 
 Structure:
 - Top 3 priorities for today
-- Schedule overview (meeting, time, who, why it matters)
-- Decisions or approvals needed today
-- Items that can be deferred
+- Meetings (time, attendees, purpose)
+- Key updates
+- Risks or issues
+- Preparation notes per meeting
 
-Keep it concise and skimmable. Use bullet points.
+Keep it concise and executive-ready.
 
 Notes:
 [Paste calendar, key emails and Teams highlights here]`,
     improvementPrompts: [
-      "Make it shorter — half a page maximum.",
-      "Add a 'risks to watch today' section at the end.",
+      "Make it more concise — half a page maximum.",
+      "Highlight the top 3 priorities at the very top.",
       "Rewrite in a more direct, executive tone.",
     ],
     realWorldAction:
-      "Send the briefing to your executive in Teams or paste it into the top of their daily agenda before 8 a.m.",
+      "Send the briefing to your executive in Teams or email before the day starts (ideally before 8 a.m.).",
     timeRange: "5–10 minutes",
   },
   {
     id: "summarize-inbox",
     roleId: "executive-assistants",
     title: "Summarize Inbox",
-    description: "Turn an overwhelming inbox into a clear list of what needs attention, what can wait and what to delete.",
+    description: "Turn an overloaded inbox into a clear list of urgent items, decisions needed and follow-ups.",
     situation:
-      "You return from a day of meetings to dozens of unread emails. You need to know what actually matters in five minutes.",
+      "Your inbox is overloaded after a day of meetings and you need a quick, actionable overview in five minutes.",
     contextSources: [
-      "Unread emails in the executive's inbox",
+      "Recent email threads",
       "Flagged or starred messages",
-      "Email threads with VIP contacts",
+      "Threads with VIP contacts",
     ],
-    copilotPrompt: `Review my unread and flagged emails from the last 24 hours and produce a triage summary.
+    copilotPrompt: `Summarize my recent emails from the last 24 hours.
 
-Group emails into:
-1. Needs response today (with suggested next step)
-2. FYI / no action needed
-3. Can be archived or deleted
+Focus on:
+- Urgent items needing a response today
+- Decisions needed (and from whom)
+- Follow-ups required
+- Deadlines mentioned
 
-For each item in group 1, include:
-- Sender
-- One-line summary
-- Recommended action and owner
+Group similar topics together. For each item include sender, one-line summary and the recommended action.
 
-Keep the whole summary under 250 words.`,
-    chatgptPrompt: `Triage the following emails into three groups:
-1. Needs response today (with suggested next step)
-2. FYI / no action needed
-3. Can be archived or deleted
+Keep the whole summary short and skimmable.`,
+    chatgptPrompt: `Summarize the following emails.
 
-For each "needs response" item include sender, one-line summary, and recommended action.
+Highlight:
+- Urgent topics
+- Decisions needed
+- Actions required (with owner)
+- Deadlines
+
+Group similar topics together and keep it short.
 
 Emails:
 [Paste emails or subject + sender + first lines here]`,
     improvementPrompts: [
+      "Prioritize urgent items at the top.",
+      "Add clear action points with owners.",
       "Only show emails from VIPs and direct reports.",
-      "Draft short reply suggestions for the top 3 items.",
-      "Group by topic instead of by urgency.",
     ],
     realWorldAction:
-      "Use the triage list as your action plan: respond to group 1, forward group 2 as FYI, bulk-archive group 3.",
-    timeRange: "5–10 minutes",
+      "Use the summary to organize your day: respond to urgent items first, schedule follow-ups, archive the rest.",
+    timeRange: "5 minutes",
   },
   {
     id: "prepare-meeting-notes",
     roleId: "executive-assistants",
     title: "Prepare Meeting Notes",
-    description: "Generate structured pre-read notes for an upcoming meeting using prior context.",
-    situation:
-      "Your executive has an important meeting in two hours and needs background, talking points and key questions ready.",
+    description: "Turn a meeting transcript or notes into structured decisions, actions, owners and deadlines.",
+    situation: "A meeting just ended and you need clean, structured notes to share with participants right away.",
     contextSources: [
-      "Previous meetings with the same attendees",
-      "Recent emails with attendees",
-      "Relevant documents shared in Teams or SharePoint",
-      "Calendar invite and agenda",
+      "Teams meeting transcript or recording",
+      "Your own notes",
+      "Follow-up emails",
     ],
-    copilotPrompt: `Prepare structured pre-read notes for my executive's upcoming meeting "[Meeting Title]" with [Attendees].
+    copilotPrompt: `Create structured meeting notes from my latest meeting.
 
 Use:
-- The meeting invite and agenda
-- Past meetings with the same attendees
-- Recent email threads with these attendees
-- Any documents shared in Teams or SharePoint about this topic
+- The Teams meeting transcript or recording
+- Any of my notes from the meeting
+- Related follow-up emails
 
-Structure:
-- Meeting purpose (1 sentence)
-- Background context (3–5 bullets)
-- Key talking points
-- Decisions or commitments expected
-- Suggested questions to ask
-- Open risks
+Include:
+- Key decisions
+- Action items (specific and outcome-oriented)
+- Owners
+- Deadlines
+- Open questions to follow up on
 
-Keep it on one page.`,
-    chatgptPrompt: `Prepare structured pre-read notes for an upcoming meeting using the notes below.
+Keep it clear, structured and easy to scan.`,
+    chatgptPrompt: `Create structured meeting notes from this transcript.
 
-Structure:
-- Meeting purpose (1 sentence)
-- Background context (3–5 bullets)
-- Key talking points
-- Decisions or commitments expected
-- Suggested questions to ask
-- Open risks
+Include:
+- Decisions
+- Actions (specific and outcome-oriented)
+- Owners
+- Deadlines
+- Open questions
 
-Notes:
-[Paste agenda, past notes, relevant emails and documents]`,
+Transcript:
+[Paste meeting transcript or notes here]`,
     improvementPrompts: [
-      "Add a section with quotes from previous emails that matter for this meeting.",
-      "Make the talking points more direct and assertive.",
-      "Compress everything into a 5-bullet summary.",
+      "Make action items more specific and outcome-oriented.",
+      "Highlight decisions clearly at the top.",
+      "Convert into a short email I can send to participants.",
     ],
     realWorldAction:
-      "Send the pre-read to your executive 1 hour before the meeting and attach it to the calendar invite.",
+      "Share the notes with all participants in Teams or email immediately after the meeting.",
     timeRange: "5–10 minutes",
   },
 
@@ -229,118 +226,128 @@ Structure:
 - Suggested questions to ask them
 
 Keep it concise and actionable.`,
-    chatgptPrompt: `Create a structured 1:1 meeting plan for a manager and their team member, using the notes below.
+    chatgptPrompt: `Create a structured 1:1 meeting plan using the notes below.
 
 Structure:
-- Key topics to discuss
-- Feedback points (positive and constructive)
+- Key topics
+- Feedback points
 - Open issues
-- Suggested questions to ask
+- Suggested questions
 
 Notes:
 [Paste recent interactions, project updates and previous 1:1 notes]`,
     improvementPrompts: [
-      "Make it more concise — 5 bullets total.",
-      "Focus only on top priorities and blockers.",
-      "Add 2 career development questions.",
+      "Focus on top priorities and blockers only.",
+      "Make feedback more specific with concrete examples.",
+      "Add 2 career-development questions at the end.",
     ],
     realWorldAction:
-      "Open the plan in your 1:1 doc and use it as your live agenda. Capture decisions directly underneath each section.",
+      "Open the plan in your 1:1 doc and use it as the live agenda. Capture decisions directly underneath each section.",
     timeRange: "5–10 minutes",
   },
   {
     id: "write-feedback",
     roleId: "managers",
-    title: "Write Feedback",
-    description: "Draft clear, specific feedback for a team member based on real recent context.",
+    title: "Write Performance Feedback",
+    description: "Draft clear, balanced and constructive feedback for a team member based on real recent context.",
     situation:
-      "You need to give a team member written feedback — for a review, a project debrief or a 1:1 — and want it to be specific, fair and actionable.",
+      "You need to write performance feedback — for a review, a project debrief or a 1:1 — and want it specific, fair and actionable.",
     contextSources: [
       "Teams conversations with the employee",
       "Project documents they've contributed to",
       "Recent meetings where they participated",
       "Emails with stakeholders about their work",
     ],
-    copilotPrompt: `Draft written feedback for [Employee Name] based on their work over the last [time period].
+    copilotPrompt: `Write performance feedback for [Employee Name] covering the last [time period].
 
 Use:
-- Our Teams conversations
+- Our recent Teams conversations
 - Documents they've authored or contributed to
 - Meetings where they presented or participated
 - Stakeholder emails referencing their work
 
-Structure the feedback as:
-- 2–3 specific strengths with concrete examples
-- 1–2 areas to improve, with concrete examples
-- Suggested next steps for development
-
-Tone: direct, supportive, fact-based. Avoid generic phrases.`,
-    chatgptPrompt: `Draft written feedback for an employee based on the notes below.
+Make it:
+- Constructive
+- Clear
+- Balanced (strengths and areas to improve)
 
 Structure:
 - 2–3 specific strengths with concrete examples
-- 1–2 areas to improve with concrete examples
+- 1–2 areas for improvement with concrete examples
 - Suggested next steps for development
 
-Tone: direct, supportive, fact-based.
+Avoid generic phrases — always include examples.`,
+    chatgptPrompt: `Write performance feedback based on the notes below.
+
+Make it:
+- Clear
+- Balanced
+- Actionable
+
+Structure:
+- 2–3 specific strengths with examples
+- 1–2 areas to improve with examples
+- Suggested next steps
 
 Notes:
 [Paste examples of their work, contributions, behaviours and outcomes]`,
     improvementPrompts: [
-      "Make the tone warmer without losing directness.",
-      "Add one example for each strength and growth area.",
+      "Make the tone more empathetic without losing directness.",
+      "Add a specific example for each strength and growth area.",
       "Rewrite as if I'm delivering it verbally in a 1:1.",
     ],
     realWorldAction:
-      "Paste the draft into your performance tool or 1:1 doc, edit any names or specifics, then share or deliver verbally.",
+      "Use the draft in your performance tool, review document or 1:1. Personalize names and specifics before sharing.",
     timeRange: "5–10 minutes",
   },
   {
     id: "define-weekly-priorities",
     roleId: "managers",
     title: "Define Weekly Priorities",
-    description: "Turn a noisy week of inputs into 3–5 clear team priorities you can communicate Monday morning.",
+    description: "Turn a noisy week of inputs into 3–5 clear team priorities you can act on Monday morning.",
     situation:
-      "It's Sunday evening or Monday morning and you need to align your team on what actually matters this week.",
+      "It's Sunday evening or Monday morning and you need to align yourself and your team on what actually matters this week.",
     contextSources: [
-      "Last week's Teams chats with your team",
-      "Project status updates and dashboards",
-      "Emails from leadership about company priorities",
-      "Calendar for the upcoming week",
+      "Recent emails from leadership and stakeholders",
+      "Upcoming meetings this week",
+      "Ongoing tasks and projects",
+      "Last week's Teams conversations with your team",
     ],
-    copilotPrompt: `Help me define this week's priorities for my team of [team description].
+    copilotPrompt: `Define my top priorities for this week as a manager of [team description].
 
 Use:
+- My recent emails (especially from leadership and key stakeholders)
+- My upcoming meetings this week
+- Ongoing tasks and projects
 - Teams conversations from the last 7 days
-- Recent project updates and status documents
-- Emails from leadership and stakeholders
-- Meetings scheduled this week
-
-Output:
-- Top 3–5 priorities for the team this week
-- For each priority: why it matters, who owns it, expected outcome by Friday
-- Anything we should explicitly deprioritise this week
-- A short kickoff message I can post in our team channel
-
-Keep it actionable and direct.`,
-    chatgptPrompt: `Help me define this week's priorities for my team based on the notes below.
 
 Output:
 - Top 3–5 priorities
-- For each: why it matters, owner, expected outcome by Friday
-- Anything to deprioritise
-- A short kickoff message I can post in our team channel
+- Key actions for each priority (with owner)
+- Expected outcome by Friday
+- Risks to watch
+- A short kickoff message I can post in my team channel
 
-Notes:
+Keep it focused, realistic and actionable.`,
+    chatgptPrompt: `Based on the following inputs, define this week's priorities.
+
+Include:
+- Top 3–5 priorities
+- Key actions for each (with owner)
+- Expected outcome by Friday
+- Risks to watch
+- A short kickoff message for my team channel
+
+Inputs:
 [Paste last week's recap, current projects, leadership goals and upcoming meetings]`,
     improvementPrompts: [
-      "Cut to the top 3 priorities only.",
+      "Reduce to the top 3 priorities only.",
+      "Make actions more concrete and outcome-oriented.",
       "Rewrite the kickoff message in a more energising tone.",
-      "Add a metric or success criterion to each priority.",
     ],
     realWorldAction:
-      "Post the kickoff message in your team Teams channel Monday morning and use the priorities to anchor your weekly stand-up.",
-    timeRange: "5–10 minutes",
+      "Use the list as your weekly plan and post the kickoff message in your team Teams channel Monday morning.",
+    timeRange: "5 minutes",
   },
 
   // ───────────────────────── Project Managers ─────────────────────────
@@ -348,149 +355,149 @@ Notes:
     id: "project-status-summary",
     roleId: "project-managers",
     title: "Project Status Summary",
-    description: "Generate a crisp status update that leadership can read in 60 seconds.",
-    situation: "Leadership has asked for a quick status update on your project and you have 10 minutes to deliver it.",
+    description: "Generate a crisp status summary leadership and stakeholders can read in 60 seconds.",
+    situation: "You need a quick, shareable overview of project status for leadership or your steering committee.",
     contextSources: [
+      "Teams channels for the project",
+      "Recent emails with sponsor and stakeholders",
       "Project plan and tracking documents",
-      "Teams conversations in the project channel",
-      "Recent stand-up notes",
-      "Emails with the project sponsor",
+      "Stand-up notes from the last 2 weeks",
     ],
-    copilotPrompt: `Create a leadership-ready status summary for project [Project Name].
+    copilotPrompt: `Create a project status summary for project [Project Name].
 
 Use:
-- The latest project plan and tracking documents
-- Recent Teams conversations in the project channel
+- Recent Teams discussions in the project channel
+- Relevant emails with the sponsor and stakeholders
+- The project plan and tracking documents
 - Stand-up notes from the last 2 weeks
-- Recent emails with the project sponsor
-
-Structure (RAG-style):
-- Overall status: Green / Amber / Red, with one-line justification
-- Progress since last update (3 bullets)
-- Key milestones for the next 2 weeks
-- Top risks and mitigations
-- Decisions or support needed from leadership
-
-Keep it under 200 words. Be honest about issues.`,
-    chatgptPrompt: `Create a leadership-ready status summary for a project based on the notes below.
 
 Structure:
-- Overall status (Green / Amber / Red) with one-line justification
-- Progress since last update (3 bullets)
-- Upcoming milestones (next 2 weeks)
-- Top risks and mitigations
+- Current status (Green / Amber / Red, with one-line justification)
+- Key updates since last report
+- Risks and blockers
+- Next steps for the next 2 weeks
 - Decisions or support needed from leadership
 
-Notes:
+Keep it under 200 words and be honest about issues.`,
+    chatgptPrompt: `Create a project status summary from these updates.
+
+Structure:
+- Current status (Green / Amber / Red)
+- Key updates
+- Risks and blockers
+- Next steps
+- Decisions or support needed
+
+Updates:
 [Paste project plan excerpts, recent updates and risks]`,
     improvementPrompts: [
-      "Make it shorter — under 100 words.",
-      "Rewrite for an audience of non-technical executives.",
-      "Add a one-sentence headline at the top.",
+      "Make it more concise — under 100 words.",
+      "Highlight blockers at the top.",
+      "Rewrite for a non-technical executive audience.",
     ],
     realWorldAction:
-      "Paste the summary into your status email or steering committee deck. Send before your next leadership review.",
+      "Send the summary to stakeholders by email or paste it into your steering committee deck.",
     timeRange: "5–10 minutes",
   },
   {
     id: "identify-risks",
     roleId: "project-managers",
-    title: "Identify Risks",
-    description: "Surface project risks hiding in your conversations, plans and recent updates.",
-    situation: "You sense things are slipping but can't articulate why. You need a structured view of project risks.",
+    title: "Identify Project Risks",
+    description: "Proactively surface project risks hiding in your conversations, plans and recent updates.",
+    situation: "You sense things may be slipping. You need a structured view of project risks before they escalate.",
     contextSources: [
-      "Project plan and timeline",
-      "Teams conversations in the project channel",
-      "Recent meeting notes and stand-ups",
-      "Emails flagging blockers or delays",
+      "Recent Teams discussions in the project channel",
+      "Emails mentioning blockers or concerns",
+      "Project updates and stand-up notes",
+      "The current project plan and timeline",
     ],
-    copilotPrompt: `Analyse my project [Project Name] and identify the most important risks right now.
+    copilotPrompt: `Identify potential risks in my current project [Project Name].
 
 Use:
-- The project plan and current timeline
-- Teams conversations from the last 2 weeks
-- Meeting notes and stand-up summaries
+- Recent Teams discussions
 - Emails mentioning blockers, delays or concerns
+- Project updates and stand-up notes from the last 2 weeks
+- The current project plan and timeline
 
-Output a risk register with the top 5 risks. For each risk include:
+Output a top-5 risk register. For each risk include:
 - Risk description (1 sentence)
 - Likelihood (High / Medium / Low)
 - Impact (High / Medium / Low)
-- Mitigation action and owner
-- Trigger or signal to watch
+- Suggested mitigation action and owner
+- Early-warning signal to watch
 
-Order them by combined severity (likelihood × impact).`,
-    chatgptPrompt: `Build a project risk register based on the notes below.
+Order by combined severity (likelihood × impact).`,
+    chatgptPrompt: `Identify risks based on these updates.
 
-For the top 5 risks, include:
-- Risk description (1 sentence)
+For each of the top 5 risks include:
+- Risk
 - Likelihood (High / Medium / Low)
 - Impact (High / Medium / Low)
-- Mitigation action and owner
-- Trigger or signal to watch
+- Mitigation (with owner)
+- Early-warning signal
 
 Order by combined severity.
 
-Notes:
+Updates:
 [Paste project plan, recent updates, blockers and concerns]`,
     improvementPrompts: [
-      "Focus only on risks that could miss the next milestone.",
-      "Add an early-warning indicator for each risk.",
+      "Prioritize the highest-severity risks only.",
+      "Add concrete mitigation steps for each risk.",
       "Rewrite as a one-slide executive view.",
     ],
     realWorldAction:
-      "Add the top 3 risks to your risk register and raise them in your next steering committee or sponsor sync.",
+      "Address the top risks early — add them to your risk register and raise the top 3 at your next sponsor sync.",
     timeRange: "5–10 minutes",
   },
   {
     id: "stakeholder-update",
     roleId: "project-managers",
     title: "Stakeholder Update",
-    description: "Draft a tailored update for a specific stakeholder based on what they actually care about.",
+    description: "Draft a clear, professional update tailored to a specific stakeholder or audience.",
     situation:
-      "A specific stakeholder (sponsor, client or department lead) needs an update — and a generic status report won't do.",
+      "A stakeholder, sponsor or leadership group needs an update — and a generic status report won't be enough.",
     contextSources: [
+      "Recent project updates and milestones",
       "Past communications with this stakeholder",
-      "Their stated priorities and concerns",
-      "Latest project status and milestones",
-      "Recent decisions and changes",
+      "Emails with the project team",
+      "Recent meeting notes",
     ],
-    copilotPrompt: `Draft a tailored project update for [Stakeholder Name] about project [Project Name].
+    copilotPrompt: `Create a stakeholder update for my project [Project Name], tailored for [Stakeholder Name].
 
 Use:
+- Recent project updates and milestones
 - Our past emails and Teams chats with this stakeholder
-- Their stated priorities and previous questions
-- The latest project status, milestones and changes
-- Any recent decisions affecting their area
+- Emails with the project team
+- Recent meeting notes
 
 Structure:
-- Personal opening (1 line) referencing their priorities
-- What's progressed (focused on what they care about)
-- What's changed since they were last updated
+- Progress since last update (focused on what they care about)
+- Key updates and changes
+- Risks and blockers
+- Next steps and timing
 - What we need from them (decisions, input, support)
-- Next checkpoint and timing
 
-Tone: clear, professional, no jargon. Maximum 200 words.`,
-    chatgptPrompt: `Draft a tailored project update email for a stakeholder based on the notes below.
+Keep it concise, professional and free of jargon. Maximum 200 words.`,
+    chatgptPrompt: `Create a stakeholder update.
 
 Structure:
-- Personal opening referencing their priorities
-- What's progressed (focused on what they care about)
-- What's changed since the last update
+- Progress
+- Key updates
+- Risks
+- Next steps
 - What we need from them
-- Next checkpoint and timing
 
-Tone: clear, professional, no jargon. Maximum 200 words.
+Keep it concise and professional.
 
 Notes:
 [Paste stakeholder profile, past concerns, current status and recent changes]`,
     improvementPrompts: [
-      "Make it more formal — for a board-level audience.",
-      "Cut it to a 5-bullet Teams message.",
+      "Make it shorter — a 5-bullet Teams message.",
+      "Focus on business impact and outcomes.",
       "Add a clear ask in the closing line.",
     ],
     realWorldAction:
-      "Send the update directly via email or Teams to the stakeholder ahead of your next checkpoint with them.",
+      "Send the update to stakeholders or leadership via email or Teams ahead of your next checkpoint.",
     timeRange: "5–10 minutes",
   },
 ];
