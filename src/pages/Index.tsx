@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock, Copy, MousePointerClick, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, Clock, Copy, MousePointerClick, Sparkles, TrendingDown, Zap } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RoleCard } from "@/components/RoleCard";
