@@ -14,6 +14,7 @@ import {
   Settings2,
   Sparkles,
   Target,
+  TrendingDown,
   Wand2,
   Zap,
 } from "lucide-react";
