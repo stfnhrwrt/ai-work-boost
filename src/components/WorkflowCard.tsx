@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Bot, Calendar, Clock, ShieldAlert, Sparkles, Workflow as WorkflowIcon } from "lucide-react";
+import { ArrowUpRight, Bot, Calendar, Clock, ShieldAlert, Sparkles, TrendingDown, Workflow as WorkflowIcon } from "lucide-react";
 import { Workflow, LEVEL_META } from "@/data/workflows";
 
 interface WorkflowCardProps {
