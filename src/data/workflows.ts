@@ -269,6 +269,7 @@ Transcript:
     realWorldAction:
       "Share the notes with all participants in Teams or email immediately after the meeting.",
     timeRange: "5–10 minutes",
+    timeSaved: "~25 min saved",
   },
 
   // ───────────────────────── Executive Assistants — Level 1: Advanced ─────────────────────────
@@ -315,6 +316,7 @@ Emails:
     realWorldAction:
       "Use the output to triage the inbox: respond, delegate, or schedule. Prepare draft replies for the executive to review.",
     timeRange: "5–10 minutes",
+    timeSaved: "~30 min saved",
   },
   {
     id: "draft-executive-responses",
@@ -357,6 +359,7 @@ Thread:
     realWorldAction:
       "Refine the draft, confirm with your executive (or use your delegated authority), then send from their mailbox.",
     timeRange: "5 minutes",
+    timeSaved: "~20 min saved",
   },
   {
     id: "meeting-brief-full-context",
@@ -412,6 +415,7 @@ Materials:
     realWorldAction:
       "Send the briefing to your executive 60 minutes before the meeting and attach it to the calendar invite.",
     timeRange: "5–10 minutes",
+    timeSaved: "~30 min saved",
   },
 
   // ───────────────────────── Executive Assistants — Level 2: Agents ─────────────────────────
@@ -670,6 +674,7 @@ Inputs:
     realWorldAction:
       "Use the result as your end-of-day checkpoint. Review, then forward to your executive before you log off.",
     timeRange: "Setup: 5 min · Runs daily",
+    timeSaved: "~15 min/day after setup",
     improvementTip:
       "Ask Copilot to highlight 'what needs attention tomorrow' — it turns a summary into a planning tool.",
     scheduled: {
@@ -799,6 +804,7 @@ Inputs:
     realWorldAction:
       "Drop the talking points into a Teams chat or short brief for your executive 30 minutes before the discussion.",
     timeRange: "5–10 minutes",
+    timeSaved: "~25 min saved",
     promptTip:
       "Ask Copilot to include 'likely objections' — it forces sharper, more defendable points.",
   },
@@ -847,6 +853,7 @@ Inputs:
     realWorldAction:
       "Surface the high-urgency items to your executive in a 3-line Teams message — don't forward the raw output.",
     timeRange: "5–10 minutes",
+    timeSaved: "~20 min saved",
     contextTip:
       "This works best when there's enough volume for patterns to emerge. On quiet days, run it across the last 3–5 days instead of 24–48 hours.",
   },
@@ -894,6 +901,7 @@ Inputs:
     realWorldAction:
       "Review every draft, adjust tone for the audience, then send from your executive's mailbox (or as their delegate).",
     timeRange: "5–10 minutes",
+    timeSaved: "~30 min saved",
     improvementTip:
       "Always review before sending. AI gets next steps right ~80% of the time — the last 20% is what protects your executive's credibility.",
   },
@@ -1123,6 +1131,7 @@ Inputs:
     realWorldAction:
       "Send the briefing to your executive 30 minutes before the meeting, or paste it directly into the calendar event body.",
     timeRange: "5–10 minutes",
+    timeSaved: "~30 min saved",
     contextTip:
       "Works best when meetings include documents or active email threads — invites with no context produce thin briefings.",
   },
@@ -1185,6 +1194,7 @@ Inputs:
     realWorldAction:
       "Send the delegation proposals as a single Teams message to your executive for a quick yes/no — then forward the invites.",
     timeRange: "10–15 minutes",
+    timeSaved: "~30 min saved",
     extraTips: [
       "Delegation is one of the biggest time-savers — but always confirm with your executive before reassigning anything visible to leadership.",
     ],
@@ -1237,6 +1247,7 @@ Notes:
     realWorldAction:
       "Open the plan in your 1:1 doc and use it as the live agenda. Capture decisions directly underneath each section.",
     timeRange: "5–10 minutes",
+    timeSaved: "~25 min saved",
   },
   {
     id: "write-feedback",
@@ -1293,6 +1304,7 @@ Notes:
     realWorldAction:
       "Use the draft in your performance tool, review document or 1:1. Personalize names and specifics before sharing.",
     timeRange: "5–10 minutes",
+    timeSaved: "~20 min saved",
   },
   {
     id: "define-weekly-priorities",
@@ -1343,6 +1355,7 @@ Inputs:
     realWorldAction:
       "Use the list as your weekly plan and post the kickoff message in your team Teams channel Monday morning.",
     timeRange: "5 minutes",
+    timeSaved: "~15 min saved",
   },
   {
     id: "draft-difficult-message",
@@ -1392,6 +1405,7 @@ Notes:
     realWorldAction:
       "Pick the version that fits the relationship, personalize it, and send via Teams or email — don't sit on it.",
     timeRange: "5–10 minutes",
+    timeSaved: "~20 min saved",
   },
   {
     id: "plan-team-offsite",
@@ -1495,6 +1509,7 @@ Updates:
     realWorldAction:
       "Send the summary to stakeholders by email or paste it into your steering committee deck.",
     timeRange: "5–10 minutes",
+    timeSaved: "~30 min saved",
   },
   {
     id: "identify-risks",
@@ -1546,6 +1561,7 @@ Updates:
     realWorldAction:
       "Address the top risks early — add them to your risk register and raise the top 3 at your next sponsor sync.",
     timeRange: "5–10 minutes",
+    timeSaved: "~25 min saved",
   },
   {
     id: "stakeholder-update",
@@ -1598,6 +1614,7 @@ Notes:
     realWorldAction:
       "Send the update to stakeholders or leadership via email or Teams ahead of your next checkpoint.",
     timeRange: "5–10 minutes",
+    timeSaved: "~25 min saved",
   },
   {
     id: "steering-committee-update",
@@ -1651,6 +1668,7 @@ Notes:
     realWorldAction:
       "Drop the content into your steering deck template. Send the deck and headline 24 hours before the meeting.",
     timeRange: "10 minutes",
+    timeSaved: "~45 min saved",
   },
   {
     id: "project-kickoff",
@@ -1706,6 +1724,7 @@ Inputs:
     realWorldAction:
       "Share the kickoff doc with the team 48 hours before the kickoff meeting and use the agenda to run the session.",
     timeRange: "10 minutes",
+    timeSaved: "~40 min saved",
   },
   {
     id: "build-business-case",
@@ -1778,6 +1797,7 @@ Start by asking the most important questions first.`,
     realWorldAction:
       "Use the generated business case for stakeholder presentations, steering committee decisions or funding requests.",
     timeRange: "10–15 minutes",
+    timeSaved: "~60 min saved",
   },
 ];
 
