@@ -103,6 +103,12 @@ const WorkflowPage = () => {
                 <Clock className="h-3.5 w-3.5" />
                 {workflow.timeRange}
               </span>
+              {workflow.timeSaved && (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-foreground">
+                  <TrendingDown className="h-3.5 w-3.5" />
+                  {workflow.timeSaved}
+                </span>
+              )}
             </div>
           </div>
         </section>
