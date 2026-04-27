@@ -869,9 +869,8 @@ Inputs:
       "Always review before sending. AI gets next steps right ~80% of the time — the last 20% is what protects your executive's credibility.",
   },
 
-
+  // ───────────────────────── Managers ─────────────────────────
   {
-    id: "prepare-1-1-meeting",
     roleId: "managers",
     level: "essential",
     title: "Prepare a 1:1 Meeting",
