@@ -530,130 +530,346 @@ When analyzing emails:
     },
   },
 
-  // ───────────────────────── Executive Assistants — Level 3: Scheduled ─────────────────────────
+  // ───────────────────────── Executive Assistants — Level 3: Scheduled Prompts ─────────────────────────
   {
     id: "scheduled-morning-briefing",
     roleId: "executive-assistants",
     level: "scheduled",
-    title: "Daily Morning Briefing Automation",
+    title: "Daily Inbox + Calendar Briefing (Automated)",
     description:
-      "Schedule a Power Automate flow that generates and sends the daily briefing to your executive every morning.",
+      "A native Copilot Scheduled Prompt that runs every weekday morning and drops your executive briefing into Copilot chat.",
     situation:
-      "You want the daily briefing to land in your executive's inbox or Teams every morning — without you running it manually.",
+      "You want a daily overview of your executive's priorities every morning — without opening Copilot and re-typing the prompt yourself.",
     contextSources: [
-      "Today's calendar events",
-      "Recent emails",
-      "Teams discussions",
+      "Executive mailbox (delegate access required)",
+      "Calendar (today's meetings)",
+      "Teams chats you're part of",
     ],
     accessNote:
-      "Scheduled flows run with your account's permissions and require Microsoft Power Automate (and Copilot AI actions enabled). Confirm with IT that scheduled Copilot triggers and the data sources you need are allowed under your company's data policy.",
-    copilotPrompt: `Create a daily executive briefing for today.
+      "Copilot can only read mailboxes you have delegate access to, meetings you're invited to, and Teams chats you're part of. If the briefing looks incomplete, check your delegate permissions first — not the prompt.",
+    copilotPrompt: `Create a daily executive briefing.
 
 Use:
 - Today's calendar
 - Recent emails (last 24 hours)
-- Teams updates
+- Important Teams messages
 
 Output:
 - Top 3 priorities
-- Meetings (time, attendees, purpose, prep notes)
-- Key updates
-- Risks
+- Urgent emails (sender + 1-line summary)
+- Key meetings with prep notes
+- Open items needing my executive's attention
 
-Format the output as a clean email body with a clear subject line.`,
+Format as a short, scannable email body with a 1-line subject.`,
     chatgptPrompt: `Create a daily executive briefing from the inputs below.
 
 Output:
 - Top 3 priorities
-- Meetings
-- Key updates
-- Risks
+- Urgent emails
+- Key meetings with prep notes
+- Open items
 
 Inputs:
-[Paste calendar, emails, Teams updates]`,
+[Paste calendar, recent emails, Teams updates]`,
     improvementPrompts: [
       "Add a 1-line headline subject for the email.",
-      "Format as a Teams adaptive card.",
       "Add a 'what to ignore today' section.",
+      "Format as a Teams adaptive card.",
     ],
     realWorldAction:
-      "Once scheduled, the briefing arrives automatically. Review it before your executive does and add any human touches.",
-    timeRange: "Setup: 20 min · Runs daily",
+      "Once scheduled, the briefing lands in Copilot chat (or Teams) every morning. Review it, add a human touch, then forward to your executive.",
+    timeRange: "Setup: 5 min · Runs daily",
+    promptTip:
+      "Keep the structure consistent every day — your executive builds trust faster when the format never changes.",
     scheduled: {
-      purpose: "Automatically generate and send a daily morning briefing.",
-      schedule: "Every weekday at 7:00 a.m. (your time zone)",
-      output: "Sent via email or Teams to your executive.",
+      mechanism: "copilot",
+      purpose: "Generate the morning briefing automatically every weekday.",
+      schedule: "Every weekday at 7:30 a.m.",
+      output: "Posted to Copilot chat (and optional Teams notification).",
+      outputLocation: "Microsoft 365 Copilot chat — Teams or Outlook",
       setupSteps: [
-        "Open Microsoft Power Automate.",
-        "Create a new scheduled cloud flow (every weekday at 7:00 a.m.).",
-        "Add a Copilot or AI Builder action and paste the prompt below.",
-        "Connect calendar, mail and Teams as data sources.",
-        "Add a final step: 'Send an email' (to your executive) or 'Post message in Teams'.",
-        "Test the flow once manually, then enable the schedule.",
+        "Open Microsoft 365 Copilot in Teams or Outlook (must be in Work mode, not Web mode).",
+        "Run the prompt below once to confirm the output looks right.",
+        "Click the '…' (three dots) next to the response.",
+        "Select 'Schedule this prompt'.",
+        "Set frequency: every weekday at 7:30 a.m.",
+        "Choose where the result should appear (Copilot chat or Teams notification).",
       ],
+      powerAutomateAlt:
+        "If your tenant limits scheduled prompts, recreate the same flow in Power Automate with a Copilot/AI Builder action and a 'Send email' or 'Post in Teams' step.",
     },
   },
   {
     id: "scheduled-end-of-day",
     roleId: "executive-assistants",
     level: "scheduled",
-    title: "End-of-Day Summary Automation",
+    title: "End-of-Day Executive Summary (Automated)",
     description:
-      "Schedule a flow that summarizes the day's activity, open tasks and tomorrow's follow-ups — sent every evening.",
+      "A scheduled prompt that wraps up the day — completed actions, open follow-ups and what needs attention tomorrow.",
     situation:
-      "Your executive wants a quick wrap-up at the end of every day so they can plan tomorrow without scrolling.",
+      "You want a clean end-of-day summary for your executive every evening, ready to send or self-review before logging off.",
     contextSources: [
-      "Today's emails",
-      "Today's Teams activity",
-      "Today's calendar (completed meetings)",
+      "Today's emails (sent + received)",
+      "Today's meetings (completed)",
+      "Today's Teams conversations",
     ],
     accessNote:
-      "Scheduled flows run on your account's permissions. Make sure all data sources used by the flow are accessible and compliant with your company's data policy.",
+      "Copilot only sees the mailboxes, meetings and chats you have access to. If the summary misses items, the gap is almost always a permission gap — not a Copilot failure.",
     copilotPrompt: `Summarize today's activities for my executive.
 
 Include:
-- Key actions completed today
-- Open tasks remaining
-- Decisions made
-- Follow-ups needed for tomorrow
-- Top 3 priorities for tomorrow morning
+- Key decisions made today
+- Completed actions
+- Open follow-ups (with owner)
+- What needs attention tomorrow
 
-Format as a short email body suitable for end-of-day delivery.`,
+Format as a short, ready-to-send email body.`,
     chatgptPrompt: `Summarize today's activities for an executive.
 
 Include:
-- Key actions completed
-- Open tasks
-- Decisions made
-- Follow-ups for tomorrow
-- Top 3 priorities for tomorrow
+- Key decisions
+- Completed actions
+- Open follow-ups
+- What needs attention tomorrow
 
 Inputs:
 [Paste today's emails, Teams activity and meeting outcomes]`,
     improvementPrompts: [
       "Make it shorter — 5 bullets total.",
-      "Format as a Teams message instead of email.",
-      "Add a quick 'wins of the day' line at the top.",
+      "Add a 'wins of the day' line at the top.",
+      "Highlight anything blocked waiting on my executive.",
     ],
     realWorldAction:
-      "Once scheduled, the summary lands automatically. Use it as your own end-of-day checkpoint before logging off.",
-    timeRange: "Setup: 20 min · Runs daily",
+      "Use the result as your end-of-day checkpoint. Review, then forward to your executive before you log off.",
+    timeRange: "Setup: 5 min · Runs daily",
+    improvementTip:
+      "Ask Copilot to highlight 'what needs attention tomorrow' — it turns a summary into a planning tool.",
     scheduled: {
-      purpose: "Automatically wrap up the day and prepare tomorrow.",
-      schedule: "Every weekday at 6:00 p.m. (your time zone)",
-      output: "Sent via email or Teams to your executive.",
+      mechanism: "copilot",
+      purpose: "Wrap up the day automatically and prepare tomorrow.",
+      schedule: "Every weekday at 5:00 p.m.",
+      output: "A ready-to-send summary email body in Copilot chat.",
+      outputLocation: "Microsoft 365 Copilot chat",
       setupSteps: [
-        "Open Microsoft Power Automate.",
-        "Create a new scheduled cloud flow (every weekday at 6:00 p.m.).",
-        "Add a Copilot or AI Builder action and paste the prompt below.",
-        "Connect today's emails, Teams activity and calendar as data sources.",
-        "Add a 'Send an email' or 'Post in Teams' step targeting your executive.",
-        "Test once, then enable the schedule.",
+        "Open Microsoft 365 Copilot (Teams or Outlook), in Work mode.",
+        "Run the prompt below once manually.",
+        "Click the '…' on the response and choose 'Schedule this prompt'.",
+        "Set: every weekday at 5:00 p.m.",
+        "Confirm the output location (Copilot chat or Teams notification).",
       ],
+      powerAutomateAlt:
+        "Power Automate alternative: scheduled flow at 5 p.m. → Copilot/AI action → 'Send email' step.",
+    },
+  },
+  {
+    id: "scheduled-weekly-prep",
+    roleId: "executive-assistants",
+    level: "scheduled",
+    title: "Weekly Executive Prep (Friday Automation)",
+    description:
+      "A Friday-afternoon scheduled prompt that previews next week — meetings, prep needed, open risks.",
+    situation:
+      "You want to walk into Monday already prepared. Friday afternoon is the perfect moment to look ahead.",
+    contextSources: [
+      "Next week's calendar",
+      "Open email threads",
+      "Ongoing Teams topics and projects",
+    ],
+    accessNote:
+      "The preview only covers meetings, mailboxes and chats your account can access. For shared mailboxes or your executive's calendar, delegate access must already be granted.",
+    copilotPrompt: `Prepare a weekly executive preparation summary for next week.
+
+Include:
+- Next week's key meetings (with attendees and purpose)
+- Required preparation per meeting
+- Open topics carried over from this week
+- Risks or decisions that need my executive's attention
+
+Format as a short planning document, grouped by day.`,
+    chatgptPrompt: `Prepare a weekly executive preparation summary for next week.
+
+Include:
+- Key meetings (attendees, purpose)
+- Required preparation
+- Open topics
+- Risks and decisions needed
+
+Inputs:
+[Paste next week's calendar and ongoing topics]`,
+    improvementPrompts: [
+      "Group by day instead of by topic.",
+      "Add an estimated prep time per meeting.",
+      "Highlight any meeting still missing an agenda.",
+    ],
+    realWorldAction:
+      "Use Friday afternoon to scan the document, line up prep work and send your executive a short Monday-readiness note.",
+    timeRange: "Setup: 5 min · Runs weekly",
+    extraTips: [
+      "This is one of the highest-value automations for assistants — it converts reactive Mondays into planned ones.",
+    ],
+    scheduled: {
+      mechanism: "copilot",
+      purpose: "Preview next week and surface required preparation every Friday.",
+      schedule: "Every Friday at 3:00 p.m.",
+      output: "A weekly planning document in Copilot chat.",
+      outputLocation: "Microsoft 365 Copilot chat",
+      setupSteps: [
+        "Open Microsoft 365 Copilot in Work mode.",
+        "Run the prompt manually once and refine the output.",
+        "Click '…' → 'Schedule this prompt'.",
+        "Set: every Friday at 3:00 p.m.",
+        "Pick where results should appear (Copilot chat or Teams).",
+      ],
+      powerAutomateAlt:
+        "Power Automate alternative: weekly recurrence (Friday 15:00) → Copilot action → 'Send email' to yourself with the planning doc.",
     },
   },
 
-  // ───────────────────────── Managers ─────────────────────────
+  // ───────────────────────── Executive Assistants — Level 1: Advanced (high-value) ─────────────────────────
+  {
+    id: "ea-talking-points",
+    roleId: "executive-assistants",
+    level: "advanced",
+    title: "Prepare Executive Talking Points",
+    description:
+      "Turn recent conversations and stakeholder context into ready-to-use talking points for upcoming discussions.",
+    situation:
+      "Your executive has a discussion coming up and needs sharp talking points based on what's actually been said across email, Teams and meetings.",
+    contextSources: [
+      "Recent Teams chats with stakeholders",
+      "Email threads on the topic",
+      "Meeting notes from related discussions",
+    ],
+    accessNote:
+      "Copilot can only pull from chats and mailboxes you (or your executive, via delegate access) can read. If a key thread is missing, that's a permission gap.",
+    copilotPrompt: `Create executive talking points for an upcoming discussion on [TOPIC] with [PERSON / GROUP].
+
+Use:
+- Recent conversations on this topic (Teams + email)
+- Key positions of the people involved
+- Open questions and stakeholder concerns
+
+Output:
+- 5–7 bullet talking points
+- Suggested responses to likely objections
+- 2–3 questions my executive should ask`,
+    chatgptPrompt: `Create executive talking points for a discussion on [TOPIC] with [PERSON].
+
+Output:
+- 5–7 talking points
+- Suggested responses to likely objections
+- 2–3 questions to ask
+
+Inputs:
+[Paste recent emails, chats and meeting notes]`,
+    improvementPrompts: [
+      "Add likely objections and a one-line counter for each.",
+      "Reorder by strategic priority.",
+      "Make it tighter — 4 talking points max.",
+    ],
+    realWorldAction:
+      "Drop the talking points into a Teams chat or short brief for your executive 30 minutes before the discussion.",
+    timeRange: "5–10 minutes",
+    promptTip:
+      "Ask Copilot to include 'likely objections' — it forces sharper, more defendable points.",
+  },
+  {
+    id: "ea-detect-escalations",
+    roleId: "executive-assistants",
+    level: "advanced",
+    title: "Detect Escalations in the Inbox",
+    description:
+      "Scan recent communication for escalations, negative sentiment and urgent risks before they reach your executive cold.",
+    situation:
+      "You manage a high-volume inbox and need to spot the messages that are actually heating up — not just the loudest ones.",
+    contextSources: [
+      "Executive mailbox (delegate access)",
+      "Shared mailboxes you manage",
+      "Teams chats and channels",
+    ],
+    accessNote:
+      "Detection quality scales with the data Copilot can see. If you only have access to part of the inbox or no Teams visibility, escalations elsewhere will stay hidden.",
+    copilotPrompt: `Analyze communication from the last 48 hours across my executive's mailbox and Teams chats.
+
+Identify:
+- Escalations (someone asking for a decision or pushing back)
+- Negative sentiment or frustration
+- Urgent risks or blockers
+- Threads going quiet that probably shouldn't be
+
+For each item: sender, topic, why it matters, and a suggested next step.`,
+    chatgptPrompt: `Analyze the communication below.
+
+Identify:
+- Escalations
+- Negative sentiment
+- Urgent risks
+- Threads gone quiet
+
+For each: sender, topic, why it matters, suggested next step.
+
+Inputs:
+[Paste recent emails and Teams messages]`,
+    improvementPrompts: [
+      "Rank by urgency (high / medium / low).",
+      "Only show items that need my executive personally.",
+      "Add a draft response for each high-urgency item.",
+    ],
+    realWorldAction:
+      "Surface the high-urgency items to your executive in a 3-line Teams message — don't forward the raw output.",
+    timeRange: "5–10 minutes",
+    contextTip:
+      "This works best when there's enough volume for patterns to emerge. On quiet days, run it across the last 3–5 days instead of 24–48 hours.",
+  },
+  {
+    id: "ea-draft-followups",
+    roleId: "executive-assistants",
+    level: "advanced",
+    title: "Draft Follow-Ups Automatically",
+    description:
+      "Turn today's meetings into a stack of ready-to-send follow-up emails — each with summary, next steps and owners.",
+    situation:
+      "Your executive ran several meetings today and follow-ups need to go out fast, before momentum is lost.",
+    contextSources: [
+      "Today's meeting recordings or transcripts (Teams)",
+      "Meeting notes",
+      "Related email threads",
+      "Open tasks (Planner / To Do)",
+    ],
+    accessNote:
+      "Copilot can only summarize meetings where transcription was on and you (or your executive) attended. For external participants, double-check what's safe to share.",
+    copilotPrompt: `Draft follow-up emails for each meeting my executive attended today.
+
+For each meeting:
+- 2–3 sentence summary
+- Decisions made
+- Next steps with owner and due date
+- Anything explicitly parked
+
+Format each as a separate email draft, ready to send to attendees.`,
+    chatgptPrompt: `Draft follow-up emails based on today's meetings.
+
+For each meeting:
+- 2–3 sentence summary
+- Decisions
+- Next steps with owner and due date
+- Parked items
+
+Inputs:
+[Paste meeting notes / transcripts]`,
+    improvementPrompts: [
+      "Use a more formal tone for external attendees.",
+      "Tighten each email to 5 lines max.",
+      "Add a clear subject line for each.",
+    ],
+    realWorldAction:
+      "Review every draft, adjust tone for the audience, then send from your executive's mailbox (or as their delegate).",
+    timeRange: "5–10 minutes",
+    improvementTip:
+      "Always review before sending. AI gets next steps right ~80% of the time — the last 20% is what protects your executive's credibility.",
+  },
+
+
   {
     id: "prepare-1-1-meeting",
     roleId: "managers",
