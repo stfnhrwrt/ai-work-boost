@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock, Copy, MousePointerClick, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, Clock, Copy, MousePointerClick, Sparkles, TrendingDown, Zap } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RoleCard } from "@/components/RoleCard";
@@ -83,6 +83,19 @@ const Index = () => {
                 <StatChip value={roles.length.toString()} label="roles covered" />
                 <StatChip value="5–10" label="minutes per task" />
               </div>
+
+              {/* Time-savings note */}
+              <p
+                className="fade-in-up mx-auto mt-5 max-w-xl text-xs leading-relaxed text-muted-foreground"
+                style={{ ["--i" as string]: 5 }}
+              >
+                Each workflow shows a conservative{" "}
+                <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-2 py-0.5 font-semibold text-accent-foreground">
+                  <TrendingDown className="h-3 w-3" />
+                  time-saved
+                </span>{" "}
+                estimate vs. doing it manually. Use 3–5 per week and most people gain 2–4 hours back.
+              </p>
             </div>
           </div>
         </section>
