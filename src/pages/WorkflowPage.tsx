@@ -176,17 +176,40 @@ const WorkflowPage = () => {
             </Section>
           )}
 
-          {/* Scheduled flow setup (Level 3) */}
+          {/* Scheduled prompt setup (Level 3) */}
           {workflow.scheduled && (
             <Section
-              title="Schedule the automation"
-              subtitle="Setup steps in Microsoft Power Automate"
+              title={
+                workflow.scheduled.mechanism === "power-automate"
+                  ? "Schedule the automation"
+                  : "Schedule the prompt"
+              }
+              subtitle={
+                workflow.scheduled.mechanism === "power-automate"
+                  ? "Setup steps in Microsoft Power Automate"
+                  : "Native Microsoft 365 Copilot — no Copilot Studio required"
+              }
               icon={CalendarClock}
             >
-              <div className="mb-4 grid gap-3 sm:grid-cols-3">
+              {workflow.scheduled.mechanism !== "power-automate" && (
+                <div className="mb-4 rounded-lg border border-primary/20 bg-primary-soft px-4 py-3 text-sm text-foreground">
+                  <span className="font-semibold">Scheduled Prompts</span> are a
+                  native Copilot feature: run a prompt manually, click the “…”
+                  menu, and choose <em>Schedule this prompt</em>. Works in Work
+                  mode (Teams or Outlook), not Web mode.
+                </div>
+              )}
+
+              <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 <InfoBox label="Purpose" value={workflow.scheduled.purpose} />
                 <InfoBox label="Schedule" value={workflow.scheduled.schedule} />
                 <InfoBox label="Output" value={workflow.scheduled.output} />
+                {workflow.scheduled.outputLocation && (
+                  <InfoBox
+                    label="Where it appears"
+                    value={workflow.scheduled.outputLocation}
+                  />
+                )}
               </div>
 
               <div className="mb-5 rounded-xl border border-border bg-card p-5">
@@ -202,6 +225,17 @@ const WorkflowPage = () => {
                   ))}
                 </ol>
               </div>
+
+              {workflow.scheduled.powerAutomateAlt && (
+                <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm">
+                  <span className="font-semibold text-foreground">
+                    Power Automate alternative:{" "}
+                  </span>
+                  <span className="text-muted-foreground">
+                    {workflow.scheduled.powerAutomateAlt}
+                  </span>
+                </div>
+              )}
             </Section>
           )}
 
