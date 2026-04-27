@@ -4,12 +4,21 @@ export type RoleId = "executive-assistants" | "managers" | "project-managers";
 
 /**
  * Workflow level
- *  - essential: core, ready-to-run prompts (Level 0)
- *  - advanced:  Level 1 — multi-source prompts that depend on access permissions
- *  - agent:     Level 2 — reusable Copilot agents (Copilot Studio)
- *  - scheduled: Level 3 — recurring automations (Power Automate)
+ *  - essential:  core, ready-to-run prompts (Level 0)
+ *  - advanced:   Level 1 — multi-source prompts that depend on access permissions
+ *  - agent:      Level 2 — reusable Copilot agents (Copilot Studio)
+ *  - scheduled:  Level 3 — recurring native Copilot Scheduled Prompts
+ *  - automation: Level 4 — Outlook + Copilot + Power Automate combined automations
  */
-export type WorkflowLevel = "essential" | "advanced" | "agent" | "scheduled";
+export type WorkflowLevel =
+  | "essential"
+  | "advanced"
+  | "agent"
+  | "scheduled"
+  | "automation";
+
+export type AutomationLayer = "outlook-rule" | "copilot" | "power-automate";
+export type SharedMailboxSupport = "yes" | "limited" | "no";
 
 export interface Role {
   id: RoleId;
