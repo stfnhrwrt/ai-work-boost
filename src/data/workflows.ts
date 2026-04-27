@@ -890,6 +890,295 @@ Inputs:
       "Always review before sending. AI gets next steps right ~80% of the time — the last 20% is what protects your executive's credibility.",
   },
 
+  // ───────────────────────── Executive Assistants — Level 4: Outlook + Copilot Automation ─────────────────────────
+  {
+    id: "ea-auto-accept-meetings",
+    roleId: "executive-assistants",
+    level: "automation",
+    title: "Auto-Accept Meetings Based on Rules",
+    description:
+      "Combine Outlook calendar settings with Copilot review so routine meetings accept themselves and only edge cases land on your plate.",
+    situation:
+      "Your executive's calendar fills up with predictable invites. You want the obvious ones handled automatically and only the judgment calls left for you.",
+    contextSources: [
+      "Calendar availability",
+      "Meeting invitations",
+      "Sender (executive, leadership, internal/external)",
+    ],
+    accessNote:
+      "Auto-accept rules apply to the mailbox they're configured in. For your executive's calendar you need delegate or full access — and rules must be set on that account, not yours.",
+    automationLayers: ["outlook-rule", "copilot"],
+    sharedMailboxSupport: "limited",
+    requiresPermissions:
+      "Delegate access to executive's calendar; rule configured in the target mailbox.",
+    outlookSetup: {
+      title: "Outlook setup (rule layer)",
+      steps: [
+        "Open Outlook (desktop or web), in the mailbox you're managing.",
+        "Go to Settings → Calendar → Events and invitations.",
+        "Enable 'Automatically accept meeting requests if available'.",
+        "Optional rule: if sender = executive or leadership distribution list → accept.",
+        "Optional rule: if calendar is busy → flag for review instead of declining.",
+        "Save and test with a known sender.",
+      ],
+      note:
+        "For shared mailboxes, sign into the shared mailbox directly (or via OWA) and configure the rule there — your personal rules don't apply.",
+    },
+    copilotPrompt: `Review my executive's upcoming meetings for the next 5 working days.
+
+Identify:
+- Conflicts and double-bookings
+- Low-priority meetings that could be declined
+- Meetings without a clear agenda or owner
+- Meetings my executive doesn't strictly need
+
+For each: a 1-line reason and a recommended action (accept / decline / delegate / shorten).`,
+    chatgptPrompt: `Review the calendar below for the next 5 working days.
+
+Identify:
+- Conflicts
+- Low-priority meetings
+- Missing agendas
+- Meetings to delegate
+
+Inputs:
+[Paste calendar entries with attendees, time, subject, body]`,
+    improvementPrompts: [
+      "Group recommendations by day.",
+      "Only show meetings I should personally action.",
+      "Add a draft decline message for each low-priority item.",
+    ],
+    realWorldAction:
+      "Let the rule handle volume. Use the Copilot review every Monday morning to clear out judgment-call meetings in 5 minutes.",
+    timeRange: "Setup: 10 min · Weekly review: 5 min",
+    promptTip:
+      "Automation handles volume; Copilot handles judgment. Don't try to put judgment into the rule — it ages badly.",
+  },
+  {
+    id: "ea-prioritize-leadership-emails",
+    roleId: "executive-assistants",
+    level: "automation",
+    title: "Prioritize Emails from Leadership Automatically",
+    description:
+      "Outlook rules surface leadership emails into a priority folder; Copilot then summarizes them with required actions.",
+    situation:
+      "You can't afford to miss a message from leadership — but you also can't stare at the inbox all day.",
+    contextSources: [
+      "Inbox",
+      "Sender hierarchy (executives, leadership DL)",
+      "Priority folder",
+    ],
+    accessNote:
+      "Rules run inside the mailbox they live in. If you're triaging a shared or executive mailbox, configure the rule there. Copilot will only summarize what your account can read.",
+    automationLayers: ["outlook-rule", "copilot"],
+    sharedMailboxSupport: "yes",
+    requiresPermissions:
+      "Full or delegate access to the mailbox where the rule is configured.",
+    outlookSetup: {
+      title: "Outlook rule setup",
+      steps: [
+        "Open Outlook → Settings → Mail → Rules → Add new rule.",
+        "Condition: 'From' = executive(s) or leadership distribution list.",
+        "Actions: mark as high importance + move to 'Priority – Leadership' folder + flag for follow-up.",
+        "Save and run on existing inbox to backfill.",
+        "Optional: add a second rule for direct reports of the executive.",
+      ],
+    },
+    copilotPrompt: `Summarize the unread emails in my 'Priority – Leadership' folder.
+
+For each: sender, topic, required action, deadline, suggested response.
+
+End with a 3-line digest of what my executive needs to know first.`,
+    chatgptPrompt: `Summarize the leadership emails below.
+
+For each: sender, topic, required action, deadline, suggested response.
+End with a 3-line digest.
+
+Inputs:
+[Paste emails]`,
+    improvementPrompts: [
+      "Sort by deadline, soonest first.",
+      "Add a draft reply for each item that needs one.",
+      "Flag anything that's been waiting more than 24 hours.",
+    ],
+    realWorldAction:
+      "Use the rule to filter, Copilot to understand. Your inbox triage drops from 30 minutes to 5.",
+    timeRange: "Setup: 10 min · Daily use: 5 min",
+    improvementTip:
+      "Rules filter, Copilot interprets. Keep them as separate jobs — you'll debug each one faster.",
+  },
+  {
+    id: "ea-calendar-optimization",
+    roleId: "executive-assistants",
+    level: "automation",
+    title: "Intelligent Calendar Optimization",
+    description:
+      "Use Copilot to find conflicts, shorten bloated meetings, protect focus time and redesign your executive's week.",
+    situation:
+      "Your executive's calendar is overloaded and the back-to-backs are killing real work.",
+    contextSources: [
+      "Calendar (next 1–2 weeks)",
+      "Meeting patterns (recurring vs. ad-hoc)",
+      "Stated priorities for the quarter",
+    ],
+    accessNote:
+      "You'll get the full picture only if you have delegate access to the executive's calendar. Without it, Copilot can only see invites you were copied on.",
+    automationLayers: ["copilot"],
+    sharedMailboxSupport: "limited",
+    requiresPermissions: "Delegate access to executive's calendar.",
+    copilotPrompt: `Analyze my executive's calendar for the next 2 weeks.
+
+Identify:
+- Conflicts and back-to-back stretches with no break
+- Meetings that could be shortened (e.g. 60 → 30 min)
+- Meetings that could be delegated (with a suggested attendee)
+- Focus-time opportunities (≥90 min blocks)
+
+Output:
+- A proposed optimized schedule
+- A list of meetings to renegotiate, with a 1-line justification for each`,
+    chatgptPrompt: `Analyze the calendar below for the next 2 weeks.
+
+Identify:
+- Conflicts
+- Meetings to shorten
+- Meetings to delegate
+- Focus-time opportunities
+
+Output an optimized schedule + list of meetings to renegotiate.
+
+Inputs:
+[Paste calendar entries]`,
+    improvementPrompts: [
+      "Protect at least 4 hours of focus time per week — block them on the calendar.",
+      "Only suggest changes I can action without my executive's approval.",
+      "Show the 'before vs. after' time saved.",
+    ],
+    realWorldAction:
+      "Walk through the proposal with your executive in your weekly sync. Even accepting half the suggestions saves hours per week.",
+    timeRange: "10–15 minutes",
+    promptTip:
+      "Always ask Copilot to 'protect focus time' explicitly — otherwise it optimizes for fitting more meetings in.",
+  },
+  {
+    id: "ea-auto-prepare-meetings",
+    roleId: "executive-assistants",
+    level: "automation",
+    title: "Auto-Prepare Meetings from Invitations",
+    description:
+      "Turn a sparse meeting invite into a full briefing — objective, participants, key topics, prep notes — using related emails and documents.",
+    situation:
+      "An invite arrives with little more than a title. Your executive needs context fast.",
+    contextSources: [
+      "Meeting invite (subject, attendees, body, attachments)",
+      "Related email threads",
+      "Documents linked or shared with attendees",
+      "Past meeting notes with the same group",
+    ],
+    accessNote:
+      "Copilot can only pull from threads and documents your account can read. For external attendees, expect thinner context.",
+    automationLayers: ["copilot"],
+    sharedMailboxSupport: "yes",
+    requiresPermissions: "Access to the executive's calendar and mailbox.",
+    copilotPrompt: `Prepare a briefing for the upcoming meeting "[MEETING TITLE]" on [DATE].
+
+Use:
+- The meeting invite and any attachments
+- Related email threads with the attendees
+- Previous discussions on the same topic
+
+Include:
+- Objective (1 sentence)
+- Participants with their role / interest
+- Key topics likely to come up
+- Preparation notes for my executive
+- 2–3 questions my executive should ask`,
+    chatgptPrompt: `Prepare a meeting briefing.
+
+Include:
+- Objective
+- Participants
+- Key topics
+- Preparation notes
+- 2–3 questions to ask
+
+Inputs:
+[Paste invite, related emails, prior notes]`,
+    improvementPrompts: [
+      "Make it one page max.",
+      "Add a 'red flags / sensitive topics' section.",
+      "Suggest a desired outcome for the meeting.",
+    ],
+    realWorldAction:
+      "Send the briefing to your executive 30 minutes before the meeting, or paste it directly into the calendar event body.",
+    timeRange: "5–10 minutes",
+    contextTip:
+      "Works best when meetings include documents or active email threads — invites with no context produce thin briefings.",
+  },
+  {
+    id: "ea-delegate-meetings",
+    roleId: "executive-assistants",
+    level: "automation",
+    title: "Delegate Meetings Automatically",
+    description:
+      "Identify meetings your executive doesn't need to attend and suggest who should go instead — with optional Power Automate forwarding.",
+    situation:
+      "Your executive is in too many meetings that someone else could handle.",
+    contextSources: [
+      "Calendar (upcoming 1–2 weeks)",
+      "Meeting type and topic",
+      "Participants and their roles",
+      "Org chart / direct reports",
+    ],
+    accessNote:
+      "Delegation suggestions are only as good as your visibility into the org. Make sure Copilot can see your executive's team in the directory.",
+    automationLayers: ["copilot", "power-automate"],
+    sharedMailboxSupport: "limited",
+    requiresPermissions:
+      "Delegate access to executive's calendar; permission to forward invites on their behalf.",
+    outlookSetup: {
+      title: "Optional Power Automate flow",
+      steps: [
+        "Open Microsoft Power Automate → Create → Automated cloud flow.",
+        "Trigger: 'When a new event is created (V3)' on the executive's calendar.",
+        "Condition: subject contains [TOPIC] OR organizer is in [LIST].",
+        "Action: 'Forward the event' to the chosen delegate.",
+        "Action: 'Send an email' to your executive: 'Delegated to X — confirm?'",
+        "Test with a sample invite, then enable.",
+      ],
+      note:
+        "Keep the auto-forward narrow: a few well-known topics. Broad rules will misfire and damage trust.",
+    },
+    copilotPrompt: `Review my executive's meetings for the next 2 weeks.
+
+Identify:
+- Meetings my executive doesn't strictly need to attend
+- Meetings that could be delegated to a direct report
+
+For each: suggested delegate, reason, and a 2-line message I can send to propose the delegation.`,
+    chatgptPrompt: `Review the meetings below.
+
+Identify:
+- Meetings to skip
+- Meetings to delegate
+
+For each: suggested delegate, reason, 2-line proposal message.
+
+Inputs:
+[Paste meetings + team org chart]`,
+    improvementPrompts: [
+      "Only suggest delegations the delegate has bandwidth for.",
+      "Group by delegate so I can send one message per person.",
+      "Add a fallback if the delegate declines.",
+    ],
+    realWorldAction:
+      "Send the delegation proposals as a single Teams message to your executive for a quick yes/no — then forward the invites.",
+    timeRange: "10–15 minutes",
+    extraTips: [
+      "Delegation is one of the biggest time-savers — but always confirm with your executive before reassigning anything visible to leadership.",
+    ],
+  },
+
   // ───────────────────────── Managers ─────────────────────────
   {
     id: "prepare-1-1-meeting",
