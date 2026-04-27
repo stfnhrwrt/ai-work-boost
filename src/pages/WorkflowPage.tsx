@@ -142,6 +142,44 @@ const WorkflowPage = () => {
           {/* Access Matters callout */}
           {workflow.accessNote && <AccessNote note={workflow.accessNote} />}
 
+          {/* Automation indicators (Level 4) */}
+          {(workflow.automationLayers ||
+            workflow.sharedMailboxSupport ||
+            workflow.requiresPermissions) && (
+            <AutomationIndicators
+              layers={workflow.automationLayers}
+              sharedMailbox={workflow.sharedMailboxSupport}
+              requiresPermissions={workflow.requiresPermissions}
+            />
+          )}
+
+          {/* Outlook setup (Level 4) */}
+          {workflow.outlookSetup && (
+            <Section
+              title={workflow.outlookSetup.title}
+              subtitle="Configure once — runs forever"
+              icon={Settings2}
+            >
+              <div className="rounded-xl border border-border bg-card p-5">
+                <ol className="space-y-2 text-sm text-foreground">
+                  {workflow.outlookSetup.steps.map((step, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
+                        {i + 1}
+                      </span>
+                      <span className="leading-relaxed">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+                {workflow.outlookSetup.note && (
+                  <p className="mt-4 border-t border-border pt-3 text-xs text-muted-foreground">
+                    {workflow.outlookSetup.note}
+                  </p>
+                )}
+              </div>
+            </Section>
+          )}
+
           {/* Agent setup (Level 2) */}
           {workflow.agent && (
             <Section title="Build the agent" subtitle="Setup steps in Copilot Studio" icon={Bot}>
