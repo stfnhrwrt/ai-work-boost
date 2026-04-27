@@ -80,6 +80,7 @@ const WorkflowPage = () => {
                 {workflow.level === "advanced" && <Zap className="h-3.5 w-3.5" />}
                 {workflow.level === "agent" && <Bot className="h-3.5 w-3.5" />}
                 {workflow.level === "scheduled" && <CalendarClock className="h-3.5 w-3.5" />}
+                {workflow.level === "automation" && <Settings2 className="h-3.5 w-3.5" />}
                 {meta.label}
               </span>
             )}
