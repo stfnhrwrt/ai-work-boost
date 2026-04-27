@@ -911,65 +911,105 @@ Inputs:
     id: "ea-auto-accept-meetings",
     roleId: "executive-assistants",
     level: "automation",
-    title: "Auto-Accept Meetings Based on Rules",
+    title: "Auto-Handle Calendar Invitations with Copilot Calendar Instructions",
     description:
-      "Combine Outlook calendar settings with Copilot review so routine meetings accept themselves and only edge cases land on your plate.",
+      "Use Copilot Calendar Instructions in Outlook to manage meeting invitations with clear, policy-style rules — accept the important ones, protect focus time, and flag judgment calls.",
     situation:
-      "Your executive's calendar fills up with predictable invites. You want the obvious ones handled automatically and only the judgment calls left for you.",
+      "You want Copilot to help manage meeting invitations according to clear rules: accept what matters, protect focus time, and surface anything that needs human judgment.",
     contextSources: [
-      "Calendar availability",
-      "Meeting invitations",
-      "Sender (executive, leadership, internal/external)",
+      "Calendar availability and existing events",
+      "Incoming meeting invitations (sender, title, attendees, agenda)",
+      "Sender hierarchy (executive, leadership, stakeholders)",
+      "Focus time blocks",
     ],
     accessNote:
-      "Auto-accept rules apply to the mailbox they're configured in. For your executive's calendar you need delegate or full access — and rules must be set on that account, not yours.",
-    automationLayers: ["outlook-rule", "copilot"],
+      "Copilot Calendar Instructions only act on calendar and mailbox data your account is allowed to access. For Executive Assistants, this may include the executive's calendar if delegate access is granted. Shared mailbox or shared calendar behavior depends on permissions and tenant settings. If Copilot does not apply an instruction as expected, check access rights first. For Managers and Leaders, instructions usually apply to their own mailbox and calendar — delegated or shared calendars may require additional permissions.",
+    automationLayers: ["copilot"],
     sharedMailboxSupport: "limited",
     requiresPermissions:
-      "Delegate access to executive's calendar; rule configured in the target mailbox.",
+      "Microsoft 365 Copilot license. For executive or shared calendars: delegate or shared access on the target mailbox.",
     outlookSetup: {
-      title: "Outlook setup (rule layer)",
+      title: "Set up Copilot Calendar Instructions",
       steps: [
-        "Open Outlook (desktop or web), in the mailbox you're managing.",
-        "Go to Settings → Calendar → Events and invitations.",
-        "Enable 'Automatically accept meeting requests if available'.",
-        "Optional rule: if sender = executive or leadership distribution list → accept.",
-        "Optional rule: if calendar is busy → flag for review instead of declining.",
-        "Save and test with a known sender.",
+        "Open Outlook (desktop or web), signed into the mailbox you're managing.",
+        "Go to Settings.",
+        "Select Copilot.",
+        "Open Calendar Instructions.",
+        "Click Create Instructions — a Copilot instruction field opens in the email/calendar experience.",
+        "Copy one of the example instructions below into that Copilot instruction field.",
+        "Save the instruction.",
+        "Repeat to add additional instructions (e.g., focus time protection, low-priority handling).",
       ],
       note:
-        "For shared mailboxes, sign into the shared mailbox directly (or via OWA) and configure the rule there — your personal rules don't apply.",
+        "Copilot can only follow calendar instructions based on the data and permissions available to your account. Always review important meeting decisions before relying on automation.",
     },
-    copilotPrompt: `Review my executive's upcoming meetings for the next 5 working days.
+    copilotPrompt: `Example Instruction 1 — Accept Important Meetings If Available
+(Paste into Outlook → Settings → Copilot → Calendar Instructions → Create Instructions)
 
-Identify:
-- Conflicts and double-bookings
-- Low-priority meetings that could be declined
-- Meetings without a clear agenda or owner
-- Meetings my executive doesn't strictly need
+If I receive a calendar invitation from my manager, executive, or senior leadership, and my calendar is free, accept the invitation.
 
-For each: a 1-line reason and a recommended action (accept / decline / delegate / shorten).`,
-    chatgptPrompt: `Review the calendar below for the next 5 working days.
+If there is a conflict, do not automatically accept. Instead, flag it for review and suggest which meeting should take priority.
 
-Identify:
-- Conflicts
-- Low-priority meetings
-- Missing agendas
-- Meetings to delegate
+When reviewing the invitation, consider:
+- Sender
+- Meeting title
+- Attendees
+- Existing calendar conflicts
+- Business priority
 
-Inputs:
-[Paste calendar entries with attendees, time, subject, body]`,
+———
+
+Example Instruction 2 — Protect Focus Time
+
+When reviewing calendar invitations, protect existing focus time.
+
+If a new invitation overlaps with focus time, do not automatically accept unless the sender is my manager, executive, or a senior stakeholder.
+
+If the meeting appears urgent or business-critical, flag it for review and explain why.
+
+———
+
+Example Instruction 3 — Handle Low-Priority Meetings
+
+If a calendar invitation appears to be informational, optional, or low priority, do not automatically accept if my calendar is busy.
+
+Suggest whether the meeting can be declined, delegated, or reviewed later.
+
+Consider:
+- Meeting title
+- Organizer
+- Attendees
+- Agenda
+- Existing conflicts`,
+    chatgptPrompt: `ChatGPT can't act on your calendar directly, but it can help you draft and refine the instruction text before pasting it into Outlook → Settings → Copilot → Calendar Instructions.
+
+Use this to draft a new instruction:
+
+I want a Copilot Calendar Instruction that does the following:
+[Describe the rule — e.g., "auto-accept invites from my CEO if I'm free, otherwise flag the conflict"]
+
+Write it as a clear policy with:
+- Conditions (when it applies)
+- Actions (what Copilot should do)
+- Exceptions (when to flag for human review)
+- Factors to consider (sender, title, attendees, agenda, conflicts)
+
+Keep it concise and unambiguous.`,
     improvementPrompts: [
-      "Group recommendations by day.",
-      "Only show meetings I should personally action.",
-      "Add a draft decline message for each low-priority item.",
+      "Tighten this instruction so it only applies to internal senders.",
+      "Add an exception for meetings marked as 'optional'.",
+      "Rewrite this instruction so Copilot always flags external meetings for review.",
+      "Add a condition that protects recurring 1:1s with my executive.",
     ],
     realWorldAction:
-      "Let the rule handle volume. Use the Copilot review every Monday morning to clear out judgment-call meetings in 5 minutes.",
-    timeRange: "Setup: 10 min · Weekly review: 5 min",
+      "Start with one instruction (e.g., focus time protection). Run it for a week, review what Copilot flagged versus auto-handled, then add the next instruction. Always review important meeting decisions before relying on automation.",
+    timeRange: "Setup: 5–10 min per instruction · Weekly review: 5 min",
     timeSaved: "~20 min/week saved",
     promptTip:
-      "Automation handles volume; Copilot handles judgment. Don't try to put judgment into the rule — it ages badly.",
+      "Write instructions like policies: clear conditions, clear actions, and clear exceptions. Vague instructions produce vague behavior.",
+    extraTips: [
+      "Copilot can only follow calendar instructions based on the data and permissions available to your account. Always review important meeting decisions before relying on automation.",
+    ],
   },
   {
     id: "ea-prioritize-leadership-emails",
