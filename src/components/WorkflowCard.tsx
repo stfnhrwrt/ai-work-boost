@@ -47,6 +47,12 @@ export function WorkflowCard({ workflow }: WorkflowCardProps) {
       <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">
         {workflow.description}
       </p>
+      {workflow.timeSaved && (
+        <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-accent-soft px-2.5 py-0.5 text-xs font-semibold text-accent-foreground">
+          <TrendingDown className="h-3 w-3" />
+          {workflow.timeSaved}
+        </span>
+      )}
       <div className="flex items-center justify-between border-t border-border pt-4 text-sm">
         <span className="inline-flex items-center gap-1.5 text-muted-foreground">
           <Clock className="h-3.5 w-3.5" />
