@@ -1511,6 +1511,35 @@ export const LEVEL_META: Record<
       "Native Microsoft 365 Copilot Scheduled Prompts that run a prompt automatically every morning, evening or week — no Copilot Studio required.",
     cardBadge: "Scheduled",
   },
+  automation: {
+    label: "Level 4 — Outlook + Copilot automation",
+    shortLabel: "Automation",
+    description:
+      "Combine Outlook rules, Copilot intelligence and (optionally) Power Automate to handle inbox triage, calendar decisions and meeting prep automatically.",
+    cardBadge: "Automation",
+  },
+};
+
+export const AUTOMATION_LAYER_META: Record<
+  AutomationLayer,
+  { label: string; short: string; tone: "rule" | "ai" | "flow" }
+> = {
+  "outlook-rule": { label: "Rule-based (Outlook)", short: "Outlook rule", tone: "rule" },
+  copilot: { label: "AI-assisted (Copilot)", short: "Copilot", tone: "ai" },
+  "power-automate": {
+    label: "Fully automated (Power Automate)",
+    short: "Power Automate",
+    tone: "flow",
+  },
+};
+
+export const SHARED_MAILBOX_META: Record<
+  SharedMailboxSupport,
+  { label: string; tone: "ok" | "warn" | "no" }
+> = {
+  yes: { label: "Works with shared mailbox", tone: "ok" },
+  limited: { label: "Limited shared-mailbox support", tone: "warn" },
+  no: { label: "Personal mailbox only", tone: "no" },
 };
 
 export const getRole = (id: string): Role | undefined => roles.find((r) => r.id === id);
@@ -1520,7 +1549,7 @@ export const getWorkflowsByRole = (roleId: RoleId): Workflow[] =>
 export const getWorkflowsByRoleAndLevel = (roleId: RoleId, level: WorkflowLevel): Workflow[] =>
   workflows.filter((w) => w.roleId === roleId && w.level === level);
 export const getLevelsForRole = (roleId: RoleId): WorkflowLevel[] => {
-  const order: WorkflowLevel[] = ["essential", "advanced", "agent", "scheduled"];
+  const order: WorkflowLevel[] = ["essential", "advanced", "agent", "scheduled", "automation"];
   const present = new Set(workflows.filter((w) => w.roleId === roleId).map((w) => w.level));
   return order.filter((l) => present.has(l));
 };
