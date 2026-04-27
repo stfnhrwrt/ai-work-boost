@@ -871,6 +871,7 @@ Inputs:
 
   // ───────────────────────── Managers ─────────────────────────
   {
+    id: "prepare-1-1-meeting",
     roleId: "managers",
     level: "essential",
     title: "Prepare a 1:1 Meeting",
