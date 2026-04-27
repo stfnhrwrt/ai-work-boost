@@ -44,6 +44,8 @@ export interface Workflow {
   improvementPrompts: string[];
   realWorldAction: string;
   timeRange: string;
+  /** Conservative time saved per use, e.g. "~25 min". Compared to doing it manually. */
+  timeSaved?: string;
   /** Optional micro-tip shown under the prompt block */
   promptTip?: string;
   /** Optional micro-tip shown under the improvement prompts */
