@@ -11,6 +11,7 @@ import {
   FileText,
   Mail,
   MessageSquare,
+  Settings2,
   Sparkles,
   Target,
   Wand2,
@@ -21,6 +22,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { PromptBlock } from "@/components/PromptBlock";
 import { CopyButton } from "@/components/CopyButton";
 import { AccessNote } from "@/components/AccessNote";
+import { AutomationIndicators } from "@/components/AutomationIndicators";
 import { Tip } from "@/components/Tip";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
