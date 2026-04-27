@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Bot, Calendar, Clock, ShieldAlert, Sparkles } from "lucide-react";
+import { ArrowUpRight, Bot, Calendar, Clock, ShieldAlert, Sparkles, Workflow as WorkflowIcon } from "lucide-react";
 import { Workflow, LEVEL_META } from "@/data/workflows";
 
 interface WorkflowCardProps {
@@ -11,6 +11,7 @@ const levelIcon = {
   advanced: ShieldAlert,
   agent: Bot,
   scheduled: Calendar,
+  automation: WorkflowIcon,
 } as const;
 
 export function WorkflowCard({ workflow }: WorkflowCardProps) {
