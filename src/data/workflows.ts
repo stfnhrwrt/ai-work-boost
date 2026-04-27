@@ -175,6 +175,7 @@ Notes:
     realWorldAction:
       "Send the briefing to your executive in Teams or email before the day starts (ideally before 8 a.m.).",
     timeRange: "5–10 minutes",
+    timeSaved: "~20 min saved",
   },
   {
     id: "summarize-inbox",
@@ -220,6 +221,7 @@ Emails:
     realWorldAction:
       "Use the summary to organize your day: respond to urgent items first, schedule follow-ups, archive the rest.",
     timeRange: "5 minutes",
+    timeSaved: "~25 min saved",
   },
   {
     id: "prepare-meeting-notes",
@@ -463,6 +465,7 @@ Inputs:
     realWorldAction:
       "Trigger the agent each morning by asking 'Create my daily briefing' — then forward the output to your executive.",
     timeRange: "Setup: 15 min · Run: 1 min",
+    timeSaved: "~20 min saved per run",
     agent: {
       purpose: "Automatically generate a consistent daily briefing on demand.",
       instruction: `You are an executive assistant.
@@ -532,6 +535,7 @@ Emails:
     realWorldAction:
       "Run the agent at the start of the morning, after lunch and end of day. Act on the categorized list immediately.",
     timeRange: "Setup: 15 min · Run: 2 min",
+    timeSaved: "~25 min saved per run",
     agent: {
       purpose: "Turn inbox management into a repeatable, structured system.",
       instruction: `You are an assistant helping manage an executive inbox.
@@ -602,6 +606,7 @@ Inputs:
     realWorldAction:
       "Once scheduled, the briefing lands in Copilot chat (or Teams) every morning. Review it, add a human touch, then forward to your executive.",
     timeRange: "Setup: 5 min · Runs daily",
+    timeSaved: "~15 min/day after setup",
     promptTip:
       "Keep the structure consistent every day — your executive builds trust faster when the format never changes.",
     scheduled: {
@@ -727,6 +732,7 @@ Inputs:
     realWorldAction:
       "Use Friday afternoon to scan the document, line up prep work and send your executive a short Monday-readiness note.",
     timeRange: "Setup: 5 min · Runs weekly",
+    timeSaved: "~30 min/week after setup",
     extraTips: [
       "This is one of the highest-value automations for assistants — it converts reactive Mondays into planned ones.",
     ],
@@ -953,6 +959,7 @@ Inputs:
     realWorldAction:
       "Let the rule handle volume. Use the Copilot review every Monday morning to clear out judgment-call meetings in 5 minutes.",
     timeRange: "Setup: 10 min · Weekly review: 5 min",
+    timeSaved: "~20 min/week saved",
     promptTip:
       "Automation handles volume; Copilot handles judgment. Don't try to put judgment into the rule — it ages badly.",
   },
@@ -1006,6 +1013,7 @@ Inputs:
     realWorldAction:
       "Use the rule to filter, Copilot to understand. Your inbox triage drops from 30 minutes to 5.",
     timeRange: "Setup: 10 min · Daily use: 5 min",
+    timeSaved: "~25 min/day saved",
     improvementTip:
       "Rules filter, Copilot interprets. Keep them as separate jobs — you'll debug each one faster.",
   },
@@ -1059,6 +1067,7 @@ Inputs:
     realWorldAction:
       "Walk through the proposal with your executive in your weekly sync. Even accepting half the suggestions saves hours per week.",
     timeRange: "10–15 minutes",
+    timeSaved: "~45 min saved",
     promptTip:
       "Always ask Copilot to 'protect focus time' explicitly — otherwise it optimizes for fitting more meetings in.",
   },
@@ -1434,6 +1443,7 @@ Inputs:
     realWorldAction:
       "Share the agenda with your team a week in advance with pre-reads, then use it as your live facilitation script on the day.",
     timeRange: "10 minutes",
+    timeSaved: "~40 min saved",
   },
 
 
