@@ -1,13 +1,26 @@
 export function SiteFooter() {
+  const year = new Date().getFullYear();
   return (
     <footer className="mt-24 border-t border-border/60 bg-background">
-      <div className="container mx-auto px-6 py-10 text-sm text-muted-foreground">
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-          <p>
-            Designed for Microsoft Copilot (recommended) and ChatGPT. No login required.
+      <div className="container mx-auto flex flex-col gap-6 px-6 py-10 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">
+            © {year} Your Name. All rights reserved.
           </p>
-          <p>Get real work done in 5–10 minutes.</p>
+          <p>
+            Built and maintained by{" "}
+            <a
+              href="https://your-link.example"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              Your Name
+            </a>
+            . Designed for Microsoft Copilot and ChatGPT.
+          </p>
         </div>
+        <p className="text-xs">Get real work done in 5–10 minutes.</p>
       </div>
     </footer>
   );
