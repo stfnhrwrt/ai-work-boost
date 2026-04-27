@@ -73,6 +73,18 @@ export interface Workflow {
     /** Optional Power Automate alternative when the native option is limited */
     powerAutomateAlt?: string;
   };
+  /** Which layers this workflow combines (Outlook rules, Copilot, Power Automate) */
+  automationLayers?: AutomationLayer[];
+  /** Does this work on a shared mailbox? */
+  sharedMailboxSupport?: SharedMailboxSupport;
+  /** Permissions required (e.g. "Delegate access to executive mailbox") */
+  requiresPermissions?: string;
+  /** For level: "automation" — Outlook / rule setup steps */
+  outlookSetup?: {
+    title: string;
+    steps: string[];
+    note?: string;
+  };
 }
 
 export const roles: Role[] = [
