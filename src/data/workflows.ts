@@ -51,12 +51,18 @@ export interface Workflow {
     benefit: string;
     setupSteps: string[];
   };
-  /** For level: "scheduled" — Power Automate scheduled flow */
+  /** For level: "scheduled" — recurring prompt automation */
   scheduled?: {
     purpose: string;
     schedule: string;
     setupSteps: string[];
     output: string;
+    /** Where the result appears (Copilot chat, Teams notification, email…) */
+    outputLocation?: string;
+    /** "copilot" = native Scheduled Prompt (preferred). "power-automate" = full flow */
+    mechanism?: "copilot" | "power-automate";
+    /** Optional Power Automate alternative when the native option is limited */
+    powerAutomateAlt?: string;
   };
 }
 
@@ -1262,10 +1268,10 @@ export const LEVEL_META: Record<
     cardBadge: "Agent",
   },
   scheduled: {
-    label: "Level 3 — Scheduled automations",
+    label: "Level 3 — Scheduled prompts",
     shortLabel: "Scheduled",
     description:
-      "Recurring flows in Microsoft Power Automate that run your prompt on a schedule and deliver results automatically.",
+      "Native Microsoft 365 Copilot Scheduled Prompts that run a prompt automatically every morning, evening or week — no Copilot Studio required.",
     cardBadge: "Scheduled",
   },
 };
