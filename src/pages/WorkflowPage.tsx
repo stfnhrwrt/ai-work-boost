@@ -399,11 +399,6 @@ const WorkflowPage = () => {
             </Section>
           )}
 
-          {/* Real-world action duplicate marker removed — kept original below */}
-          <div className="hidden">
-            {workflow.realWorldAction}
-            </div>
-          </Section>
 
           {/* Bottom nav */}
           <div className="mt-14 flex flex-col items-stretch justify-between gap-3 border-t border-border pt-8 sm:flex-row sm:items-center">
