@@ -152,141 +152,6 @@ const WorkflowPage = () => {
           {/* Access Matters callout */}
           {workflow.accessNote && <AccessNote note={workflow.accessNote} />}
 
-          {/* Automation indicators (Level 4) */}
-          {(workflow.automationLayers ||
-            workflow.sharedMailboxSupport ||
-            workflow.requiresPermissions) && (
-            <AutomationIndicators
-              layers={workflow.automationLayers}
-              sharedMailbox={workflow.sharedMailboxSupport}
-              requiresPermissions={workflow.requiresPermissions}
-            />
-          )}
-
-          {/* Outlook setup (Level 4) */}
-          {workflow.outlookSetup && (
-            <Section
-              title={workflow.outlookSetup.title}
-              subtitle="Configure once — runs forever"
-              icon={Settings2}
-            >
-              <div className="rounded-xl border border-border bg-card p-5">
-                <ol className="space-y-2 text-sm text-foreground">
-                  {workflow.outlookSetup.steps.map((step, i) => (
-                    <li key={i} className="flex gap-3">
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
-                        {i + 1}
-                      </span>
-                      <span className="leading-relaxed">{step}</span>
-                    </li>
-                  ))}
-                </ol>
-                {workflow.outlookSetup.note && (
-                  <p className="mt-4 border-t border-border pt-3 text-xs text-muted-foreground">
-                    {workflow.outlookSetup.note}
-                  </p>
-                )}
-              </div>
-            </Section>
-          )}
-
-          {/* Agent setup (Level 2) */}
-          {workflow.agent && (
-            <Section title="Build the agent" subtitle="Setup steps in Copilot Studio" icon={Bot}>
-              <div className="mb-4 grid gap-3 sm:grid-cols-2">
-                <InfoBox label="Purpose" value={workflow.agent.purpose} />
-                <InfoBox label="Why it's powerful" value={workflow.agent.benefit} />
-              </div>
-
-              <div className="mb-5 rounded-xl border border-border bg-card p-5">
-                <h4 className="mb-3 text-sm font-semibold text-foreground">Setup steps</h4>
-                <ol className="space-y-2 text-sm text-foreground">
-                  {workflow.agent.setupSteps.map((step, i) => (
-                    <li key={i} className="flex gap-3">
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
-                        {i + 1}
-                      </span>
-                      <span className="leading-relaxed">{step}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-
-              <div className="mb-3">
-                <h4 className="mb-2 text-sm font-semibold text-foreground">Agent instruction</h4>
-                <PromptBlock prompt={workflow.agent.instruction} />
-              </div>
-
-              <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm">
-                <span className="font-semibold text-foreground">Example trigger: </span>
-                <span className="text-muted-foreground">{workflow.agent.triggerExample}</span>
-              </div>
-            </Section>
-          )}
-
-          {/* Scheduled prompt setup (Level 3) */}
-          {workflow.scheduled && (
-            <Section
-              title={
-                workflow.scheduled.mechanism === "power-automate"
-                  ? "Schedule the automation"
-                  : "Schedule the prompt"
-              }
-              subtitle={
-                workflow.scheduled.mechanism === "power-automate"
-                  ? "Setup steps in Microsoft Power Automate"
-                  : "Native Microsoft 365 Copilot — no Copilot Studio required"
-              }
-              icon={CalendarClock}
-            >
-              {workflow.scheduled.mechanism !== "power-automate" && (
-                <div className="mb-4 rounded-lg border border-primary/20 bg-primary-soft px-4 py-3 text-sm text-foreground">
-                  <span className="font-semibold">Scheduled Prompts</span> are a
-                  native Copilot feature: run a prompt manually, click the “…”
-                  menu, and choose <em>Schedule this prompt</em>. Works in Work
-                  mode (Teams or Outlook), not Web mode.
-                </div>
-              )}
-
-              <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                <InfoBox label="Purpose" value={workflow.scheduled.purpose} />
-                <InfoBox label="Schedule" value={workflow.scheduled.schedule} />
-                <InfoBox label="Output" value={workflow.scheduled.output} />
-                {workflow.scheduled.outputLocation && (
-                  <InfoBox
-                    label="Where it appears"
-                    value={workflow.scheduled.outputLocation}
-                  />
-                )}
-              </div>
-
-              <div className="mb-5 rounded-xl border border-border bg-card p-5">
-                <h4 className="mb-3 text-sm font-semibold text-foreground">Setup steps</h4>
-                <ol className="space-y-2 text-sm text-foreground">
-                  {workflow.scheduled.setupSteps.map((step, i) => (
-                    <li key={i} className="flex gap-3">
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
-                        {i + 1}
-                      </span>
-                      <span className="leading-relaxed">{step}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-
-              {workflow.scheduled.powerAutomateAlt && (
-                <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm">
-                  <span className="font-semibold text-foreground">
-                    Power Automate alternative:{" "}
-                  </span>
-                  <span className="text-muted-foreground">
-                    {workflow.scheduled.powerAutomateAlt}
-                  </span>
-                </div>
-              )}
-            </Section>
-          )}
-
           {/* Tool Mode + Prompts */}
           <Section
             title={
@@ -360,6 +225,180 @@ const WorkflowPage = () => {
               {workflow.realWorldAction}
             </div>
           </Section>
+
+          {/* Time */}
+          <Section title="Time" icon={Clock}>
+            <div className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-foreground">
+              <Clock className="h-4 w-4 text-primary" />
+              {workflow.timeRange}
+              {workflow.timeSaved && (
+                <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold text-accent-foreground">
+                  <TrendingDown className="h-3 w-3" />
+                  Saves {workflow.timeSaved}
+                </span>
+              )}
+            </div>
+          </Section>
+
+          {/* ===== Level-specific sections ===== */}
+
+          {/* Automation indicators (Level 4) */}
+          {(workflow.automationLayers ||
+            workflow.sharedMailboxSupport ||
+            workflow.requiresPermissions) && (
+            <AutomationIndicators
+              layers={workflow.automationLayers}
+              sharedMailbox={workflow.sharedMailboxSupport}
+              requiresPermissions={workflow.requiresPermissions}
+            />
+          )}
+
+          {/* Outlook setup (Level 4) */}
+          {workflow.outlookSetup && (
+            <Section
+              title={workflow.outlookSetup.title}
+              subtitle="Configure once — runs forever"
+              icon={Settings2}
+            >
+              <div className="rounded-xl border border-border bg-card p-5">
+                <ol className="space-y-2 text-sm text-foreground">
+                  {workflow.outlookSetup.steps.map((step, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
+                        {i + 1}
+                      </span>
+                      <span className="leading-relaxed">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+                {workflow.outlookSetup.note && (
+                  <p className="mt-4 border-t border-border pt-3 text-xs text-muted-foreground">
+                    {workflow.outlookSetup.note}
+                  </p>
+                )}
+              </div>
+            </Section>
+          )}
+
+          {/* Agent setup (Level 2) — Interaction Mode first, Studio setup collapsible */}
+          {workflow.agent && (
+            <Section title="Use the agent" subtitle="How the conversation works" icon={Bot}>
+              <div className="mb-4 grid gap-3 sm:grid-cols-2">
+                <InfoBox label="Purpose" value={workflow.agent.purpose} />
+                <InfoBox label="Why it's powerful" value={workflow.agent.benefit} />
+              </div>
+
+              <div className="mb-4 rounded-xl border border-primary/20 bg-primary-soft p-5">
+                <h4 className="mb-2 text-sm font-semibold text-foreground">Interaction mode</h4>
+                <p className="mb-3 text-sm leading-relaxed text-foreground">
+                  The agent asks you short questions one at a time. You answer step-by-step,
+                  and it builds the final result from your inputs — no Copilot Studio required
+                  to use it.
+                </p>
+                <ol className="space-y-1.5 text-sm text-foreground">
+                  <li><span className="font-semibold">1.</span> AI asks a focused question.</li>
+                  <li><span className="font-semibold">2.</span> You answer in your own words.</li>
+                  <li><span className="font-semibold">3.</span> AI assembles the structured output.</li>
+                </ol>
+              </div>
+
+              <div className="mb-3">
+                <h4 className="mb-2 text-sm font-semibold text-foreground">Agent instruction</h4>
+                <PromptBlock prompt={workflow.agent.instruction} />
+              </div>
+
+              <div className="mb-4 rounded-lg border border-border bg-secondary/50 p-4 text-sm">
+                <span className="font-semibold text-foreground">Example trigger: </span>
+                <span className="text-muted-foreground">{workflow.agent.triggerExample}</span>
+              </div>
+
+              <details className="group rounded-xl border border-border bg-card p-5 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center justify-between gap-3 text-sm font-semibold text-foreground">
+                  <span>Optional: build it in Copilot Studio</span>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-open:rotate-90" />
+                </summary>
+                <div className="mt-4">
+                  <p className="mb-3 text-xs text-muted-foreground">
+                    Only needed if you want to package this as a reusable agent for your team.
+                  </p>
+                  <ol className="space-y-2 text-sm text-foreground">
+                    {workflow.agent.setupSteps.map((step, i) => (
+                      <li key={i} className="flex gap-3">
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
+                          {i + 1}
+                        </span>
+                        <span className="leading-relaxed">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </details>
+            </Section>
+          )}
+
+          {/* Scheduled prompt setup (Level 3) */}
+          {workflow.scheduled && (
+            <Section
+              title={
+                workflow.scheduled.mechanism === "power-automate"
+                  ? "Schedule the automation"
+                  : "Schedule the prompt"
+              }
+              subtitle={
+                workflow.scheduled.mechanism === "power-automate"
+                  ? "Setup steps in Microsoft Power Automate"
+                  : "Native Microsoft 365 Copilot — no Copilot Studio required"
+              }
+              icon={CalendarClock}
+            >
+              {workflow.scheduled.mechanism !== "power-automate" && (
+                <div className="mb-4 rounded-lg border border-primary/20 bg-primary-soft px-4 py-3 text-sm text-foreground">
+                  <span className="font-semibold">Scheduled Prompts</span> are a
+                  native Copilot feature: run a prompt manually, click the "…"
+                  menu, and choose <em>Schedule this prompt</em>. Works in Work
+                  mode (Teams or Outlook), not Web mode.
+                </div>
+              )}
+
+              <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <InfoBox label="Purpose" value={workflow.scheduled.purpose} />
+                <InfoBox label="Schedule" value={workflow.scheduled.schedule} />
+                <InfoBox label="Output" value={workflow.scheduled.output} />
+                {workflow.scheduled.outputLocation && (
+                  <InfoBox
+                    label="Where it appears"
+                    value={workflow.scheduled.outputLocation}
+                  />
+                )}
+              </div>
+
+              <div className="mb-5 rounded-xl border border-border bg-card p-5">
+                <h4 className="mb-3 text-sm font-semibold text-foreground">Setup steps</h4>
+                <ol className="space-y-2 text-sm text-foreground">
+                  {workflow.scheduled.setupSteps.map((step, i) => (
+                    <li key={i} className="flex gap-3">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
+                        {i + 1}
+                      </span>
+                      <span className="leading-relaxed">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              {workflow.scheduled.powerAutomateAlt && (
+                <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm">
+                  <span className="font-semibold text-foreground">
+                    Power Automate alternative:{" "}
+                  </span>
+                  <span className="text-muted-foreground">
+                    {workflow.scheduled.powerAutomateAlt}
+                  </span>
+                </div>
+              )}
+            </Section>
+          )}
+
 
           {/* Bottom nav */}
           <div className="mt-14 flex flex-col items-stretch justify-between gap-3 border-t border-border pt-8 sm:flex-row sm:items-center">
