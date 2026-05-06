@@ -40,16 +40,25 @@ const Index = () => {
                 style={{ ["--i" as string]: 0 }}
               >
                 <Sparkles className="h-3 w-3 text-accent" />
-                For Copilot &amp; ChatGPT
+                Microsoft 365 Copilot · Enterprise workflows
               </span>
 
               <h1
                 className="fade-in-up mb-5 text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl"
                 style={{ ["--i" as string]: 1 }}
               >
-                Turn AI into Daily Productivity —{" "}
-                <span className="text-gradient-animated">Not Just Theory</span>
+                AI-powered enterprise workflows —{" "}
+                <span className="text-gradient-animated">integrated into Microsoft 365</span>
               </h1>
+
+              <p
+                className="fade-in-up mb-9 text-lg leading-relaxed text-muted-foreground sm:text-xl"
+                style={{ ["--i" as string]: 2 }}
+              >
+                Practical Microsoft 365 Copilot workflows for meeting intelligence,
+                knowledge retrieval and reporting — built to operate within your
+                existing permissions, sensitivity labels and governance controls.
+              </p>
 
               <p
                 className="fade-in-up mb-9 text-lg leading-relaxed text-muted-foreground sm:text-xl"
