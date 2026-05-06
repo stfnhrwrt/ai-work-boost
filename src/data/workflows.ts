@@ -45,6 +45,8 @@ export interface Role {
   tagline: string;
   description: string;
   icon: LucideIcon;
+  /** When true, role appears on the homepage but the role page shows a "Coming soon" state */
+  comingSoon?: boolean;
 }
 
 export interface Workflow {
