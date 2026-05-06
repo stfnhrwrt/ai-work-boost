@@ -19,6 +19,7 @@ const RolePage = () => {
 
   const levels = getLevelsForRole(role.id);
   const Icon = role.icon;
+  const isComingSoon = role.comingSoon || levels.length === 0;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
