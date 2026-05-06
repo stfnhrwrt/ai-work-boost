@@ -114,9 +114,9 @@ export const roles: Role[] = [
     id: "executive-assistants",
     name: "Executive Assistants",
     shortName: "EA",
-    tagline: "Stay one step ahead of your executive.",
+    tagline: "Coordinate, brief and follow up — within existing permissions.",
     description:
-      "Workflows for daily briefings, inbox triage and meeting prep — built to save you hours every week.",
+      "Meeting prep, inbox triage and executive coordination across Outlook, Teams and SharePoint. Copilot only uses content you are already authorized to access.",
     icon: Briefcase,
   },
   {
@@ -125,17 +125,65 @@ export const roles: Role[] = [
     shortName: "Manager",
     tagline: "Lead your team with sharper, faster decisions.",
     description:
-      "Practical workflows for 1:1s, feedback and weekly priorities — ready to use before your next meeting.",
+      "Practical workflows for 1:1s, feedback and weekly priorities — built on the meetings, chats and documents you already work with.",
     icon: Users,
   },
   {
     id: "project-managers",
     name: "Project Managers",
     shortName: "PM",
-    tagline: "Keep projects moving and stakeholders aligned.",
+    tagline: "Keep projects, PMO reporting and stakeholders aligned.",
     description:
-      "Status summaries, risk reviews and stakeholder updates — turn scattered context into clear communication.",
+      "Consolidates project information across Teams, Planner, SharePoint and meetings to improve visibility, reporting and coordination across projects.",
     icon: KanbanSquare,
+  },
+  {
+    id: "compliance",
+    name: "Compliance & Policy",
+    shortName: "Compliance",
+    tagline: "Navigate policies and governance documentation.",
+    description:
+      "Helps employees navigate internal policies, compliance documentation, governance procedures and organizational standards. Not a substitute for legal advice or autonomous compliance decisions.",
+    icon: ShieldCheck,
+  },
+  {
+    id: "finance",
+    name: "Finance & Reporting",
+    shortName: "Finance",
+    tagline: "Reporting, Excel analysis and management summaries.",
+    description:
+      "Supports finance teams with reporting, Excel analysis, forecasting assistance and management summaries across Microsoft 365.",
+    icon: LineChart,
+  },
+  {
+    id: "procurement",
+    name: "Procurement & Sourcing",
+    shortName: "Procurement",
+    tagline: "Summarize suppliers, RFPs and contracts.",
+    description:
+      "Supports procurement teams by summarizing supplier documents, comparing proposals and organizing sourcing information across Microsoft 365.",
+    icon: ShoppingCart,
+    comingSoon: true,
+  },
+  {
+    id: "knowledge-management",
+    name: "Knowledge Management",
+    shortName: "Knowledge",
+    tagline: "Find and summarize organizational knowledge.",
+    description:
+      "Enables employees to retrieve and summarize organizational knowledge across SharePoint, Teams, Outlook and OneDrive — within existing permissions.",
+    icon: BookOpen,
+    comingSoon: true,
+  },
+  {
+    id: "human-resources",
+    name: "Human Resources Support",
+    shortName: "HR",
+    tagline: "Onboarding, policies and HR communication.",
+    description:
+      "Assists HR teams with onboarding, policy guidance, document retrieval and internal communication. Not used for performance evaluation or hiring decisions.",
+    icon: UserCog,
+    comingSoon: true,
   },
 ];
 
