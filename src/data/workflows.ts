@@ -1,6 +1,24 @@
-import { Briefcase, Users, KanbanSquare, LucideIcon } from "lucide-react";
+import {
+  Briefcase,
+  Users,
+  KanbanSquare,
+  ShoppingCart,
+  BookOpen,
+  ShieldCheck,
+  LineChart,
+  UserCog,
+  LucideIcon,
+} from "lucide-react";
 
-export type RoleId = "executive-assistants" | "managers" | "project-managers";
+export type RoleId =
+  | "executive-assistants"
+  | "managers"
+  | "project-managers"
+  | "procurement"
+  | "knowledge-management"
+  | "compliance"
+  | "finance"
+  | "human-resources";
 
 /**
  * Workflow level
@@ -27,6 +45,8 @@ export interface Role {
   tagline: string;
   description: string;
   icon: LucideIcon;
+  /** When true, role appears on the homepage but the role page shows a "Coming soon" state */
+  comingSoon?: boolean;
 }
 
 export interface Workflow {
@@ -94,9 +114,9 @@ export const roles: Role[] = [
     id: "executive-assistants",
     name: "Executive Assistants",
     shortName: "EA",
-    tagline: "Stay one step ahead of your executive.",
+    tagline: "Coordinate, brief and follow up — within existing permissions.",
     description:
-      "Workflows for daily briefings, inbox triage and meeting prep — built to save you hours every week.",
+      "Meeting prep, inbox triage and executive coordination across Outlook, Teams and SharePoint. Copilot only uses content you are already authorized to access.",
     icon: Briefcase,
   },
   {
@@ -105,17 +125,65 @@ export const roles: Role[] = [
     shortName: "Manager",
     tagline: "Lead your team with sharper, faster decisions.",
     description:
-      "Practical workflows for 1:1s, feedback and weekly priorities — ready to use before your next meeting.",
+      "Practical workflows for 1:1s, feedback and weekly priorities — built on the meetings, chats and documents you already work with.",
     icon: Users,
   },
   {
     id: "project-managers",
     name: "Project Managers",
     shortName: "PM",
-    tagline: "Keep projects moving and stakeholders aligned.",
+    tagline: "Keep projects, PMO reporting and stakeholders aligned.",
     description:
-      "Status summaries, risk reviews and stakeholder updates — turn scattered context into clear communication.",
+      "Consolidates project information across Teams, Planner, SharePoint and meetings to improve visibility, reporting and coordination across projects.",
     icon: KanbanSquare,
+  },
+  {
+    id: "compliance",
+    name: "Compliance & Policy",
+    shortName: "Compliance",
+    tagline: "Navigate policies and governance documentation.",
+    description:
+      "Helps employees navigate internal policies, compliance documentation, governance procedures and organizational standards. Not a substitute for legal advice or autonomous compliance decisions.",
+    icon: ShieldCheck,
+  },
+  {
+    id: "finance",
+    name: "Finance & Reporting",
+    shortName: "Finance",
+    tagline: "Reporting, Excel analysis and management summaries.",
+    description:
+      "Supports finance teams with reporting, Excel analysis, forecasting assistance and management summaries across Microsoft 365.",
+    icon: LineChart,
+  },
+  {
+    id: "procurement",
+    name: "Procurement & Sourcing",
+    shortName: "Procurement",
+    tagline: "Summarize suppliers, RFPs and contracts.",
+    description:
+      "Supports procurement teams by summarizing supplier documents, comparing proposals and organizing sourcing information across Microsoft 365.",
+    icon: ShoppingCart,
+    comingSoon: true,
+  },
+  {
+    id: "knowledge-management",
+    name: "Knowledge Management",
+    shortName: "Knowledge",
+    tagline: "Find and summarize organizational knowledge.",
+    description:
+      "Enables employees to retrieve and summarize organizational knowledge across SharePoint, Teams, Outlook and OneDrive — within existing permissions.",
+    icon: BookOpen,
+    comingSoon: true,
+  },
+  {
+    id: "human-resources",
+    name: "Human Resources Support",
+    shortName: "HR",
+    tagline: "Onboarding, policies and HR communication.",
+    description:
+      "Assists HR teams with onboarding, policy guidance, document retrieval and internal communication. Not used for performance evaluation or hiring decisions.",
+    icon: UserCog,
+    comingSoon: true,
   },
 ];
 
@@ -1836,6 +1904,308 @@ Start by asking the most important questions first.`,
     ],
     realWorldAction:
       "Use the generated business case for stakeholder presentations, steering committee decisions or funding requests.",
+    timeRange: "10–15 minutes",
+    timeSaved: "~60 min saved",
+  },
+
+  // ───────────────────────── Compliance & Policy — Essentials ─────────────────────────
+  {
+    id: "policy-qa",
+    roleId: "compliance",
+    level: "essential",
+    title: "Policy Q&A",
+    description:
+      "Answer employee questions about internal policies using the policy documents you already have access to in SharePoint.",
+    situation:
+      "An employee asks whether a planned activity is covered by an internal policy. You need a clear, sourced answer in minutes.",
+    contextSources: [
+      "Policy documents in SharePoint",
+      "Compliance handbooks in OneDrive",
+      "Approved guidance documents",
+    ],
+    accessNote:
+      "Copilot only references policies you are authorized to view. Always link the source document and confirm the policy is the current version before sharing the answer.",
+    copilotPrompt: `Answer the following policy question using the policy documents in our SharePoint compliance library.
+
+Question:
+[Paste the employee's question]
+
+Structure your answer:
+- Short answer (1–2 sentences)
+- Relevant policy section (with document name)
+- Key conditions or exceptions
+- What the employee should do next
+
+Quote the source document and section. If the documents don't contain a clear answer, say so explicitly.`,
+    chatgptPrompt: `Answer this policy question using the policy text below.
+
+Question:
+[Paste question]
+
+Policy text:
+[Paste relevant policy excerpts]
+
+Structure:
+- Short answer
+- Relevant section
+- Conditions / exceptions
+- Next step
+
+If the policy text doesn't cover the question, say so.`,
+    improvementPrompts: [
+      "Rewrite the answer for a non-expert audience.",
+      "List the exact policy clauses you used as sources.",
+      "Add a one-line disclaimer that this is guidance, not legal advice.",
+    ],
+    realWorldAction:
+      "Send the answer to the employee, link the policy document and copy your compliance lead if the case is borderline.",
+    timeRange: "5 minutes",
+    timeSaved: "~20 min saved",
+  },
+  {
+    id: "compliance-document-summary",
+    roleId: "compliance",
+    level: "essential",
+    title: "Summarize a Compliance Document",
+    description:
+      "Turn a long policy, ISO procedure or governance document into a structured summary your team can actually use.",
+    situation:
+      "A new or updated policy document needs to be communicated to the organization. You need a clear summary highlighting what changed and what people must do.",
+    contextSources: [
+      "The policy or procedure document (Word / PDF in SharePoint or OneDrive)",
+      "Previous version of the same document (if available)",
+    ],
+    accessNote:
+      "Copilot summarizes only the document you point it to. Verify the summary against the source — never publish a compliance summary without a human review.",
+    copilotPrompt: `Summarize the following compliance document for an internal audience.
+
+Document: [Paste link or reference the document in SharePoint]
+
+Structure:
+- Purpose (1 sentence)
+- Scope (who it applies to)
+- Key requirements (bulleted)
+- What changed vs. the previous version (if available)
+- What employees must do
+- Owner / contact
+
+Keep the summary on one page and use plain language.`,
+    chatgptPrompt: `Summarize this compliance document for an internal audience.
+
+Structure:
+- Purpose
+- Scope
+- Key requirements
+- What changed (if previous version is provided)
+- What employees must do
+- Owner / contact
+
+Document:
+[Paste document text]`,
+    improvementPrompts: [
+      "Rewrite as a short Teams announcement.",
+      "Add a 5-bullet 'what you need to do' list at the top.",
+      "Highlight only the changes vs. the previous version.",
+    ],
+    realWorldAction:
+      "Share the summary in the relevant Teams channel, link the full policy in SharePoint and track acknowledgements.",
+    timeRange: "5–10 minutes",
+    timeSaved: "~40 min saved",
+  },
+  {
+    id: "governance-search",
+    roleId: "compliance",
+    level: "essential",
+    title: "Governance Documentation Search",
+    description:
+      "Find the right governance document, control or process owner across SharePoint without manual hunting.",
+    situation:
+      "You need to locate a specific control, process owner or governance artefact and you don't remember exactly where it lives.",
+    contextSources: [
+      "Governance and compliance SharePoint sites",
+      "Process documentation libraries",
+      "Approved control catalogue",
+    ],
+    accessNote:
+      "Copilot searches only the SharePoint sites you can access. If you don't see expected results, request access to the relevant governance site rather than working around permissions.",
+    copilotPrompt: `Search our governance and compliance SharePoint sites for documentation related to:
+
+[Describe the topic — e.g. "third-party risk assessment process"]
+
+For each relevant document return:
+- Title and link
+- Owner / contact
+- Last updated date
+- 1-line summary of why it is relevant
+
+Order results from most to least relevant. Ignore drafts and outdated versions when a newer one exists.`,
+    chatgptPrompt: `From the list of documents below, identify the ones relevant to this topic and explain why.
+
+Topic: [Describe topic]
+
+Documents:
+[Paste list of titles, owners and short descriptions]
+
+Return ranked results with title, owner, last updated, and a 1-line relevance note.`,
+    improvementPrompts: [
+      "Only show documents updated in the last 12 months.",
+      "Group results by process area.",
+      "Add the document owner so I can contact them.",
+    ],
+    realWorldAction:
+      "Use the ranked list to open the right document, contact the owner and answer the original request with a sourced reference.",
+    timeRange: "5 minutes",
+    timeSaved: "~25 min saved",
+  },
+
+  // ───────────────────────── Finance & Reporting — Essentials ─────────────────────────
+  {
+    id: "kpi-summary",
+    roleId: "finance",
+    level: "essential",
+    title: "KPI Summary from Excel",
+    description:
+      "Turn a KPI workbook into a clear management summary highlighting trends, variances and items needing attention.",
+    situation:
+      "You have an updated KPI workbook in Excel and need to brief management on the most important movements before the meeting.",
+    contextSources: [
+      "The KPI workbook in OneDrive or SharePoint",
+      "Previous month's workbook for comparison",
+      "Commentary from business owners (email / Teams)",
+    ],
+    accessNote:
+      "Copilot uses only the workbooks you can open. Always sanity-check the numbers Copilot quotes against the source cells before sharing with management.",
+    copilotPrompt: `Summarize the latest KPI workbook for the management meeting.
+
+Workbook: [Reference the file in OneDrive / SharePoint]
+
+Structure:
+- Headline result (1 sentence)
+- Top 5 KPI movements vs. previous period (with % change)
+- KPIs missing target — and why (use commentary if available)
+- Items requiring a management decision
+- Suggested talking points (max 3)
+
+Keep it on one page. Quote KPI names and values exactly as they appear in the workbook.`,
+    chatgptPrompt: `Summarize the KPI data below for a management meeting.
+
+Structure:
+- Headline result
+- Top 5 movements vs. previous period
+- KPIs missing target (and reasons)
+- Decisions needed
+- Talking points
+
+Data:
+[Paste KPI table and any commentary]`,
+    improvementPrompts: [
+      "Re-do the summary as a short email to the CFO.",
+      "Highlight only KPIs missing target.",
+      "Add a one-line forecast call-out for next month.",
+    ],
+    realWorldAction:
+      "Send the summary as the management pre-read 24 hours before the meeting, with the workbook attached.",
+    timeRange: "5–10 minutes",
+    timeSaved: "~45 min saved",
+  },
+  {
+    id: "variance-summary",
+    roleId: "finance",
+    level: "essential",
+    title: "Budget Variance Summary",
+    description:
+      "Explain budget vs. actual variances in plain language, with the most material movements at the top.",
+    situation:
+      "Month-end is closed and you need to communicate variances vs. budget to non-finance stakeholders without overwhelming them.",
+    contextSources: [
+      "Budget vs. actuals report (Excel)",
+      "Cost-centre owner commentary",
+      "Previous month's variance summary",
+    ],
+    accessNote:
+      "Copilot summarizes the figures it can read. Always verify totals and any variance over your materiality threshold against the source report.",
+    copilotPrompt: `Create a budget variance summary for the latest closed period using the report in [reference file].
+
+Structure:
+- Overall result vs. budget (1 sentence)
+- Top 5 favourable variances (with amount and driver)
+- Top 5 unfavourable variances (with amount and driver)
+- Recurring vs. one-off items
+- Recommended actions for cost-centre owners
+
+Use plain business language — assume the reader is not in finance.`,
+    chatgptPrompt: `Create a budget variance summary using the data below.
+
+Structure:
+- Overall result
+- Top favourable variances (amount, driver)
+- Top unfavourable variances (amount, driver)
+- Recurring vs. one-off
+- Recommended actions
+
+Data:
+[Paste variance table and commentary]`,
+    improvementPrompts: [
+      "Only include variances above [materiality threshold].",
+      "Rewrite for cost-centre owners, not the CFO.",
+      "Add a short paragraph on the YTD trend.",
+    ],
+    realWorldAction:
+      "Send the summary to cost-centre owners and use it as the basis for the month-end review meeting.",
+    timeRange: "10 minutes",
+    timeSaved: "~50 min saved",
+  },
+  {
+    id: "forecast-prep",
+    roleId: "finance",
+    level: "essential",
+    title: "Forecast Preparation Brief",
+    description:
+      "Combine the latest actuals, pipeline and commentary into a structured brief to kick off the next forecast cycle.",
+    situation:
+      "The next forecast cycle starts and you need a single brief that orients business partners and accelerates their input.",
+    contextSources: [
+      "Latest actuals and YTD report",
+      "Sales / pipeline data shared with finance",
+      "Commentary from previous forecast",
+      "Macro assumptions document",
+    ],
+    accessNote:
+      "Copilot uses only the data sources you can access. Pipeline figures should come from the report finance is authorized to use — not from individual users' private notes.",
+    copilotPrompt: `Prepare a forecast kick-off brief for business partners for the next forecast cycle.
+
+Use:
+- Latest actuals and YTD report
+- Pipeline / commercial data shared with finance
+- Commentary from the previous forecast
+- Macro assumptions document
+
+Structure:
+- Where we stand vs. budget and previous forecast
+- Key drivers to revisit (revenue, costs, headcount)
+- Assumptions confirmed for this cycle
+- Open questions per business area
+- Timeline and deliverables for business partners
+
+Keep it under one page.`,
+    chatgptPrompt: `Prepare a forecast kick-off brief using the inputs below.
+
+Structure:
+- Where we stand
+- Key drivers to revisit
+- Confirmed assumptions
+- Open questions per business area
+- Timeline and deliverables
+
+Inputs:
+[Paste actuals summary, pipeline highlights, previous forecast commentary, macro assumptions]`,
+    improvementPrompts: [
+      "Add a per-business-unit section with specific questions.",
+      "Tighten the assumptions section to 5 bullets.",
+      "Reformat as a Teams announcement to launch the cycle.",
+    ],
+    realWorldAction:
+      "Send the brief to business partners along with the forecast templates and book a 30-minute kick-off call.",
     timeRange: "10–15 minutes",
     timeSaved: "~60 min saved",
   },

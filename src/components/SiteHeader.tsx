@@ -23,6 +23,12 @@ export function SiteHeader() {
             Workflows
           </Link>
           <Link
+            to="/#governance"
+            className="text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Governance
+          </Link>
+          <Link
             to="/basics"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >

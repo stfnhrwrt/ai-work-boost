@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Clock, Copy, MousePointerClick, Sparkles, TrendingDown, Zap } from "lucide-react";
+import { ArrowRight, Clock, Copy, Lock, MousePointerClick, ShieldCheck, Sparkles, TrendingDown, Zap } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RoleCard } from "@/components/RoleCard";
@@ -40,23 +40,33 @@ const Index = () => {
                 style={{ ["--i" as string]: 0 }}
               >
                 <Sparkles className="h-3 w-3 text-accent" />
-                For Copilot &amp; ChatGPT
+                Microsoft 365 Copilot · Enterprise workflows
               </span>
 
               <h1
                 className="fade-in-up mb-5 text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl"
                 style={{ ["--i" as string]: 1 }}
               >
-                Turn AI into Daily Productivity —{" "}
-                <span className="text-gradient-animated">Not Just Theory</span>
+                AI-powered enterprise workflows —{" "}
+                <span className="text-gradient-animated">integrated into Microsoft 365</span>
               </h1>
 
               <p
                 className="fade-in-up mb-9 text-lg leading-relaxed text-muted-foreground sm:text-xl"
                 style={{ ["--i" as string]: 2 }}
               >
-                Practical AI workflows for real work. Designed for Microsoft Copilot
-                and ChatGPT — pick a role, copy the prompt, get it done in minutes.
+                Practical Microsoft 365 Copilot workflows for meeting intelligence,
+                knowledge retrieval and reporting — built to operate within your
+                existing permissions, sensitivity labels and governance controls.
+              </p>
+
+              <p
+                className="fade-in-up mb-9 text-base leading-relaxed text-muted-foreground"
+                style={{ ["--i" as string]: 2 }}
+              >
+                Pick a role, copy a prompt, get the work done in Copilot — with ChatGPT
+                provided as a manual fallback. All workflows operate within existing
+                Microsoft 365 permissions and security controls.
               </p>
 
               <div
@@ -195,33 +205,130 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Differentiator strip */}
-        <section className="container mx-auto px-6 pb-8 pt-4">
-          <div className="hover-lift relative overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-card sm:p-10">
-            <div
-              className="blob bg-primary/15"
-              style={{ width: 280, height: 280, top: -100, right: -80 }}
-              aria-hidden
-            />
-            <div className="relative grid items-center gap-6 sm:grid-cols-3">
-              <div className="sm:col-span-2">
-                <h3 className="mb-2 text-xl font-semibold text-foreground">
-                  Built for execution, not learning
-                </h3>
-                <p className="text-muted-foreground">
-                  These aren't tutorials. Every workflow is a ready-to-run prompt
-                  that uses your real company context — emails, Teams chats, calendar
-                  and documents — so you can finish the task and move on.
-                </p>
+        {/* Workflow categories */}
+        <section className="container mx-auto px-6 py-16">
+          <div className="mb-10 max-w-2xl">
+            <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-wider text-primary">
+              Core capabilities
+            </span>
+            <h2 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Three workflow areas, one Microsoft 365 backbone
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Every workflow on this site falls into one of these enterprise areas — built on the Copilot capabilities your tenant already supports.
+            </p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              {
+                title: "Meeting Intelligence",
+                desc: "Transform meetings into actionable outcomes using summaries, task extraction and decision tracking.",
+                bullets: [
+                  "Teams transcript summaries",
+                  "Follow-up generation",
+                  "Action-item tracking",
+                ],
+              },
+              {
+                title: "Enterprise Knowledge Retrieval",
+                desc: "Retrieve organizational knowledge across Microsoft 365 while respecting existing permissions and governance controls.",
+                bullets: [
+                  "SharePoint & Teams search",
+                  "Decision retrieval",
+                  "Cross-source summarization",
+                ],
+              },
+              {
+                title: "Workflow Automation",
+                desc: "Connect meetings, documents, reporting and task management into streamlined enterprise workflows.",
+                bullets: [
+                  "Meeting → Planner task",
+                  "Weekly digest creation",
+                  "Reporting automation",
+                ],
+              },
+            ].map((c) => (
+              <div
+                key={c.title}
+                className="hover-lift flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-card"
+              >
+                <h3 className="mb-2 text-lg font-semibold text-foreground">{c.title}</h3>
+                <p className="mb-4 text-sm text-muted-foreground">{c.desc}</p>
+                <ul className="mt-auto space-y-1.5 text-sm text-foreground/80">
+                  {c.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-2">
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="flex justify-start sm:justify-end">
-                <Button asChild variant="outline" size="lg">
-                  <Link to="/role/managers">
-                    Browse Manager workflows
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Governance & Security */}
+        <section id="governance" className="container mx-auto scroll-mt-20 px-6 py-16">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                <ShieldCheck className="h-3 w-3" />
+                Governance &amp; Security
+              </span>
+              <h2 className="mb-3 text-2xl font-bold tracking-tight text-foreground">
+                Built within your Microsoft 365 controls
+              </h2>
+              <p className="mb-5 text-muted-foreground">
+                Microsoft 365 Copilot respects existing permissions, sensitivity labels, governance rules and tenant security policies. Copilot only accesses information users are already authorized to view.
+              </p>
+              <ul className="space-y-2.5 text-sm text-foreground/85">
+                {[
+                  "Existing permissions remain enforced",
+                  "Sensitivity labels remain active",
+                  "Compliance policies remain active",
+                  "Tenant isolation remains active",
+                  "Access controls are inherited",
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-2.5">
+                    <Lock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 rounded-lg border border-accent/40 bg-accent-soft p-4 text-sm text-foreground">
+                <strong>Copilot does not expand user permissions or bypass organizational security controls.</strong>
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent-foreground">
+                <ShieldCheck className="h-3 w-3" />
+                Responsible Deployment
+              </span>
+              <h2 className="mb-3 text-2xl font-bold tracking-tight text-foreground">
+                Copilot reflects how your tenant is governed
+              </h2>
+              <p className="mb-5 text-muted-foreground">
+                Microsoft 365 Copilot reflects existing organizational permissions and governance structures. Overshared environments or poorly managed permissions may increase visibility of existing data exposure risks.
+              </p>
+              <ul className="space-y-2.5 text-sm text-foreground/85">
+                <li className="flex items-start gap-2.5">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  Review SharePoint and OneDrive sharing scopes before rollout.
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  Apply sensitivity labels to confidential and restricted content.
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  Use Microsoft Purview to monitor Copilot interactions and data access.
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                  Always require a human review before sending Copilot output externally.
+                </li>
+              </ul>
             </div>
           </div>
         </section>

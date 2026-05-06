@@ -19,6 +19,7 @@ const RolePage = () => {
 
   const levels = getLevelsForRole(role.id);
   const Icon = role.icon;
+  const isComingSoon = role.comingSoon || levels.length === 0;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -48,7 +49,30 @@ const RolePage = () => {
         </section>
 
         <section className="container mx-auto px-6 py-12">
-          {levels.length > 1 ? (
+          {isComingSoon ? (
+            <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-card p-10 text-center shadow-card">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent-foreground">
+                Coming soon
+              </span>
+              <h2 className="mb-3 text-2xl font-semibold text-foreground">
+                Workflows for {role.name} are on the way
+              </h2>
+              <p className="mb-6 text-muted-foreground">
+                {role.description}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                In the meantime, browse the workflows already published for other roles.
+              </p>
+              <div className="mt-6">
+                <Link
+                  to="/#roles"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                >
+                  ← Back to all roles
+                </Link>
+              </div>
+            </div>
+          ) : levels.length > 1 ? (
             <Tabs defaultValue={levels[0]} className="w-full">
               <TabsList className="mb-8 inline-flex h-auto flex-wrap justify-start gap-1 bg-secondary p-1">
                 {levels.map((lvl) => (
