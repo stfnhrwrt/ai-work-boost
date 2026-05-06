@@ -8,8 +8,8 @@ export function SiteFooter() {
         <div className="flex items-start gap-3 rounded-lg border border-accent/40 bg-accent-soft p-4 text-sm text-foreground">
           <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-accent-foreground" />
           <p className="leading-relaxed">
-            <span className="font-semibold">Copilot only uses data you have access to.</span>{" "}
-            If results are incomplete, check permissions.
+            <span className="font-semibold">All Copilot workflows operate within existing Microsoft 365 permissions, compliance policies and organizational security controls.</span>{" "}
+            Copilot only accesses information users are already authorized to view.
           </p>
         </div>
       </div>
