@@ -1,6 +1,24 @@
-import { Briefcase, Users, KanbanSquare, LucideIcon } from "lucide-react";
+import {
+  Briefcase,
+  Users,
+  KanbanSquare,
+  ShoppingCart,
+  BookOpen,
+  ShieldCheck,
+  LineChart,
+  UserCog,
+  LucideIcon,
+} from "lucide-react";
 
-export type RoleId = "executive-assistants" | "managers" | "project-managers";
+export type RoleId =
+  | "executive-assistants"
+  | "managers"
+  | "project-managers"
+  | "procurement"
+  | "knowledge-management"
+  | "compliance"
+  | "finance"
+  | "human-resources";
 
 /**
  * Workflow level
