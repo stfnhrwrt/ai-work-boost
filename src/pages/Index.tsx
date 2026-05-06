@@ -61,11 +61,12 @@ const Index = () => {
               </p>
 
               <p
-                className="fade-in-up mb-9 text-lg leading-relaxed text-muted-foreground sm:text-xl"
+                className="fade-in-up mb-9 text-base leading-relaxed text-muted-foreground"
                 style={{ ["--i" as string]: 2 }}
               >
-                Practical AI workflows for real work. Designed for Microsoft Copilot
-                and ChatGPT — pick a role, copy the prompt, get it done in minutes.
+                Pick a role, copy a prompt, get the work done in Copilot — with ChatGPT
+                provided as a manual fallback. All workflows operate within existing
+                Microsoft 365 permissions and security controls.
               </p>
 
               <div
