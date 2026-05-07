@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, Clock, Copy, Lock, MousePointerClick, ShieldCheck, Sparkles, TrendingDown, Zap } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -8,6 +9,16 @@ import { roles, getWorkflowsByRole, workflows } from "@/data/workflows";
 
 const Index = () => {
   const totalWorkflows = workflows.length;
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.getElementById(location.hash.slice(1));
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+      }
+    }
+  }, [location.hash]);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
