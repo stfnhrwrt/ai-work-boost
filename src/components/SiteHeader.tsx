@@ -1,7 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Sparkles } from "lucide-react";
 
 export function SiteHeader() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleAnchor = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", `/#${id}`);
+    }
+  };
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <div className="container mx-auto flex h-16 items-center justify-between px-6">
@@ -16,18 +32,20 @@ export function SiteHeader() {
           <Link to="/" className="text-muted-foreground transition-colors hover:text-foreground">
             Home
           </Link>
-          <Link
-            to="/#roles"
+          <a
+            href="/#roles"
+            onClick={(e) => handleAnchor(e, "roles")}
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Workflows
-          </Link>
-          <Link
-            to="/#governance"
+          </a>
+          <a
+            href="/#governance"
+            onClick={(e) => handleAnchor(e, "governance")}
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Governance
-          </Link>
+          </a>
           <Link
             to="/basics"
             className="text-muted-foreground transition-colors hover:text-foreground"
