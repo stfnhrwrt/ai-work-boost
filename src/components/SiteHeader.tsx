@@ -32,18 +32,20 @@ export function SiteHeader() {
           <Link to="/" className="text-muted-foreground transition-colors hover:text-foreground">
             Home
           </Link>
-          <Link
-            to="/#roles"
+          <a
+            href="/#roles"
+            onClick={(e) => handleAnchor(e, "roles")}
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Workflows
-          </Link>
-          <Link
-            to="/#governance"
+          </a>
+          <a
+            href="/#governance"
+            onClick={(e) => handleAnchor(e, "governance")}
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Governance
-          </Link>
+          </a>
           <Link
             to="/basics"
             className="text-muted-foreground transition-colors hover:text-foreground"
