@@ -74,7 +74,7 @@ const ResponsibleAI = () => (
           <h1 className="mb-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Use AI inside the rules you already work with
           </h1>
-          <p className="max-w-2xl text-lg text-muted-foreground">
+          <p className="max-w-measure text-lg text-muted-foreground">
             Use each workflow only with data and AI tools approved by your organization. Access,
             privacy, and governance depend on the tool and its configuration.
           </p>
