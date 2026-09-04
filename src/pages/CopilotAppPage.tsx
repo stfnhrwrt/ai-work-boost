@@ -1,4 +1,5 @@
-import { Link, Navigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Navigate, useLocation, useParams } from "react-router-dom";
 import { AlertTriangle, ArrowLeft, CheckCircle2, Info, Lightbulb, XCircle } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -42,7 +43,17 @@ const GuidanceList = ({ title, items, icon: Icon, tone = "default" }: GuidanceLi
 
 const CopilotAppPage = () => {
   const { appId } = useParams<{ appId: string }>();
+  const { hash } = useLocation();
   const app = appId ? getCopilotApp(appId) : undefined;
+  const [open, setOpen] = useState<string[]>([]);
+
+  useEffect(() => {
+    const target = hash.replace("#", "");
+    if (!target) return;
+    setOpen((current) => (current.includes(target) ? current : [...current, target]));
+    const element = document.getElementById(target);
+    if (element) element.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [hash]);
 
   if (!app) return <Navigate to="/copilot-microsoft-365" replace />;
 
@@ -122,10 +133,11 @@ const CopilotAppPage = () => {
             copy and adapt, follow-up prompts and what a good result looks like.
           </p>
 
-          <Accordion type="multiple" className="space-y-3">
+          <Accordion type="multiple" value={open} onValueChange={setOpen} className="space-y-3">
             {app.workflows.map((workflow) => (
               <AccordionItem
                 key={workflow.id}
+                id={workflow.id}
                 value={workflow.id}
                 className="rounded-lg border border-border bg-card px-5"
               >

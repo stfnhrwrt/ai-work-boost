@@ -77,8 +77,14 @@ const EXPECTED_OUTPUT_BY_TASK: Record<TaskTypeId, string> = {
     "A structured brief or set of notes: purpose, key points, decisions, agreed actions with owners, and open questions.",
   communication:
     "A ready-to-review draft in a professional tone, with a clear subject or opening line, the key message up front, and a specific next step.",
-  knowledge:
+  writing:
+    "A structured first draft in your own voice, complete enough to edit, with anything unverified flagged rather than invented.",
+  research:
     "A concise answer with the relevant points summarised, the documents or sources it relied on, and anything it could not confirm.",
+  analysis:
+    "A clear read of what the data shows: the material movements with figures, and an explicit boundary between fact and interpretation.",
+  administration:
+    "A short, reliable working list — what needs attention, in priority order, with nothing important dropped.",
   planning:
     "A prioritised plan: what matters most, why, sequencing or dependencies, and the risks or trade-offs to watch.",
   reporting:
@@ -100,7 +106,25 @@ const REVIEW_CHECKLIST_BY_TASK: Record<TaskTypeId, string[]> = {
     "The ask or next step is unambiguous.",
     "Nothing confidential is included for the recipients on the message.",
   ],
-  knowledge: [
+  writing: [
+    "The draft says only what your source material supports.",
+    "Tone and terminology match how you normally write.",
+    "Placeholders and [TO CONFIRM] markers are resolved before sharing.",
+    "Nothing confidential travelled from the source into a wider-audience document.",
+  ],
+  analysis: [
+    "Key figures are spot-checked against a source you trust.",
+    "Filters, periods, currencies and units are as intended.",
+    "Stated causes are labelled as interpretation, not as data.",
+    "Assumptions are listed explicitly.",
+  ],
+  administration: [
+    "Nothing time-critical has been filtered out.",
+    "Names, dates and meeting details are correct.",
+    "Anything actioned on someone else's behalf is within your delegation.",
+    "You reviewed the list before acting on it.",
+  ],
+  research: [
     "Each key claim is traceable to a document or source you can open.",
     "The version of the policy or document used is the current one.",
     "Gaps and uncertainties are stated, not glossed over.",
