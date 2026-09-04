@@ -63,6 +63,7 @@ const WorkflowPage = () => {
   const meta = LEVEL_META[workflow.level];
   const isAdvanced = workflow.level !== "essential";
   const model = resolveWorkflow(workflow);
+  const related = getRelatedItems(workflow.id, 4);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
