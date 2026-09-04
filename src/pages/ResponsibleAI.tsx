@@ -39,7 +39,7 @@ const PRINCIPLES: Principle[] = [
 ];
 
 const PERMISSION_POINTS = [
-  "Existing permissions remain enforced",
+  "Approved tools only",
   "Sensitivity labels remain active",
   "Compliance policies remain active",
   "Tenant and workspace isolation remains active",
@@ -75,8 +75,8 @@ const ResponsibleAI = () => (
             Use AI inside the rules you already work with
           </h1>
           <p className="max-w-2xl text-lg text-muted-foreground">
-            Every workflow on this site is designed to run within your organization's existing
-            access rights, data protection rules and review processes — whichever assistant you use.
+            Use each workflow only with data and AI tools approved by your organization. Access,
+            privacy, and governance depend on the tool and its configuration.
           </p>
         </div>
       </section>

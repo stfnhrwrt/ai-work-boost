@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { getWorkflowsByTaskType, taskTypes } from "@/data/taskTypes";
+import { taskTypes } from "@/data/taskTypes";
+import { getTaskTypeCounts, taskTypeCountLabel } from "@/data/discovery";
 
 const TaskTypes = () => (
   <div className="flex min-h-screen flex-col bg-background">
@@ -14,8 +15,8 @@ const TaskTypes = () => (
             Workflows by task type
           </h1>
           <p className="max-w-2xl text-lg text-muted-foreground">
-            Start from the work you need to get done. Every task type collects the workflows that
-            solve it, across all roles.
+            Start from the work you need to get done. Counts show general workflows first, then
+            Microsoft 365 app workflows, which are Copilot-specific.
           </p>
         </div>
       </section>
@@ -24,7 +25,7 @@ const TaskTypes = () => (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {taskTypes.map((task, idx) => {
             const Icon = task.icon;
-            const count = getWorkflowsByTaskType(task.id).length;
+            const counts = getTaskTypeCounts(task.id);
             return (
               <Link
                 key={task.id}
@@ -38,9 +39,7 @@ const TaskTypes = () => (
                 <h2 className="mb-1 text-lg font-semibold text-foreground">{task.name}</h2>
                 <p className="mb-4 text-sm text-muted-foreground">{task.description}</p>
                 <div className="mt-auto flex items-center justify-between border-t border-border pt-4 text-sm">
-                  <span className="text-muted-foreground">
-                    {count} {count === 1 ? "workflow" : "workflows"}
-                  </span>
+                  <span className="text-muted-foreground">{taskTypeCountLabel(counts)}</span>
                   <span className="inline-flex items-center gap-1 font-medium text-primary transition-transform group-hover:translate-x-0.5">
                     Browse
                     <ArrowUpRight className="h-4 w-4" />

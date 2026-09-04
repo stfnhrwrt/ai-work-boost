@@ -126,9 +126,9 @@ export const roles: Role[] = [
     id: "executive-assistants",
     name: "Assistants / Executive Assistants",
     shortName: "EA",
-    tagline: "Coordinate, brief and follow up — within existing permissions.",
+    tagline: "Coordinate, brief and follow up with less manual effort.",
     description:
-      "Meeting prep, inbox triage and executive coordination across Outlook, Teams and SharePoint. Copilot only uses content you are already authorized to access.",
+      "Meeting prep, inbox triage and executive coordination. Run these with any approved AI assistant, using only information you are allowed to work with.",
     icon: Briefcase,
   },
   {
@@ -146,7 +146,7 @@ export const roles: Role[] = [
     shortName: "PM",
     tagline: "Keep projects, PMO reporting and stakeholders aligned.",
     description:
-      "Consolidates project information across Teams, Planner, SharePoint and meetings to improve visibility, reporting and coordination across projects.",
+      "Consolidates project information from meetings, plans and status updates to improve visibility, reporting and coordination across projects.",
     icon: KanbanSquare,
   },
   {
@@ -164,7 +164,7 @@ export const roles: Role[] = [
     shortName: "Finance",
     tagline: "Reporting, Excel analysis and management summaries.",
     description:
-      "Supports finance teams with reporting, Excel analysis, forecasting assistance and management summaries across Microsoft 365.",
+      "Supports finance teams with reporting, spreadsheet analysis, forecasting assistance and management summaries.",
     icon: LineChart,
   },
 ];

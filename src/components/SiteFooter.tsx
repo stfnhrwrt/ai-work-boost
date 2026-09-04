@@ -19,10 +19,10 @@ export function SiteFooter() {
           <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-accent-foreground" />
           <p className="leading-relaxed">
             <span className="font-semibold">
-              Every workflow runs inside your existing access rights, compliance policies and
-              organizational security controls.
+              Use only AI tools approved for your organization.
             </span>{" "}
-            Use only AI tools your organization has approved, and review output before you send it.
+            Access, privacy, and governance depend on the tool and its configuration. Review every
+            result before you share or act on it.
           </p>
         </div>
       </div>
@@ -48,7 +48,7 @@ export function SiteFooter() {
             >
               learn.agentstacker.org
             </a>
-            . Works with Copilot, ChatGPT, Claude and approved internal AI tools.
+            . Works with Copilot, ChatGPT, Claude, Gemini and approved internal AI tools.
           </p>
         </div>
         <p className="text-xs">Get real work done in 5–10 minutes.</p>

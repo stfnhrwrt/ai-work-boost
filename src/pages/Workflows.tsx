@@ -82,7 +82,7 @@ const Workflows = () => {
             </h1>
             <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
               Search {discoveryItems.length} practical workflows by task, role, format, app or skill
-              level. Most work with Copilot, ChatGPT, Claude or an approved internal AI tool; the
+              level. Most work with Copilot, ChatGPT, Claude, Gemini or an approved internal AI tool; the
               Microsoft 365 app workflows are Copilot-specific.
             </p>
             <div className="relative mt-6 max-w-xl">
