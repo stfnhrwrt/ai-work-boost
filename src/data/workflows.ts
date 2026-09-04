@@ -35,6 +35,7 @@ export type ExecutionEnvironmentId =
   | "copilot"
   | "chatgpt"
   | "claude"
+  | "gemini"
   | "internal";
 
 export type AutomationLayer = "outlook-rule" | "copilot" | "power-automate";

@@ -7,7 +7,13 @@ import { RoleCard } from "@/components/RoleCard";
 import { Button } from "@/components/ui/button";
 import { roles, getWorkflowsByRole } from "@/data/workflows";
 import { taskTypes, microsoft365Workflows } from "@/data/taskTypes";
-import { discoveryItems, getTaskTypeCounts, taskTypeCountLabel } from "@/data/discovery";
+import {
+  discoveryItems,
+  getTaskTypeCounts,
+  libraryCounts,
+  taskTypeCountLabel,
+} from "@/data/discovery";
+import { SituationFinder } from "@/components/SituationFinder";
 import { copilotAppWorkflowCount } from "@/data/copilotApps";
 
 const STACK = [
@@ -99,13 +105,27 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Situation finder */}
+        <section className="container mx-auto px-6 py-12">
+          <SituationFinder eyebrow="Start here — find your workflow" />
+        </section>
+
         {/* Library index row */}
         <section className="border-b border-rule bg-card/60">
           <div className="container mx-auto grid grid-cols-2 gap-px px-6 py-0 sm:grid-cols-4">
-            <IndexStat label="Published workflows" value={totalWorkflows.toString()} />
+            <IndexStat label="General workflows" value={libraryCounts.general.toString()} />
+            <IndexStat
+              label="Microsoft 365 specialist workflows"
+              value={libraryCounts.microsoft365.toString()}
+            />
             <IndexStat label="Roles covered" value={roles.length.toString()} />
             <IndexStat label="Task types" value={taskTypes.length.toString()} />
-            <IndexStat label="Typical effort" value="5–10 min" />
+          </div>
+          <div className="container mx-auto px-6 pb-6">
+            <p className="text-xs text-muted-foreground">
+              {libraryCounts.shared} workflows appear in both collections because they use
+              Microsoft-specific mechanics, so the two counts overlap.
+            </p>
           </div>
         </section>
 

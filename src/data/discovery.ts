@@ -14,6 +14,7 @@ export type AppFilterId =
   | "planner"
   | "chatgpt"
   | "claude"
+  | "gemini"
   | "internal"
   | "cross-app";
 
@@ -33,6 +34,7 @@ export const appFilters: FilterOption<AppFilterId>[] = [
   { id: "planner", label: "Planner" },
   { id: "chatgpt", label: "ChatGPT" },
   { id: "claude", label: "Claude" },
+  { id: "gemini", label: "Gemini" },
   { id: "internal", label: "Internal AI tool" },
   { id: "cross-app", label: "Cross-app" },
 ];
@@ -48,6 +50,7 @@ export const environmentFilters: FilterOption<ExecutionEnvironmentId>[] = [
   { id: "copilot", label: "Microsoft Copilot" },
   { id: "chatgpt", label: "ChatGPT" },
   { id: "claude", label: "Claude" },
+  { id: "gemini", label: "Gemini" },
   { id: "internal", label: "Internal AI tool" },
 ];
 
@@ -301,3 +304,30 @@ export const taskTypeCountLabel = (counts: TaskTypeCounts): string => {
     ? `${general} · ${counts.microsoft365} Microsoft 365`
     : general;
 };
+
+/**
+ * Library totals. Some workflows are counted in both collections:
+ * role workflows that rely on Microsoft-specific mechanics.
+ */
+export interface LibraryCounts {
+  general: number;
+  microsoft365: number;
+  shared: number;
+  total: number;
+}
+
+export const libraryCounts: LibraryCounts = (() => {
+  const roleWorkflows = discoveryItems.filter((i) => i.roleId);
+  const shared = roleWorkflows.filter((i) => i.environments.length === 1 && i.environments[0] === "copilot").length;
+  const appItems = discoveryItems.length - roleWorkflows.length;
+  return {
+    general: roleWorkflows.length,
+    microsoft365: appItems + shared,
+    shared,
+    total: discoveryItems.length,
+  };
+})();
+
+export const libraryCountsNote =
+  `${libraryCounts.general} general workflows · ${libraryCounts.microsoft365} Microsoft 365 specialist workflows. ` +
+  `${libraryCounts.shared} appear in both collections because they use Microsoft-specific mechanics.`;

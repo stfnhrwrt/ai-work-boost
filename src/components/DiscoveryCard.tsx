@@ -21,7 +21,7 @@ const metaFor = (item: DiscoveryItem) => {
 export function DiscoveryCard({ item, variant = "card" }: DiscoveryCardProps) {
   const { role, task, format, tools } = metaFor(item);
   const isCopilotSpecific = !item.roleId;
-  const toolLabel = isCopilotSpecific ? `Microsoft Copilot in ${item.sourceLabel}` : tools;
+  const toolLabel = isCopilotSpecific ? `Microsoft Copilot in ${item.sourceLabel.replace(/^Copilot in /, "")}` : tools;
 
   if (variant === "row") {
     return (
