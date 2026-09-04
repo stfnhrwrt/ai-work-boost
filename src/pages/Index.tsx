@@ -16,7 +16,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { RoleCard } from "@/components/RoleCard";
 import { Button } from "@/components/ui/button";
 import { roles, getWorkflowsByRole } from "@/data/workflows";
-import { taskTypes, getWorkflowsByTaskType, microsoft365Workflows } from "@/data/taskTypes";
+import { taskTypes, microsoft365Workflows } from "@/data/taskTypes";
+import { getTaskTypeCounts, taskTypeCountLabel } from "@/data/discovery";
 import { discoveryItems } from "@/data/discovery";
 import { copilotAppWorkflowCount } from "@/data/copilotApps";
 
@@ -80,9 +81,9 @@ const Index = () => {
                 className="fade-in-up mb-6 text-lg leading-relaxed text-muted-foreground sm:text-xl"
                 style={{ ["--i" as string]: 2 }}
               >
-                Pick a task or your role, copy a prompt, get the job done in 5–10 minutes. Every
-                workflow works with Copilot, ChatGPT, Claude or the AI tools your company has
-                approved.
+                Pick a task or your role, copy a prompt, get the job done in 5–10 minutes. Most
+                workflows work with Copilot, ChatGPT, Claude, Gemini, or an approved internal AI
+                tool. Microsoft 365 app workflows are Copilot-specific.
               </p>
 
               <div
@@ -215,7 +216,7 @@ const Index = () => {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {taskTypes.map((task, idx) => {
               const Icon = task.icon;
-              const count = getWorkflowsByTaskType(task.id).length;
+              const counts = getTaskTypeCounts(task.id);
               return (
                 <Link
                   key={task.id}
@@ -229,7 +230,7 @@ const Index = () => {
                   <h3 className="mb-1 text-base font-semibold text-foreground">{task.name}</h3>
                   <p className="mb-4 text-sm text-muted-foreground">{task.tagline}</p>
                   <span className="mt-auto text-sm text-muted-foreground">
-                    {count} {count === 1 ? "workflow" : "workflows"}
+                    {taskTypeCountLabel(counts)}
                   </span>
                 </Link>
               );
@@ -303,16 +304,16 @@ const Index = () => {
                 Built for the rules you already work with
               </h2>
               <p className="mb-5 text-muted-foreground">
-                Enterprise AI assistants respect existing permissions, sensitivity labels and
-                security policies. They only access information you are already authorized to view.
+                Use each workflow only with data and AI tools approved by your organization.
+                Access, privacy, and governance depend on the tool and its configuration.
               </p>
               <ul className="space-y-2.5 text-sm text-foreground/85">
                 {[
-                  "Existing permissions remain enforced",
-                  "Sensitivity labels remain active",
-                  "Compliance policies remain active",
-                  "Tenant and workspace isolation remains active",
-                  "Access controls are inherited",
+                  "Use only tools your organization has approved",
+                  "Check what data the tool can reach before you rely on it",
+                  "Keep confidential data out of tools that are not approved for it",
+                  "Treat every result as a draft, not a decision",
+                  "Review output before you share or act on it",
                 ].map((b) => (
                   <li key={b} className="flex items-start gap-2.5">
                     <Lock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -321,7 +322,10 @@ const Index = () => {
                 ))}
               </ul>
               <p className="mt-5 rounded-lg border border-accent/40 bg-accent-soft p-4 text-sm text-foreground">
-                <strong>AI does not expand your permissions or bypass security controls.</strong>
+                <strong>
+                  AI tools differ. Access, privacy, and governance depend on the tool and how your
+                  organization has configured it.
+                </strong>
               </p>
             </div>
 

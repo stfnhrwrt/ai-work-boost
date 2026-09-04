@@ -75,7 +75,7 @@ const ResponsibleAI = () => (
             Use AI inside the rules you already work with
           </h1>
           <p className="max-w-2xl text-lg text-muted-foreground">
-            Every workflow on this site is designed to run within your organization's existing
+            Use every workflow only with data and AI tools approved by your organization's existing
             access rights, data protection rules and review processes — whichever assistant you use.
           </p>
         </div>
