@@ -177,7 +177,7 @@ const recommendedTool = (
   item: DiscoveryItem,
   selected: ExecutionEnvironmentId | "any",
 ): string => {
-  if (!item.roleId) return `Microsoft Copilot in ${item.sourceLabel}`;
+  if (!item.roleId) return `Microsoft Copilot in ${item.sourceLabel.replace(/^Copilot in /, "")}`;
   if (item.environments.length === 1) return environmentName(item.environments[0]);
   if (selected !== "any" && item.environments.includes(selected)) return environmentName(selected);
   return "Any approved AI assistant";
