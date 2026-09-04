@@ -12,6 +12,7 @@ import Workflows from "./pages/Workflows.tsx";
 import Roles from "./pages/Roles.tsx";
 import TaskTypes from "./pages/TaskTypes.tsx";
 import CopilotMicrosoft365 from "./pages/CopilotMicrosoft365.tsx";
+import CopilotAppPage from "./pages/CopilotAppPage.tsx";
 import ResponsibleAI from "./pages/ResponsibleAI.tsx";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/roles" element={<Roles />} />
           <Route path="/task-types" element={<TaskTypes />} />
           <Route path="/copilot-microsoft-365" element={<CopilotMicrosoft365 />} />
+          <Route path="/copilot-microsoft-365/:appId" element={<CopilotAppPage />} />
           <Route path="/responsible-ai" element={<ResponsibleAI />} />
           <Route path="/role/:roleId" element={<RolePage />} />
           <Route path="/workflow/:workflowId" element={<WorkflowPage />} />
