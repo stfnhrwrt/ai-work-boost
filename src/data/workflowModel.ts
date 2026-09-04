@@ -51,6 +51,14 @@ export const executionEnvironments: Record<ExecutionEnvironmentId, ExecutionEnvi
     governanceNote:
       "Handled outside your Microsoft 365 tenant. Remove names, figures and client details you are not allowed to share externally.",
   },
+  gemini: {
+    id: "gemini",
+    name: "Gemini",
+    contextBehaviour:
+      "Has no access to your Microsoft 365 systems. Paste or attach the inputs the workflow needs.",
+    governanceNote:
+      "Handled outside your Microsoft 365 tenant. Remove names, figures and client details you are not allowed to share externally.",
+  },
   internal: {
     id: "internal",
     name: "Internal AI tool",
@@ -66,6 +74,7 @@ const ALL_ENVIRONMENTS: ExecutionEnvironmentId[] = [
   "copilot",
   "chatgpt",
   "claude",
+  "gemini",
   "internal",
 ];
 
