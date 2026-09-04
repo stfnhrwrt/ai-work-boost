@@ -65,7 +65,7 @@ const RolePage = () => {
               </p>
               <div className="mt-6">
                 <Link
-                  to="/#roles"
+                  to="/roles"
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
                 >
                   ← Back to all roles

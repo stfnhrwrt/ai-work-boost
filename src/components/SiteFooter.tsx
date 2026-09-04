@@ -1,4 +1,14 @@
+import { Link } from "react-router-dom";
 import { ShieldAlert } from "lucide-react";
+
+const FOOTER_LINKS = [
+  { to: "/workflows", label: "Browse workflows" },
+  { to: "/roles", label: "Roles" },
+  { to: "/task-types", label: "Task types" },
+  { to: "/copilot-microsoft-365", label: "Copilot in Microsoft 365 apps" },
+  { to: "/basics", label: "AI basics" },
+  { to: "/responsible-ai", label: "Responsible AI" },
+];
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -8,16 +18,26 @@ export function SiteFooter() {
         <div className="flex items-start gap-3 rounded-lg border border-accent/40 bg-accent-soft p-4 text-sm text-foreground">
           <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-accent-foreground" />
           <p className="leading-relaxed">
-            <span className="font-semibold">All Copilot workflows operate within existing Microsoft 365 permissions, compliance policies and organizational security controls.</span>{" "}
-            Copilot only accesses information users are already authorized to view.
+            <span className="font-semibold">
+              Every workflow runs inside your existing access rights, compliance policies and
+              organizational security controls.
+            </span>{" "}
+            Use only AI tools your organization has approved, and review output before you send it.
           </p>
         </div>
       </div>
+      <div className="container mx-auto px-6 pb-4">
+        <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          {FOOTER_LINKS.map((l) => (
+            <Link key={l.to} to={l.to} className="transition-colors hover:text-foreground">
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
       <div className="container mx-auto flex flex-col gap-6 px-6 pb-10 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
-          <p className="font-medium text-foreground">
-            © {year} S. Harwart. All rights reserved.
-          </p>
+          <p className="font-medium text-foreground">© {year} S. Harwart. All rights reserved.</p>
           <p>
             Built and maintained by{" "}
             <a
@@ -28,7 +48,7 @@ export function SiteFooter() {
             >
               learn.agentstacker.org
             </a>
-            . Designed for Microsoft Copilot and ChatGPT.
+            . Works with Copilot, ChatGPT, Claude and approved internal AI tools.
           </p>
         </div>
         <p className="text-xs">Get real work done in 5–10 minutes.</p>
