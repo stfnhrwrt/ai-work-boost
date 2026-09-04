@@ -106,6 +106,9 @@ const Index = () => {
           </div>
         </section>
 
+        {/* The AI Workbench — animated inputs → instructions → outputs */}
+        <Workbench />
+
         {/* Situation finder */}
         <section className="container mx-auto px-6 py-12">
           <SituationFinder eyebrow="Start here — find your workflow" />
