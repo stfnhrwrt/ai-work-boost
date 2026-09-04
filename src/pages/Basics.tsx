@@ -39,7 +39,7 @@ const Basics = () => {
             <h1 className="mb-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
               How to Use AI Effectively
             </h1>
-            <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            <p className="max-w-measure text-lg leading-relaxed text-muted-foreground">
               Five short blocks. Two-minute read. Everything you need to get better
               results from Copilot, ChatGPT, Claude or your internal AI tool — starting
               today.

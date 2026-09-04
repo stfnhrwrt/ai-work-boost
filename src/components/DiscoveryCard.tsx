@@ -20,6 +20,8 @@ const metaFor = (item: DiscoveryItem) => {
 
 export function DiscoveryCard({ item, variant = "card" }: DiscoveryCardProps) {
   const { role, task, format, tools } = metaFor(item);
+  const isCopilotSpecific = !item.roleId;
+  const toolLabel = isCopilotSpecific ? `Microsoft Copilot in ${item.sourceLabel}` : tools;
 
   if (variant === "row") {
     return (
@@ -32,6 +34,11 @@ export function DiscoveryCard({ item, variant = "card" }: DiscoveryCardProps) {
             <span className="label-marker">{task}</span>
             {role && <span className="text-[0.7rem] text-muted-foreground">/ {role}</span>}
             {format && <span className="text-[0.7rem] text-muted-foreground">/ {format}</span>}
+            {isCopilotSpecific && (
+              <span className="border border-primary/40 bg-primary-soft px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-primary">
+                Copilot-specific
+              </span>
+            )}
           </div>
           <h3 className="font-display text-lg font-semibold leading-snug text-foreground group-hover:text-primary">
             {item.title}
@@ -41,7 +48,7 @@ export function DiscoveryCard({ item, variant = "card" }: DiscoveryCardProps) {
           </p>
         </div>
         <div className="flex flex-col gap-1 text-xs text-muted-foreground sm:items-end sm:text-right">
-          {tools && <span className="truncate">{tools}</span>}
+          {toolLabel && <span className="truncate">{toolLabel}</span>}
           {item.effort && (
             <span className="inline-flex items-center gap-1.5">
               <Clock className="h-3 w-3" />
@@ -49,7 +56,7 @@ export function DiscoveryCard({ item, variant = "card" }: DiscoveryCardProps) {
             </span>
           )}
           {item.effortAvoided && (
-            <span className="text-accent">Avoids {item.effortAvoided}</span>
+            <span className="text-accent">Effort avoided: {item.effortAvoided}</span>
           )}
           <span className="mt-1 inline-flex items-center gap-1 font-medium text-primary sm:justify-end">
             Open
@@ -65,9 +72,14 @@ export function DiscoveryCard({ item, variant = "card" }: DiscoveryCardProps) {
       to={item.href}
       className="hover-lift group flex h-full min-w-0 flex-col break-words border border-rule bg-card p-5"
     >
-      <div className="mb-2 flex flex-wrap items-center gap-x-2">
+      <div className="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1">
         <span className="label-marker">{task}</span>
         {role && <span className="text-[0.7rem] text-muted-foreground">/ {role}</span>}
+        {isCopilotSpecific && (
+          <span className="border border-primary/40 bg-primary-soft px-1.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-primary">
+            Copilot-specific
+          </span>
+        )}
       </div>
       <h3 className="font-display text-base font-semibold leading-snug text-foreground group-hover:text-primary sm:text-lg">
         {item.title}
@@ -75,7 +87,8 @@ export function DiscoveryCard({ item, variant = "card" }: DiscoveryCardProps) {
       <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
         {item.description}
       </p>
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-rule pt-3 text-xs text-muted-foreground">
+      <p className="mt-3 truncate text-xs text-muted-foreground">{toolLabel}</p>
+      <div className="mt-3 flex items-center justify-between gap-3 border-t border-rule pt-3 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5 truncate">
           {item.effort ? (
             <>

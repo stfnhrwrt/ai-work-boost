@@ -63,7 +63,7 @@ const RolePage = () => {
               <div className="flex h-14 w-14 shrink-0 items-center justify-center  bg-primary text-primary-foreground shadow-card">
                 <Icon className="h-7 w-7" />
               </div>
-              <div className="max-w-2xl">
+              <div className="max-w-measure">
                 <h1 className="mb-1 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                   {role.name}
                 </h1>

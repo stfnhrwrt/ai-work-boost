@@ -104,11 +104,16 @@ const WorkflowPage = () => {
               <Chip>{role.name}</Chip>
               <Chip>{model.taskTypeName}</Chip>
               <Chip>{model.format.shortLabel}</Chip>
+              {model.copilotOnly && (
+                <span className="inline-flex items-center gap-1.5 border border-primary/40 bg-primary-soft px-2.5 py-1 text-xs font-semibold text-primary">
+                  Copilot-specific
+                </span>
+              )}
               <Chip icon={Clock}>Typical effort {model.typicalEffort}</Chip>
               {model.manualEffortAvoided && (
                 <span className="inline-flex items-center gap-1.5 border border-accent/40 bg-accent-soft px-2.5 py-1 text-xs font-semibold text-accent-foreground">
                   <TrendingDown className="h-3.5 w-3.5" />
-                  Manual effort avoided {model.manualEffortAvoided}
+                  Effort avoided: {model.manualEffortAvoided}
                 </span>
               )}
             </div>
@@ -153,7 +158,7 @@ const WorkflowPage = () => {
               <p className="mb-4 text-xs text-muted-foreground">
                 {model.copilotOnly
                   ? "This workflow depends on Microsoft 365 mechanics, so it runs in Copilot only."
-                  : "Use whichever of these your organisation has approved. They do not behave the same way."}
+                  : "Use whichever of these your organization has approved. They do not behave the same way."}
               </p>
               <ul className="space-y-3">
                 {model.environments.map((env) => (
@@ -302,8 +307,9 @@ const WorkflowPage = () => {
               />
               <InfoBox label="Last reviewed" value={formatReviewDate(model.lastReviewed)} />
             </div>
-            <p className="mt-3 text-xs text-muted-foreground">
-              Effort figures are indicative estimates for a typical case, not guaranteed savings.
+            <p className="mt-3 max-w-measure text-xs text-muted-foreground">
+              Estimated manual effort avoided is an indicative figure for a typical case, not a
+              guaranteed saving.
             </p>
           </Section>
 
