@@ -22,6 +22,8 @@ import {
   Zap,
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
+import { DiscoveryCard } from "@/components/DiscoveryCard";
+import { getRelatedItems } from "@/data/discovery";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PromptBlock } from "@/components/PromptBlock";
 import { CopyButton } from "@/components/CopyButton";
@@ -459,6 +461,16 @@ const WorkflowPage = () => {
                   </span>
                 </div>
               )}
+            </Section>
+          )}
+
+          {related.length > 0 && (
+            <Section title="Related workflows" subtitle="Often used alongside this one">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {related.map((item) => (
+                  <DiscoveryCard key={item.key} item={item} />
+                ))}
+              </div>
             </Section>
           )}
 
