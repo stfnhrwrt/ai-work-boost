@@ -66,12 +66,12 @@ const WorkflowPage = () => {
   const related = getRelatedItems(workflow.id, 4);
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-paper">
       <SiteHeader />
-      <main id="main" className="flex-1">
-        {/* Header */}
-        <section className="border-b border-border bg-hero-gradient">
-          <div className="container mx-auto max-w-4xl px-6 py-10">
+      <main id="main" className="flex-1 pb-20 lg:pb-0">
+        {/* Masthead */}
+        <section className="border-b border-rule">
+          <div className="container mx-auto px-6 py-10">
             <nav className="mb-5 flex items-center gap-1.5 text-sm text-muted-foreground">
               <Link to="/" className="transition-colors hover:text-foreground">
                 Home
@@ -85,7 +85,7 @@ const WorkflowPage = () => {
             </nav>
 
             {isAdvanced && (
-              <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary-foreground">
+              <span className="mb-3 inline-flex items-center gap-1.5 bg-primary px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-primary-foreground">
                 {workflow.level === "advanced" && <Zap className="h-3.5 w-3.5" />}
                 {workflow.level === "agent" && <Bot className="h-3.5 w-3.5" />}
                 {workflow.level === "scheduled" && <CalendarClock className="h-3.5 w-3.5" />}
@@ -94,10 +94,10 @@ const WorkflowPage = () => {
               </span>
             )}
 
-            <h1 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            <h1 className="mb-3 max-w-measure font-display text-4xl text-foreground sm:text-5xl">
               {workflow.title}
             </h1>
-            <p className="mb-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            <p className="mb-5 max-w-measure text-lg leading-relaxed text-muted-foreground">
               {workflow.description}
             </p>
             <div className="flex flex-wrap items-center gap-2">
@@ -106,7 +106,7 @@ const WorkflowPage = () => {
               <Chip>{model.format.shortLabel}</Chip>
               <Chip icon={Clock}>Typical effort {model.typicalEffort}</Chip>
               {model.manualEffortAvoided && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-foreground">
+                <span className="inline-flex items-center gap-1.5 border border-accent/40 bg-accent-soft px-2.5 py-1 text-xs font-semibold text-accent-foreground">
                   <TrendingDown className="h-3.5 w-3.5" />
                   Manual effort avoided {model.manualEffortAvoided}
                 </span>
@@ -115,10 +115,11 @@ const WorkflowPage = () => {
           </div>
         </section>
 
-        <article className="container mx-auto max-w-4xl px-6 py-12">
+        <div className="container mx-auto grid gap-10 px-6 py-12 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-14">
+        <article className="min-w-0 max-w-measure">
           {/* Step 1 — Understand the situation */}
           <Section step={1} title="Understand the situation">
-            <div className="rounded-xl border border-border bg-secondary/50 p-5 text-base leading-relaxed text-foreground">
+            <div className="border border-rule bg-secondary/50 p-5 text-base leading-relaxed text-foreground">
               {workflow.situation}
             </div>
           </Section>
@@ -135,7 +136,7 @@ const WorkflowPage = () => {
                 return (
                   <li
                     key={src}
-                    className="flex items-start gap-3 rounded-lg border border-border bg-card p-3.5 text-sm"
+                    className="flex items-start gap-3 border border-rule bg-card p-3.5 text-sm"
                   >
                     <Icon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <span className="text-foreground">{src}</span>
@@ -144,7 +145,7 @@ const WorkflowPage = () => {
               })}
             </ul>
 
-            <div className="mt-5 rounded-xl border border-border bg-card p-5">
+            <div className="mt-5 border border-rule bg-card p-5">
               <h3 className="mb-1 flex items-center gap-2 text-sm font-semibold text-foreground">
                 <Sparkles className="h-4 w-4 text-primary" />
                 Recommended execution environment
@@ -220,14 +221,14 @@ const WorkflowPage = () => {
             subtitle="You stay accountable for the result"
             icon={ClipboardCheck}
           >
-            <div className="mb-4 rounded-xl border border-border bg-card p-5">
+            <div className="mb-4 border border-rule bg-card p-5">
               <h3 className="mb-1.5 text-sm font-semibold text-foreground">Expected output</h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
                 {model.expectedOutput}
               </p>
             </div>
 
-            <div className="rounded-xl border border-border bg-card p-5">
+            <div className="border border-rule bg-card p-5">
               <h3 className="mb-3 text-sm font-semibold text-foreground">Review checklist</h3>
               <ul className="space-y-2">
                 {model.reviewChecklist.map((item) => (
@@ -239,7 +240,7 @@ const WorkflowPage = () => {
               </ul>
             </div>
 
-            <div className="mt-4 flex gap-3 rounded-xl border border-border bg-secondary/50 p-5">
+            <div className="mt-4 flex gap-3 border border-rule bg-secondary/50 p-5">
               <Lock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
               <div>
                 <h3 className="mb-1 text-sm font-semibold text-foreground">
@@ -263,7 +264,7 @@ const WorkflowPage = () => {
               {model.followUpPrompts.map((p) => (
                 <li
                   key={p}
-                  className="flex items-center justify-between gap-4 rounded-lg border border-border bg-card p-4"
+                  className="flex items-center justify-between gap-4 border border-rule bg-card p-4"
                 >
                   <span className="text-sm text-foreground">{p}</span>
                   <CopyButton text={p} label="Copy" size="sm" variant="outline" />
@@ -286,7 +287,7 @@ const WorkflowPage = () => {
 
           {/* Real-World Action */}
           <Section title="Real-world action" icon={Target}>
-            <div className="rounded-xl border border-primary/20 bg-primary-soft p-5 text-base leading-relaxed text-foreground">
+            <div className="border border-primary/30 bg-primary-soft p-5 text-base leading-relaxed text-foreground">
               {workflow.realWorldAction}
             </div>
           </Section>
@@ -326,7 +327,7 @@ const WorkflowPage = () => {
               subtitle="Configure once — runs forever"
               icon={Settings2}
             >
-              <div className="rounded-xl border border-border bg-card p-5">
+              <div className="border border-rule bg-card p-5">
                 <ol className="space-y-2 text-sm text-foreground">
                   {workflow.outlookSetup.steps.map((step, i) => (
                     <li key={i} className="flex gap-3">
@@ -354,7 +355,7 @@ const WorkflowPage = () => {
                 <InfoBox label="Why it's powerful" value={workflow.agent.benefit} />
               </div>
 
-              <div className="mb-4 rounded-xl border border-primary/20 bg-primary-soft p-5">
+              <div className="mb-4 border border-primary/30 bg-primary-soft p-5">
                 <h4 className="mb-2 text-sm font-semibold text-foreground">Interaction mode</h4>
                 <p className="mb-3 text-sm leading-relaxed text-foreground">
                   The agent asks you short questions one at a time. You answer step-by-step,
@@ -373,12 +374,12 @@ const WorkflowPage = () => {
                 <PromptBlock prompt={workflow.agent.instruction} />
               </div>
 
-              <div className="mb-4 rounded-lg border border-border bg-secondary/50 p-4 text-sm">
+              <div className="mb-4 border border-rule bg-secondary/50 p-4 text-sm">
                 <span className="font-semibold text-foreground">Example trigger: </span>
                 <span className="text-muted-foreground">{workflow.agent.triggerExample}</span>
               </div>
 
-              <details className="group rounded-xl border border-border bg-card p-5 [&_summary::-webkit-details-marker]:hidden">
+              <details className="group border border-rule bg-card p-5 [&_summary::-webkit-details-marker]:hidden">
                 <summary className="flex cursor-pointer items-center justify-between gap-3 text-sm font-semibold text-foreground">
                   <span>Optional: build it in Copilot Studio</span>
                   <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-open:rotate-90" />
@@ -418,7 +419,7 @@ const WorkflowPage = () => {
               icon={CalendarClock}
             >
               {workflow.scheduled.mechanism !== "power-automate" && (
-                <div className="mb-4 rounded-lg border border-primary/20 bg-primary-soft px-4 py-3 text-sm text-foreground">
+                <div className="mb-4 border border-primary/30 bg-primary-soft px-4 py-3 text-sm text-foreground">
                   <span className="font-semibold">Scheduled Prompts</span> are a
                   native Copilot feature: run a prompt manually, click the "…"
                   menu, and choose <em>Schedule this prompt</em>. Works in Work
@@ -438,7 +439,7 @@ const WorkflowPage = () => {
                 )}
               </div>
 
-              <div className="mb-5 rounded-xl border border-border bg-card p-5">
+              <div className="mb-5 border border-rule bg-card p-5">
                 <h4 className="mb-3 text-sm font-semibold text-foreground">Setup steps</h4>
                 <ol className="space-y-2 text-sm text-foreground">
                   {workflow.scheduled.setupSteps.map((step, i) => (
@@ -453,7 +454,7 @@ const WorkflowPage = () => {
               </div>
 
               {workflow.scheduled.powerAutomateAlt && (
-                <div className="rounded-lg border border-border bg-secondary/50 p-4 text-sm">
+                <div className="border border-rule bg-secondary/50 p-4 text-sm">
                   <span className="font-semibold text-foreground">
                     Power Automate alternative:{" "}
                   </span>
@@ -493,6 +494,36 @@ const WorkflowPage = () => {
             )}
           </div>
         </article>
+
+          {/* Side rail */}
+          <aside className="order-first hidden lg:order-none lg:block">
+            <div className="sticky top-24 border-t border-rule pt-4 text-sm">
+              <p className="label-eyebrow mb-3">At a glance</p>
+              <dl className="space-y-3">
+                <RailItem label="Role" value={role.name} />
+                <RailItem label="Task type" value={model.taskTypeName} />
+                <RailItem label="Format" value={model.format.shortLabel} />
+                <RailItem label="Typical effort" value={model.typicalEffort} />
+                <RailItem
+                  label="Recommended tools"
+                  value={model.environments.map((e) => e.name).join(", ")}
+                />
+                <RailItem label="Last reviewed" value={formatReviewDate(model.lastReviewed)} />
+              </dl>
+              <div className="mt-5 border-t border-rule pt-4">
+                <CopyButton text={workflow.copilotPrompt} className="w-full rounded-sm" />
+                <p className="mt-2 text-xs text-muted-foreground">
+                  Copies the main instructions for this workflow.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        {/* Mobile sticky copy action */}
+        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-rule bg-background/95 p-3 backdrop-blur lg:hidden">
+          <CopyButton text={workflow.copilotPrompt} className="w-full rounded-sm" />
+        </div>
       </main>
       <SiteFooter />
     </div>
@@ -507,7 +538,7 @@ function Chip({
   icon?: React.ComponentType<{ className?: string }>;
 }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+    <span className="inline-flex items-center gap-1.5 border border-rule bg-card px-2.5 py-1 text-xs font-medium text-muted-foreground">
       {Icon && <Icon className="h-3.5 w-3.5" />}
       {children}
     </span>
@@ -524,28 +555,33 @@ interface SectionProps {
 
 function Section({ title, subtitle, step, icon: Icon, children }: SectionProps) {
   return (
-    <section className="mb-10">
-      <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h2 className="flex items-center gap-2 text-xl font-semibold text-foreground">
-          {step && (
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-              {step}
-            </span>
-          )}
+    <section className="mb-12 scroll-mt-24">
+      <div className="mb-4 border-b border-rule pb-3">
+        {step && <p className="label-marker mb-1">Step {String(step).padStart(2, "0")}</p>}
+        <h2 className="flex items-center gap-2 font-display text-2xl text-foreground">
           {Icon && !step && <Icon className="h-5 w-5 text-primary" />}
           {title}
         </h2>
-        {subtitle && <p className="text-sm text-muted-foreground">{subtitle}</p>}
+        {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
       </div>
       {children}
     </section>
   );
 }
 
+function RailItem({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="border-b border-rule pb-3 last:border-0">
+      <dt className="label-eyebrow">{label}</dt>
+      <dd className="mt-1 text-sm leading-snug text-foreground">{value}</dd>
+    </div>
+  );
+}
+
 function InfoBox({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-border bg-card p-4">
-      <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+    <div className="border border-rule bg-card p-4">
+      <div className="label-eyebrow mb-1 flex items-center gap-1.5">
         <CheckCircle2 className="h-3 w-3 text-primary" />
         {label}
       </div>
