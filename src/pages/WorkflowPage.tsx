@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { DiscoveryCard } from "@/components/DiscoveryCard";
+import { WorkflowChain } from "@/components/WorkflowChain";
+import { getChainForWorkflow } from "@/data/chains";
 import { getRelatedItems } from "@/data/discovery";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PromptBlock } from "@/components/PromptBlock";
@@ -64,6 +66,7 @@ const WorkflowPage = () => {
   const isAdvanced = workflow.level !== "essential";
   const model = resolveWorkflow(workflow);
   const related = getRelatedItems(workflow.id, 4);
+  const chain = getChainForWorkflow(workflow.id);
 
   return (
     <div className="flex min-h-screen flex-col bg-paper">
