@@ -28,7 +28,7 @@ const Basics = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         {/* Hero */}
         <section className="border-b border-border bg-hero-gradient">
           <div className="container mx-auto max-w-4xl px-6 py-14">
@@ -40,8 +40,9 @@ const Basics = () => {
               How to Use AI Effectively
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Five short blocks. Two-minute read. Everything you need to get
-              dramatically better results from Copilot and ChatGPT — starting today.
+              Five short blocks. Two-minute read. Everything you need to get better
+              results from Copilot, ChatGPT, Claude or your internal AI tool — starting
+              today.
             </p>
           </div>
         </section>
@@ -135,26 +136,42 @@ const Basics = () => {
           <Block
             number="03"
             icon={Sparkles}
-            title="Why Copilot is powerful"
-            subtitle="It's different from ChatGPT."
+            title="Know what your tool can access"
+            subtitle="The same instructions behave differently in each assistant."
           >
-            <p className="mb-4 text-base leading-relaxed text-foreground">
-              Copilot can use:
-            </p>
-            <div className="mb-5 grid gap-2 sm:grid-cols-2">
-              {["Emails", "Teams chats", "Calendar", "Documents"].map((src) => (
+            <div className="mb-5 grid gap-3 sm:grid-cols-3">
+              {[
+                {
+                  tool: "Microsoft Copilot",
+                  desc: "Can use work content you are already authorized to see, such as emails, chats, calendar and documents.",
+                },
+                {
+                  tool: "ChatGPT or Claude",
+                  desc: "No access to company systems. You paste or attach the context — and leave confidential data out.",
+                },
+                {
+                  tool: "Internal AI tool",
+                  desc: "Depends on how your organization configured it. Check the approved use cases first.",
+                },
+              ].map((item) => (
                 <div
-                  key={src}
-                  className="flex items-center gap-3 rounded-lg border border-border bg-card p-3.5 text-sm font-medium text-foreground"
+                  key={item.tool}
+                  className="rounded-lg border border-border bg-card p-4 text-sm"
                 >
-                  <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary-soft text-primary">
-                    <Sparkles className="h-3.5 w-3.5" />
-                  </span>
-                  {src}
+                  <div className="mb-2 flex items-center gap-2">
+                    <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary-soft text-primary">
+                      <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+                    </span>
+                    <span className="font-semibold text-foreground">{item.tool}</span>
+                  </div>
+                  <p className="text-muted-foreground">{item.desc}</p>
                 </div>
               ))}
             </div>
-            <Callout>You don't need to paste everything manually.</Callout>
+            <Callout>
+              Better context means better output — but only share context the tool is
+              approved to handle.
+            </Callout>
           </Block>
 
           {/* Block 4 */}
@@ -219,7 +236,7 @@ const Basics = () => {
               principles.
             </p>
             <Button asChild size="lg">
-              <Link to="/#roles">
+              <Link to="/workflows">
                 Browse workflows
                 <ArrowRight className="h-4 w-4" />
               </Link>

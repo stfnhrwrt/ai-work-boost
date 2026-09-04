@@ -15,13 +15,15 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RoleCard } from "@/components/RoleCard";
 import { Button } from "@/components/ui/button";
-import { roles, getWorkflowsByRole, workflows } from "@/data/workflows";
+import { roles, getWorkflowsByRole } from "@/data/workflows";
 import { taskTypes, getWorkflowsByTaskType, microsoft365Workflows } from "@/data/taskTypes";
+import { discoveryItems } from "@/data/discovery";
+import { copilotAppWorkflowCount } from "@/data/copilotApps";
 
 const TOOLS = ["Microsoft Copilot", "ChatGPT", "Claude", "Gemini", "Approved internal AI tools"];
 
 const Index = () => {
-  const totalWorkflows = workflows.length;
+  const totalWorkflows = discoveryItems.length;
   const location = useLocation();
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const Index = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         {/* Hero */}
         <section className="relative overflow-hidden bg-hero-gradient">
           <div className="absolute inset-0 bg-grid-soft" aria-hidden />
@@ -273,8 +275,9 @@ const Index = () => {
                   Copilot in Microsoft 365 apps
                 </h2>
                 <p className="text-muted-foreground">
-                  {microsoft365Workflows.length} workflows that use Microsoft-specific mechanics:
-                  Copilot agents, scheduled prompts, Outlook rules and Power Automate. Optional — the
+                  {copilotAppWorkflowCount + microsoft365Workflows.length} workflows that use
+                  Microsoft-specific mechanics: Copilot in Word, Excel, PowerPoint and Planner,
+                  plus agents, scheduled prompts, Outlook rules and Power Automate. Optional — the
                   rest of the library is tool-agnostic.
                 </p>
               </div>

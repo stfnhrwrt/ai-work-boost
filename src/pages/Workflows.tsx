@@ -74,7 +74,7 @@ const Workflows = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <section className="border-b border-border bg-hero-gradient">
           <div className="container mx-auto px-6 py-10 sm:py-12">
             <h1 className="mb-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -152,7 +152,7 @@ const Workflows = () => {
               </Button>
             </div>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
               {results.map((item) => (
                 <DiscoveryCard key={item.key} item={item} />
               ))}
@@ -174,11 +174,11 @@ interface FilterRowProps {
 
 function FilterRow({ label, options, active, onSelect }: FilterRowProps) {
   return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+    <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
       <span className="shrink-0 text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:w-24">
         {label}
       </span>
-      <div className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+      <div className="flex w-full min-w-0 gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
         {options.map((option) => {
           const isActive = active === option.id;
           const disabled = option.count === 0 && !isActive;

@@ -18,6 +18,12 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-sm focus:text-primary-foreground"
+      >
+        Skip to main content
+      </a>
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-6">
         <Link to="/" className="flex shrink-0 items-center gap-2 font-semibold text-foreground">
           <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
