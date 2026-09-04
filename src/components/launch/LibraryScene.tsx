@@ -115,10 +115,10 @@ function Chip({ to, label, children }: { to: string; label: string; children: Re
   return (
     <Link
       to={to}
-      className="group flex items-baseline justify-between gap-4 bg-card px-5 py-4 transition-colors hover:bg-primary-soft/50"
+      className="group flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 bg-card px-5 py-4 transition-colors hover:bg-primary-soft/50"
     >
       <span className="font-medium text-foreground group-hover:text-primary">{label}</span>
-      <span className="shrink-0 text-xs text-muted-foreground">{children}</span>
+      <span className="text-xs text-muted-foreground">{children}</span>
     </Link>
   );
 }
