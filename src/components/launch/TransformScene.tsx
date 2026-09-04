@@ -101,7 +101,7 @@ export function TransformScene() {
                 return (
                   <article
                     key={input.id}
-                    className="stage-layer absolute w-[46%] min-w-0 border p-3.5"
+                    className="stage-layer absolute w-[88%] sm:w-[46%] border p-3.5"
                     style={{
                       ...style,
                       borderColor: isSelected && !scattered ? "hsl(var(--primary))" : "hsl(var(--ink-rule))",
