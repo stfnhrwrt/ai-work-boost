@@ -8,19 +8,19 @@ const PLATES = [
   { label: "Result", offset: 14 },
 ];
 
-/** Scene 1 — the promise. Dark, quiet, one central workflow object. */
+/** Scene 1 — the promise. Warm paper, quiet, one central workflow object. */
 export function HeroScene() {
   const reduced = usePrefersReducedMotion();
 
   return (
-    <section className="scene-ink relative overflow-hidden" aria-labelledby="scene-promise">
+    <section className="relative overflow-hidden border-b border-rule bg-hero-gradient" aria-labelledby="scene-promise">
       <div className="container mx-auto grid gap-14 px-6 pb-20 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-10 lg:pb-28 lg:pt-24">
         <div>
-          <p className="label-eyebrow ink-muted mb-6">Scene 01 — The promise</p>
+          <p className="label-eyebrow mb-6">Scene 01 — The promise</p>
           <h1 id="scene-promise" className="headline-xl max-w-[15ch]">
             Work is messy. Your next step doesn’t have to be.
           </h1>
-          <p className="ink-muted mt-7 max-w-measure text-lg leading-relaxed">
+          <p className="mt-7 max-w-measure text-lg leading-relaxed text-muted-foreground">
             Practical AI workflows for the work you do every day.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-6">
@@ -41,23 +41,21 @@ export function HeroScene() {
           {PLATES.map((plate, idx) => (
             <div
               key={plate.label}
-              className="absolute left-1/2 w-[78%] -translate-x-1/2 border p-5 backdrop-blur-[1px]"
+              className="absolute left-1/2 w-[78%] -translate-x-1/2 border border-rule bg-card p-5 shadow-card"
               style={{
-                borderColor: "hsl(var(--ink-rule))",
-                background: "hsl(222 26% 11% / 0.85)",
                 transform: `translate(-50%, ${plate.offset * 5.6}px) rotate(${plate.offset * 0.09}deg)`,
                 animation: reduced ? undefined : `plate-drift 9s ease-in-out ${idx * 0.9}s infinite`,
               }}
             >
               <div className="flex items-baseline justify-between">
-                <span className="label-eyebrow ink-muted">{plate.label}</span>
+                <span className="label-eyebrow">{plate.label}</span>
                 <span className="font-mono-prompt text-[0.6875rem] text-primary">
                   {String(idx + 1).padStart(2, "0")}
                 </span>
               </div>
               <div className="mt-4 space-y-2">
                 {[100, 78, 56].map((w) => (
-                  <div key={w} className="h-px" style={{ width: `${w}%`, background: "hsl(var(--ink-rule))" }} />
+                  <div key={w} className="h-px bg-rule" style={{ width: `${w}%` }} />
                 ))}
               </div>
             </div>
@@ -67,10 +65,10 @@ export function HeroScene() {
 
       <div className="container mx-auto flex items-center gap-3 px-6 pb-10">
         <ArrowDown className="h-4 w-4 text-primary" aria-hidden="true" />
-        <span className="label-eyebrow ink-muted">Scroll to see one workflow run end to end</span>
+        <span className="label-eyebrow">Scroll to see one workflow run end to end</span>
       </div>
 
-      <style>{`@keyframes plate-drift { 0%,100% { filter: none } 50% { filter: brightness(1.08) } }`}</style>
+      <style>{`@keyframes plate-drift { 0%,100% { filter: none } 50% { filter: brightness(0.985) } }`}</style>
     </section>
   );
 }
