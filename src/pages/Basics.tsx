@@ -40,8 +40,9 @@ const Basics = () => {
               How to Use AI Effectively
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              Five short blocks. Two-minute read. Everything you need to get
-              dramatically better results from Copilot and ChatGPT — starting today.
+              Five short blocks. Two-minute read. Everything you need to get better
+              results from Copilot, ChatGPT, Claude or your internal AI tool — starting
+              today.
             </p>
           </div>
         </section>
