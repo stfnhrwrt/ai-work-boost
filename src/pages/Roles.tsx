@@ -21,6 +21,9 @@ const Roles = () => (
       </section>
 
       <section id="roles" className="container mx-auto scroll-mt-20 px-6 py-12">
+        <h2 className="label-eyebrow mb-4 border-b border-rule pb-3">
+          {roles.length} role libraries
+        </h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {roles.map((role, idx) => (
             <div key={role.id} className="fade-in-up h-full" style={{ ["--i" as string]: idx }}>

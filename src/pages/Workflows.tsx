@@ -161,10 +161,10 @@ const Workflows = () => {
         </section>
 
         <section className="container mx-auto px-6 py-8">
-          <p className="label-eyebrow mb-4 border-b border-rule pb-3">
+          <h2 className="label-eyebrow mb-4 border-b border-rule pb-3">
             {results.length} {results.length === 1 ? "entry" : "entries"}
             {hasActiveFilters ? " matching your filters" : " in the library"}
-          </p>
+          </h2>
 
           {results.length === 0 ? (
             <div className="border border-rule bg-card p-10 text-center">
