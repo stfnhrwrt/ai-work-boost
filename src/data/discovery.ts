@@ -282,3 +282,22 @@ export const getRelatedItems = (workflowId: string, limit = 4): DiscoveryItem[] 
 
 export const environmentName = (id: ExecutionEnvironmentId): string =>
   executionEnvironments[id].name;
+
+export interface TaskTypeCounts {
+  general: number;
+  microsoft365: number;
+  total: number;
+}
+
+export const getTaskTypeCounts = (taskTypeId: string): TaskTypeCounts => {
+  const items = discoveryItems.filter((i) => i.taskTypeId === taskTypeId);
+  const microsoft365 = items.filter((i) => i.href.startsWith("/copilot-microsoft-365")).length;
+  return { general: items.length - microsoft365, microsoft365, total: items.length };
+};
+
+export const taskTypeCountLabel = (counts: TaskTypeCounts): string => {
+  const general = `${counts.general} general ${counts.general === 1 ? "workflow" : "workflows"}`;
+  return counts.microsoft365 > 0
+    ? `${general} · ${counts.microsoft365} Microsoft 365`
+    : general;
+};
