@@ -21,7 +21,7 @@ interface GuidanceListProps {
 }
 
 const GuidanceList = ({ title, items, icon: Icon, tone = "default" }: GuidanceListProps) => (
-  <div className="rounded-lg border border-border bg-card p-5">
+  <div className="border border-rule bg-card p-5">
     <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
       <Icon
         className={
@@ -61,10 +61,10 @@ const CopilotAppPage = () => {
   const otherApps = copilotApps.filter((a) => a.id !== app.id);
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-paper">
       <SiteHeader />
       <main id="main" className="flex-1">
-        <section className="border-b border-border bg-hero-gradient">
+        <section className="border-b border-rule">
           <div className="container mx-auto px-6 py-12">
             <Link
               to="/copilot-microsoft-365"
@@ -139,7 +139,7 @@ const CopilotAppPage = () => {
                 key={workflow.id}
                 id={workflow.id}
                 value={workflow.id}
-                className="rounded-lg border border-border bg-card px-5"
+                className="border border-rule bg-card px-5"
               >
                 <AccordionTrigger className="text-left hover:no-underline">
                   <span>
@@ -202,7 +202,7 @@ const CopilotAppPage = () => {
                       {workflow.followUps.map((followUp) => (
                         <li
                           key={followUp}
-                          className="flex items-start justify-between gap-3 rounded-md border border-border bg-secondary/40 px-3 py-2"
+                          className="flex items-start justify-between gap-3 rounded-md border border-rule bg-secondary/40 px-3 py-2"
                         >
                           <span className="text-sm text-foreground">{followUp}</span>
                           <CopyButton text={followUp} size="sm" variant="outline" label="Copy" />
@@ -216,7 +216,7 @@ const CopilotAppPage = () => {
           </Accordion>
         </section>
 
-        <section className="border-t border-border bg-secondary/30">
+        <section className="border-t border-rule bg-secondary/30">
           <div className="container mx-auto px-6 py-10">
             <h2 className="mb-4 text-lg font-semibold text-foreground">Other sections</h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -226,7 +226,7 @@ const CopilotAppPage = () => {
                   <Link
                     key={other.id}
                     to={`/copilot-microsoft-365/${other.id}`}
-                    className="rounded-lg border border-border bg-card p-4 transition-colors hover:border-primary/50"
+                    className="border border-rule bg-card p-4 transition-colors hover:border-primary/50"
                   >
                     <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-foreground">
                       <OtherIcon className="h-4 w-4 text-primary" />

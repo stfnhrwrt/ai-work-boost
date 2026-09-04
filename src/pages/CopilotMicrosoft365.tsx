@@ -17,7 +17,7 @@ const CopilotMicrosoft365 = () => (
   <div className="flex min-h-screen flex-col bg-background">
     <SiteHeader />
     <main id="main" className="flex-1">
-      <section className="border-b border-border bg-hero-gradient">
+      <section className="border-b border-rule">
         <div className="container mx-auto px-6 py-12">
           <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-wider text-primary">
             Collection
@@ -56,7 +56,7 @@ const CopilotMicrosoft365 = () => (
               <Link
                 key={app.id}
                 to={`/copilot-microsoft-365/${app.id}`}
-                className="group flex flex-col rounded-lg border border-border bg-card p-5 transition-all hover:border-primary/50 hover:shadow-md"
+                className="group flex flex-col border border-rule bg-card p-5 transition-all hover:border-primary/50 hover:shadow-md"
               >
                 <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary">
                   <Icon className="h-4 w-4" />

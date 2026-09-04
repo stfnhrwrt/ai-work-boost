@@ -65,7 +65,7 @@ const ResponsibleAI = () => (
   <div className="flex min-h-screen flex-col bg-background">
     <SiteHeader />
     <main id="main" className="flex-1">
-      <section className="border-b border-border bg-hero-gradient">
+      <section className="border-b border-rule">
         <div className="container mx-auto px-6 py-12">
           <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
             <ShieldCheck className="h-3 w-3" />
@@ -87,7 +87,7 @@ const ResponsibleAI = () => (
         </h2>
         <ol className="grid gap-4 md:grid-cols-2">
           {PRINCIPLES.map((p, i) => (
-            <li key={p.title} className="rounded-2xl border border-border bg-card p-6 shadow-card">
+            <li key={p.title} className="border border-rule bg-card p-6 shadow-card">
               <div className="mb-2 flex items-center gap-3">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
                   {i + 1}
@@ -100,7 +100,7 @@ const ResponsibleAI = () => (
         </ol>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+          <div className="border border-rule bg-card p-8 shadow-card">
             <h2 className="mb-3 text-xl font-semibold text-foreground">
               Permissions are never expanded
             </h2>
@@ -124,7 +124,7 @@ const ResponsibleAI = () => (
             </p>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+          <div className="border border-rule bg-card p-8 shadow-card">
             <h2 className="mb-3 text-xl font-semibold text-foreground">
               Tools are not interchangeable
             </h2>
@@ -134,7 +134,7 @@ const ResponsibleAI = () => (
             </p>
             <ul className="space-y-4">
               {TOOL_NOTES.map((t) => (
-                <li key={t.tool} className="rounded-lg border border-border bg-background p-4">
+                <li key={t.tool} className="border border-rule bg-background p-4">
                   <p className="mb-1 text-sm font-semibold text-foreground">{t.tool}</p>
                   <p className="text-sm text-muted-foreground">{t.note}</p>
                 </li>
@@ -144,7 +144,7 @@ const ResponsibleAI = () => (
         </div>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+          <div className="border border-rule bg-card p-8 shadow-card">
             <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-foreground">
               <CheckCircle2 className="h-5 w-5 text-primary" aria-hidden="true" />
               Before you accept an output
@@ -165,7 +165,7 @@ const ResponsibleAI = () => (
             </ul>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+          <div className="border border-rule bg-card p-8 shadow-card">
             <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-foreground">
               <AlertTriangle className="h-5 w-5 text-accent-foreground" aria-hidden="true" />
               What this site is not

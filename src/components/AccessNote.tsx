@@ -6,7 +6,7 @@ interface AccessNoteProps {
 
 export function AccessNote({ note }: AccessNoteProps) {
   return (
-    <aside className="my-8 flex gap-4 rounded-xl border border-accent/40 bg-accent-soft p-5">
+    <aside className="my-8 flex gap-4  border border-accent/40 bg-accent-soft p-5">
       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground">
         <ShieldAlert className="h-5 w-5" />
       </div>

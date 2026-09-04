@@ -157,7 +157,7 @@ const WorkflowPage = () => {
               </p>
               <ul className="space-y-3">
                 {model.environments.map((env) => (
-                  <li key={env.id} className="border-l-2 border-border pl-4">
+                  <li key={env.id} className="border-l-2 border-rule pl-4">
                     <div className="text-sm font-semibold text-foreground">{env.name}</div>
                     <p className="text-sm leading-relaxed text-muted-foreground">
                       {env.contextBehaviour}
@@ -339,7 +339,7 @@ const WorkflowPage = () => {
                   ))}
                 </ol>
                 {workflow.outlookSetup.note && (
-                  <p className="mt-4 border-t border-border pt-3 text-xs text-muted-foreground">
+                  <p className="mt-4 border-t border-rule pt-3 text-xs text-muted-foreground">
                     {workflow.outlookSetup.note}
                   </p>
                 )}
@@ -477,7 +477,7 @@ const WorkflowPage = () => {
           )}
 
           {/* Bottom nav */}
-          <div className="mt-14 flex flex-col items-stretch justify-between gap-3 border-t border-border pt-8 sm:flex-row sm:items-center">
+          <div className="mt-14 flex flex-col items-stretch justify-between gap-3 border-t border-rule pt-8 sm:flex-row sm:items-center">
             <Button asChild variant="outline">
               <Link to={`/role/${role.id}`}>
                 <ArrowLeft className="h-4 w-4" />

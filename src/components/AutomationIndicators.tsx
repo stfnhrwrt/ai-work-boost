@@ -28,7 +28,7 @@ const sharedMailboxIcon: Record<SharedMailboxSupport, React.ComponentType<{ clas
 const sharedMailboxTone: Record<SharedMailboxSupport, string> = {
   yes: "border-primary/30 bg-primary-soft text-foreground",
   limited: "border-accent/40 bg-accent-soft text-accent-foreground",
-  no: "border-border bg-secondary text-muted-foreground",
+  no: "border-rule bg-secondary text-muted-foreground",
 };
 
 export function AutomationIndicators({
@@ -39,7 +39,7 @@ export function AutomationIndicators({
   if (!layers && !sharedMailbox && !requiresPermissions) return null;
 
   return (
-    <div className="mb-8 rounded-xl border border-border bg-card p-5">
+    <div className="mb-8 border border-rule bg-card p-5">
       <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
         <Zap className="h-3.5 w-3.5 text-primary" />
         Automation profile
@@ -55,7 +55,7 @@ export function AutomationIndicators({
               return (
                 <span
                   key={l}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-foreground"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-rule bg-secondary px-3 py-1 text-xs font-medium text-foreground"
                 >
                   <Icon className="h-3.5 w-3.5 text-primary" />
                   {meta.label}

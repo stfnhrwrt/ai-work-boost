@@ -26,11 +26,11 @@ Output:
 
 const Basics = () => {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-paper">
       <SiteHeader />
       <main id="main" className="flex-1">
         {/* Hero */}
-        <section className="border-b border-border bg-hero-gradient">
+        <section className="border-b border-rule">
           <div className="container mx-auto max-w-4xl px-6 py-14">
             <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
               <Brain className="h-3.5 w-3.5" />
@@ -80,7 +80,7 @@ const Basics = () => {
               ].map((p, i) => (
                 <li
                   key={p.label}
-                  className="rounded-xl border border-border bg-card p-5"
+                  className="border border-rule bg-card p-5"
                 >
                   <div className="mb-2 flex items-center gap-2">
                     <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-soft text-xs font-semibold text-primary">
@@ -119,7 +119,7 @@ const Basics = () => {
               ].map((line) => (
                 <li
                   key={line}
-                  className="flex items-start gap-3 rounded-lg border border-border bg-card p-3.5 text-sm"
+                  className="flex items-start gap-3 border border-rule bg-card p-3.5 text-sm"
                 >
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                   <span className="text-foreground">{line}</span>
@@ -156,7 +156,7 @@ const Basics = () => {
               ].map((item) => (
                 <div
                   key={item.tool}
-                  className="rounded-lg border border-border bg-card p-4 text-sm"
+                  className="border border-rule bg-card p-4 text-sm"
                 >
                   <div className="mb-2 flex items-center gap-2">
                     <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary-soft text-primary">
@@ -193,7 +193,7 @@ const Basics = () => {
               ].map((p) => (
                 <li
                   key={p}
-                  className="rounded-lg border border-border bg-card p-3.5 text-sm font-medium text-foreground"
+                  className="border border-rule bg-card p-3.5 text-sm font-medium text-foreground"
                 >
                   {p}
                 </li>
@@ -227,7 +227,7 @@ const Basics = () => {
           </Block>
 
           {/* CTA */}
-          <div className="mt-12 flex flex-col items-center gap-4 rounded-2xl border border-border bg-primary-soft p-8 text-center">
+          <div className="mt-12 flex flex-col items-center gap-4 border border-rule bg-primary-soft p-8 text-center">
             <h2 className="text-xl font-semibold text-foreground sm:text-2xl">
               Now put it into practice
             </h2>
@@ -259,7 +259,7 @@ interface BlockProps {
 
 function Block({ number, icon: Icon, title, subtitle, children }: BlockProps) {
   return (
-    <section className="mb-10 border-t border-border pt-8 first:border-t-0 first:pt-0">
+    <section className="mb-10 border-t border-rule pt-8 first:border-t-0 first:pt-0">
       <div className="mb-5 flex items-start gap-4">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
           <Icon className="h-5 w-5" />
