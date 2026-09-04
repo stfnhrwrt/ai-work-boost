@@ -29,6 +29,14 @@ export type WorkflowLevel =
   | "scheduled"
   | "automation";
 
+/** Recommended execution environments (see workflowModel.ts for details) */
+export type ExecutionEnvironmentId =
+  | "any-approved"
+  | "copilot"
+  | "chatgpt"
+  | "claude"
+  | "internal";
+
 export type AutomationLayer = "outlook-rule" | "copilot" | "power-automate";
 export type SharedMailboxSupport = "yes" | "limited" | "no";
 

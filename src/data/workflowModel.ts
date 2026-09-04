@@ -1,4 +1,4 @@
-import { Workflow } from "@/data/workflows";
+import { Workflow, ExecutionEnvironmentId } from "@/data/workflows";
 import { getTaskType, isMicrosoft365Workflow, TaskTypeId } from "@/data/taskTypes";
 import { getFormat, WorkflowFormat } from "@/data/formats";
 
@@ -7,12 +7,7 @@ import { getFormat, WorkflowFormat } from "@/data/formats";
  * Copilot is deliberately described differently from the other tools:
  * it can use authorized Microsoft 365 context, the others cannot.
  */
-export type ExecutionEnvironmentId =
-  | "any-approved"
-  | "copilot"
-  | "chatgpt"
-  | "claude"
-  | "internal";
+export type { ExecutionEnvironmentId };
 
 export interface ExecutionEnvironment {
   id: ExecutionEnvironmentId;
