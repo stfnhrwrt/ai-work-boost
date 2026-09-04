@@ -10,7 +10,7 @@ export function DiscoveryCard({ item }: DiscoveryCardProps) {
   return (
     <Link
       to={item.href}
-      className="group flex h-full flex-col rounded-xl border border-border bg-card p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card-hover sm:p-6"
+      className="group flex h-full min-w-0 flex-col break-words rounded-xl border border-border bg-card p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card-hover sm:p-6"
     >
       <div className="mb-3 flex flex-wrap items-center gap-2">
         {item.tags.slice(0, 2).map((tag) => (
