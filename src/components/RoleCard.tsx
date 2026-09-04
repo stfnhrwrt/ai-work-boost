@@ -23,15 +23,11 @@ export function RoleCard({ role, workflowCount }: RoleCardProps) {
         <p className="text-sm leading-relaxed text-muted-foreground">{role.description}</p>
       </div>
       <div className="mt-6 flex items-center justify-between border-t border-border pt-4 text-sm">
-        {role.comingSoon ? (
-          <span className="font-medium text-muted-foreground">Coming soon</span>
-        ) : (
-          <span className="font-medium text-muted-foreground">
-            {workflowCount} workflows
-          </span>
-        )}
+        <span className="font-medium text-muted-foreground">
+          {workflowCount} {workflowCount === 1 ? "workflow" : "workflows"}
+        </span>
         <span className="inline-flex items-center gap-1.5 font-medium text-primary transition-transform group-hover:translate-x-0.5">
-          {role.comingSoon ? "Preview" : "Explore"}
+          Explore
           <ArrowRight className="h-4 w-4" />
         </span>
       </div>

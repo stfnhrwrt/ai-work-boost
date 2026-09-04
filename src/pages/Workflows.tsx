@@ -6,10 +6,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { WorkflowCard } from "@/components/WorkflowCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { LEVEL_META, roles, workflows, RoleId, WorkflowLevel } from "@/data/workflows";
+import { roles, workflows, RoleId } from "@/data/workflows";
 import { getTaskType, taskTypes, TaskTypeId } from "@/data/taskTypes";
-
-const LEVELS: WorkflowLevel[] = ["essential", "advanced", "agent", "scheduled", "automation"];
+import { getFormatId, workflowFormats } from "@/data/formats";
 
 const Workflows = () => {
   const [params, setParams] = useSearchParams();
@@ -17,7 +16,7 @@ const Workflows = () => {
 
   const roleFilter = params.get("role") ?? "all";
   const taskFilter = params.get("task") ?? "all";
-  const levelFilter = params.get("level") ?? "all";
+  const formatFilter = params.get("format") ?? "all";
 
   const setFilter = (key: string, value: string) => {
     const next = new URLSearchParams(params);
@@ -30,7 +29,7 @@ const Workflows = () => {
     const q = query.trim().toLowerCase();
     return workflows.filter((w) => {
       if (roleFilter !== "all" && w.roleId !== roleFilter) return false;
-      if (levelFilter !== "all" && w.level !== levelFilter) return false;
+      if (formatFilter !== "all" && getFormatId(w.level) !== formatFilter) return false;
       if (taskFilter !== "all" && getTaskType(w.id)?.id !== taskFilter) return false;
       if (!q) return true;
       return (
@@ -39,9 +38,9 @@ const Workflows = () => {
         w.situation.toLowerCase().includes(q)
       );
     });
-  }, [query, roleFilter, taskFilter, levelFilter]);
+  }, [query, roleFilter, taskFilter, formatFilter]);
 
-  const activeRoles = roles.filter((r) => !r.comingSoon);
+  const activeRoles = roles;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -90,13 +89,13 @@ const Workflows = () => {
               onSelect={(v) => setFilter("role", v)}
             />
             <FilterRow
-              label="Level"
+              label="Format"
               options={[
-                { value: "all", label: "All levels" },
-                ...LEVELS.map((l) => ({ value: l, label: LEVEL_META[l].shortLabel })),
+                { value: "all", label: "All formats" },
+                ...workflowFormats.map((f) => ({ value: f.id, label: f.label })),
               ]}
-              active={levelFilter}
-              onSelect={(v) => setFilter("level", v)}
+              active={formatFilter}
+              onSelect={(v) => setFilter("format", v)}
             />
           </div>
 

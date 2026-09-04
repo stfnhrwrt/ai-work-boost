@@ -2,11 +2,8 @@ import {
   Briefcase,
   Users,
   KanbanSquare,
-  ShoppingCart,
-  BookOpen,
   ShieldCheck,
   LineChart,
-  UserCog,
   LucideIcon,
 } from "lucide-react";
 
@@ -14,11 +11,8 @@ export type RoleId =
   | "executive-assistants"
   | "managers"
   | "project-managers"
-  | "procurement"
-  | "knowledge-management"
   | "compliance"
-  | "finance"
-  | "human-resources";
+  | "finance";
 
 /**
  * Workflow level
@@ -45,8 +39,6 @@ export interface Role {
   tagline: string;
   description: string;
   icon: LucideIcon;
-  /** When true, role appears on the homepage but the role page shows a "Coming soon" state */
-  comingSoon?: boolean;
 }
 
 export interface Workflow {
@@ -112,7 +104,7 @@ export interface Workflow {
 export const roles: Role[] = [
   {
     id: "executive-assistants",
-    name: "Executive Assistants",
+    name: "Assistants / Executive Assistants",
     shortName: "EA",
     tagline: "Coordinate, brief and follow up — within existing permissions.",
     description:
@@ -121,7 +113,7 @@ export const roles: Role[] = [
   },
   {
     id: "managers",
-    name: "Managers & Leaders",
+    name: "Managers & Team Leads",
     shortName: "Manager",
     tagline: "Lead your team with sharper, faster decisions.",
     description:
@@ -139,11 +131,11 @@ export const roles: Role[] = [
   },
   {
     id: "compliance",
-    name: "Compliance & Policy",
+    name: "Compliance & Operations",
     shortName: "Compliance",
-    tagline: "Navigate policies and governance documentation.",
+    tagline: "Navigate policies, governance and operational documentation.",
     description:
-      "Helps employees navigate internal policies, compliance documentation, governance procedures and organizational standards. Not a substitute for legal advice or autonomous compliance decisions.",
+      "Helps teams navigate internal policies, compliance documentation, governance procedures and operational standards. Not a substitute for legal advice or autonomous compliance decisions.",
     icon: ShieldCheck,
   },
   {
@@ -154,36 +146,6 @@ export const roles: Role[] = [
     description:
       "Supports finance teams with reporting, Excel analysis, forecasting assistance and management summaries across Microsoft 365.",
     icon: LineChart,
-  },
-  {
-    id: "procurement",
-    name: "Procurement & Sourcing",
-    shortName: "Procurement",
-    tagline: "Summarize suppliers, RFPs and contracts.",
-    description:
-      "Supports procurement teams by summarizing supplier documents, comparing proposals and organizing sourcing information across Microsoft 365.",
-    icon: ShoppingCart,
-    comingSoon: true,
-  },
-  {
-    id: "knowledge-management",
-    name: "Knowledge Management",
-    shortName: "Knowledge",
-    tagline: "Find and summarize organizational knowledge.",
-    description:
-      "Enables employees to retrieve and summarize organizational knowledge across SharePoint, Teams, Outlook and OneDrive — within existing permissions.",
-    icon: BookOpen,
-    comingSoon: true,
-  },
-  {
-    id: "human-resources",
-    name: "Human Resources Support",
-    shortName: "HR",
-    tagline: "Onboarding, policies and HR communication.",
-    description:
-      "Assists HR teams with onboarding, policy guidance, document retrieval and internal communication. Not used for performance evaluation or hiring decisions.",
-    icon: UserCog,
-    comingSoon: true,
   },
 ];
 
@@ -2216,35 +2178,35 @@ export const LEVEL_META: Record<
   { label: string; shortLabel: string; description: string; cardBadge: string }
 > = {
   essential: {
-    label: "Essentials",
-    shortLabel: "Essentials",
+    label: "Core workflows",
+    shortLabel: "Core",
     description: "Core, ready-to-run prompts you can copy and use today.",
     cardBadge: "Essential",
   },
   advanced: {
-    label: "Level 1 — Advanced workflows",
+    label: "Advanced workflows",
     shortLabel: "Advanced",
     description:
       "Multi-source prompts that depend on the access and delegate permissions you already have.",
     cardBadge: "Advanced",
   },
   agent: {
-    label: "Level 2 — Build your own agent",
-    shortLabel: "Agents",
+    label: "Multi-step workflows — build your own agent",
+    shortLabel: "Multi-step",
     description:
       "Reusable Copilot agents (built in Copilot Studio) that turn a recurring task into a one-click workflow.",
     cardBadge: "Agent",
   },
   scheduled: {
-    label: "Level 3 — Scheduled prompts",
-    shortLabel: "Scheduled",
+    label: "Repeatable workflows — scheduled prompts",
+    shortLabel: "Repeatable",
     description:
       "Native Microsoft 365 Copilot Scheduled Prompts that run a prompt automatically every morning, evening or week — no Copilot Studio required.",
     cardBadge: "Scheduled",
   },
   automation: {
-    label: "Level 4 — Outlook + Copilot automation",
-    shortLabel: "Automation",
+    label: "Multi-step workflows — Outlook + Copilot automation",
+    shortLabel: "Multi-step",
     description:
       "Combine Outlook rules, Copilot intelligence and (optionally) Power Automate to handle inbox triage, calendar decisions and meeting prep automatically.",
     cardBadge: "Automation",
