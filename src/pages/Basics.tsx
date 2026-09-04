@@ -236,7 +236,7 @@ const Basics = () => {
               principles.
             </p>
             <Button asChild size="lg">
-              <Link to="/#roles">
+              <Link to="/workflows">
                 Browse workflows
                 <ArrowRight className="h-4 w-4" />
               </Link>
