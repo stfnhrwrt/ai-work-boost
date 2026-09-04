@@ -153,7 +153,7 @@ const WorkflowPage = () => {
               <p className="mb-4 text-xs text-muted-foreground">
                 {model.copilotOnly
                   ? "This workflow depends on Microsoft 365 mechanics, so it runs in Copilot only."
-                  : "Use whichever of these your organisation has approved. They do not behave the same way."}
+                  : "Use whichever of these your organization has approved. They do not behave the same way."}
               </p>
               <ul className="space-y-3">
                 {model.environments.map((env) => (

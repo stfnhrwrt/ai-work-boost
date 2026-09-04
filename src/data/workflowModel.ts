@@ -23,9 +23,9 @@ export const executionEnvironments: Record<ExecutionEnvironmentId, ExecutionEnvi
     id: "any-approved",
     name: "Any approved AI assistant",
     contextBehaviour:
-      "Works with any assistant your organisation has approved. You provide the inputs listed below.",
+      "Works with any assistant your organization has approved. You provide the inputs listed below.",
     governanceNote:
-      "Check what your organisation allows you to paste into the assistant before you start.",
+      "Check what your organization allows you to paste into the assistant before you start.",
   },
   copilot: {
     id: "copilot",
@@ -55,9 +55,9 @@ export const executionEnvironments: Record<ExecutionEnvironmentId, ExecutionEnvi
     id: "internal",
     name: "Internal AI tool",
     contextBehaviour:
-      "Depends on the connections your organisation has configured. Provide anything it is not connected to.",
+      "Depends on the connections your organization has configured. Provide anything it is not connected to.",
     governanceNote:
-      "Governance depends on how your organisation deployed the tool. Follow its published usage rules.",
+      "Governance depends on how your organization deployed the tool. Follow its published usage rules.",
   },
 };
 
@@ -80,13 +80,13 @@ const EXPECTED_OUTPUT_BY_TASK: Record<TaskTypeId, string> = {
   writing:
     "A structured first draft in your own voice, complete enough to edit, with anything unverified flagged rather than invented.",
   research:
-    "A concise answer with the relevant points summarised, the documents or sources it relied on, and anything it could not confirm.",
+    "A concise answer with the relevant points summarized, the documents or sources it relied on, and anything it could not confirm.",
   analysis:
     "A clear read of what the data shows: the material movements with figures, and an explicit boundary between fact and interpretation.",
   administration:
     "A short, reliable working list — what needs attention, in priority order, with nothing important dropped.",
   planning:
-    "A prioritised plan: what matters most, why, sequencing or dependencies, and the risks or trade-offs to watch.",
+    "A prioritized plan: what matters most, why, sequencing or dependencies, and the risks or trade-offs to watch.",
   reporting:
     "A management-ready summary: headline position, the main figures or status, drivers behind the change, and recommended next steps.",
   automation:
@@ -177,7 +177,14 @@ const FALLBACK_FOLLOW_UPS = [
 ];
 
 const normaliseEffort = (value?: string): string | undefined =>
-  value?.replace(/\s*saved\s*$/i, "").replace(/^~\s*/, "approx. ").trim();
+  value
+    ?.replace(/\s*saved\s*$/i, "")
+    .replace(/^~\s*/, "approx. ")
+    .replace(/\bmins?\b/gi, "minutes")
+    .replace(/\bhrs?\b/gi, "hours")
+    .replace(/\b1 minutes\b/g, "1 minute")
+    .replace(/\b1 hours\b/g, "1 hour")
+    .trim();
 
 export function resolveWorkflow(workflow: Workflow): ResolvedWorkflow {
   const taskType = getTaskType(workflow.id);
@@ -212,7 +219,7 @@ export const formatReviewDate = (iso: string): string => {
   if (Number.isNaN(date.getTime())) return iso;
   return date.toLocaleDateString("en-GB", {
     day: "numeric",
-    month: "short",
+    month: "long",
     year: "numeric",
     timeZone: "UTC",
   });

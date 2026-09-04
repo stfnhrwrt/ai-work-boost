@@ -105,7 +105,7 @@ export const copilotApps: CopilotApp[] = [
         id: "word-structured-report",
         title: "Turn rough notes into a structured report",
         description: "Convert unordered notes into a report with a logical flow and headings.",
-        situation: "You have raw material from several sources and no time to organise it.",
+        situation: "You have raw material from several sources and no time to organize it.",
         inputs: [
           "All notes, extracts and data points in one place",
           "The report's purpose and expected length",
@@ -168,14 +168,14 @@ export const copilotApps: CopilotApp[] = [
         situation: "The draft is finished and you want the weak points found before a reviewer finds them.",
         inputs: ["The draft", "The audience and the decision it supports", "Any policy or template it must follow"],
         prompt:
-          "Act as a critical reviewer of the attached document. The audience is [audience] and it must support [decision].\n\nIdentify:\n1. Statements that contradict each other, with section references\n2. Claims presented as fact with no supporting evidence in the document\n3. Missing information a reader would reasonably expect\n4. Sections that are ambiguous about who does what by when\n\nDo not rewrite the document. Give a prioritised list of issues with a one-line suggested fix each.",
+          "Act as a critical reviewer of the attached document. The audience is [audience] and it must support [decision].\n\nIdentify:\n1. Statements that contradict each other, with section references\n2. Claims presented as fact with no supporting evidence in the document\n3. Missing information a reader would reasonably expect\n4. Sections that are ambiguous about who does what by when\n\nDo not rewrite the document. Give a prioritized list of issues with a one-line suggested fix each.",
         followUps: [
           "Rank the issues by how likely they are to block approval.",
           "Fix only issues 1 to 3 and show the revised sections.",
           "Check the document against [policy/template] and list deviations.",
         ],
         expectedOutput:
-          "A prioritised issue list with section references — not a silent rewrite.",
+          "A prioritized issue list with section references — not a silent rewrite.",
       },
       {
         id: "word-executive-summary",
@@ -259,7 +259,7 @@ export const copilotApps: CopilotApp[] = [
           "I need the data in [sheet/range] cleaned for analysis. Before changing anything, describe the plan:\n\n1. Which columns you would rename, split or merge\n2. How you would handle blanks, duplicates and inconsistent formats\n3. Any rows you consider invalid and why\n\nWait for my confirmation before applying changes. Never delete rows — mark them in a new 'review' column instead.",
         followUps: [
           "Apply steps 1 and 2 only, and add the review column.",
-          "List every value you standardised so I can check the mapping.",
+          "List every value you standardized so I can check the mapping.",
           "How many rows would each of your rules affect?",
         ],
         expectedOutput:
@@ -304,7 +304,7 @@ export const copilotApps: CopilotApp[] = [
         situation: "Month-end close and you need a variance commentary quickly.",
         inputs: ["Budget and actual columns aligned by period and cost centre", "The materiality threshold", "Owner per cost centre"],
         prompt:
-          "Compare budget and actuals in [sheet/range] for [period].\n\nReturn a table: [cost centre] | budget | actual | variance | variance % | direction.\n\nSort by absolute variance. Only include variances above [threshold]. Add a column 'needs explanation from' and leave it blank for me to fill.\n\nBelow the table, summarise the overall position in three sentences using only the figures shown.",
+          "Compare budget and actuals in [sheet/range] for [period].\n\nReturn a table: [cost centre] | budget | actual | variance | variance % | direction.\n\nSort by absolute variance. Only include variances above [threshold]. Add a column 'needs explanation from' and leave it blank for me to fill.\n\nBelow the table, summarize the overall position in three sentences using only the figures shown.",
         followUps: [
           "Separate timing differences from genuine overspend where the data allows, and say when it does not.",
           "Show the year-to-date position alongside the monthly one.",
@@ -615,7 +615,7 @@ export const copilotApps: CopilotApp[] = [
           "Turn the must-happen list into a short message for the team channel.",
         ],
         expectedOutput:
-          "Three prioritised groups with reasons and an explicit statement of what slips.",
+          "Three prioritized groups with reasons and an explicit statement of what slips.",
       },
       {
         id: "planner-workload-dependencies",
@@ -692,7 +692,7 @@ export const copilotApps: CopilotApp[] = [
         title: "Meeting notes → Word summary → PowerPoint update",
         description: "Move from a recorded discussion to a shareable update in two checked steps.",
         situation: "A workshop or review happened and stakeholders need an update.",
-        inputs: ["Meeting notes or a summary you are authorised to use", "The stakeholder audience", "The approved deck template"],
+        inputs: ["Meeting notes or a summary you are authorized to use", "The stakeholder audience", "The approved deck template"],
         prompt:
           "Step 1 (Word): From the attached meeting notes, write a summary for [audience] with: context, decisions taken, actions with owners, open questions. Use only what is in the notes; mark anything unclear as [TO CONFIRM].\n\nI will review and correct this before step 2.\n\nStep 2 (PowerPoint): Build a [n]-slide update from the corrected summary for [audience], one message per slide, using the [template] template.",
         followUps: [
@@ -710,7 +710,7 @@ export const copilotApps: CopilotApp[] = [
         situation: "The analysis is done and leadership needs the conclusion, not the workbook.",
         inputs: ["Verified analysis with checked figures", "Measure definitions", "The decision required"],
         prompt:
-          "Step 1 (Excel): Summarise the analysis in [sheet/range] as the [5] findings that matter for [decision], each with its supporting figure.\n\nAfter I verify the figures:\n\nStep 2 (PowerPoint): Build a leadership deck around those [5] findings for [audience], [duration] minutes, ending with the decision requested. One chart per finding, using the [template] template.",
+          "Step 1 (Excel): Summarize the analysis in [sheet/range] as the [5] findings that matter for [decision], each with its supporting figure.\n\nAfter I verify the figures:\n\nStep 2 (PowerPoint): Build a leadership deck around those [5] findings for [audience], [duration] minutes, ending with the decision requested. One chart per finding, using the [template] template.",
         followUps: [
           "Restate each finding as a headline that says the message, not the topic.",
           "Add a slide covering the main counter-argument and our response.",
@@ -742,7 +742,7 @@ export const copilotApps: CopilotApp[] = [
         situation: "Recurring stakeholder reporting based on the plan you already maintain.",
         inputs: ["A current plan", "The stakeholder audience and their concerns", "The previous update"],
         prompt:
-          "Step 1 (Planner): Summarise [plan name]: completed, in progress, overdue or blocked, next milestone and its date. Mark stale or missing data as 'unclear'.\n\nAfter I correct it:\n\nStep 2 (Word or email): Write a stakeholder update for [audience] from that summary — status in one sentence, progress, risks with mitigations, what we need from them. Neutral tone, no task-level detail.",
+          "Step 1 (Planner): Summarize [plan name]: completed, in progress, overdue or blocked, next milestone and its date. Mark stale or missing data as 'unclear'.\n\nAfter I correct it:\n\nStep 2 (Word or email): Write a stakeholder update for [audience] from that summary — status in one sentence, progress, risks with mitigations, what we need from them. Neutral tone, no task-level detail.",
         followUps: [
           "Compare with the previous update and highlight only what changed.",
           "Make the ask to stakeholders explicit and time-bound.",
@@ -756,7 +756,7 @@ export const copilotApps: CopilotApp[] = [
         title: "Teams or Outlook context → briefing or Planner tasks",
         description: "Consolidate scattered conversation into a briefing and follow-up tasks.",
         situation: "A topic has been discussed across chats and email and nobody has the full picture.",
-        inputs: ["The relevant conversations you are authorised to access", "The topic and time window", "The plan where actions belong"],
+        inputs: ["The relevant conversations you are authorized to access", "The topic and time window", "The plan where actions belong"],
         prompt:
           "Step 1: Using only content I can access about [topic] from the last [time window], produce a briefing: what has been agreed, what is still open, who is involved, and the current position. Cite the source conversation for each point.\n\nAfter I check it:\n\nStep 2 (Planner): Propose tasks in [plan name] for the open items only, with owners as stated in the conversations and blank where not agreed.",
         followUps: [
