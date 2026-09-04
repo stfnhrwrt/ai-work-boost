@@ -26,9 +26,6 @@ const Index = () => {
         <HeroScene />
         <TransformScene />
 
-        {/* Handover from the ink scene back to the warm editorial paper */}
-        <div aria-hidden="true" className="scene-ink-fade h-24 sm:h-32" />
-
         <LibraryScene />
 
         <section id="tasks" className="container mx-auto scroll-mt-20 px-6 pb-24">

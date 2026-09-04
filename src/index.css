@@ -372,7 +372,7 @@ li:nth-child(3) > .workbench-hidden {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   line-height: 1;
   letter-spacing: -0.04em;
-  color: hsl(var(--ink-fg) / 0.14);
+  color: hsl(var(--foreground) / 0.1);
 }
 
 /* Scroll-linked stage transitions (driven by inline --p, 0 → 1) */
