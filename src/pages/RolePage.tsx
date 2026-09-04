@@ -43,10 +43,10 @@ const RolePage = () => {
     .slice(0, 3);
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-paper">
       <SiteHeader />
       <main id="main" className="flex-1">
-        <section className="border-b border-border bg-hero-gradient">
+        <section className="border-b border-rule">
           <div className="container mx-auto px-6 py-12">
             <nav className="mb-6 flex items-center gap-1.5 text-sm text-muted-foreground">
               <Link to="/" className="transition-colors hover:text-foreground">
@@ -60,7 +60,7 @@ const RolePage = () => {
               <span className="font-medium text-foreground">{role.name}</span>
             </nav>
             <div className="flex flex-col items-start gap-5 sm:flex-row">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-card">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center  bg-primary text-primary-foreground shadow-card">
                 <Icon className="h-7 w-7" />
               </div>
               <div className="max-w-2xl">
@@ -69,7 +69,7 @@ const RolePage = () => {
                 </h1>
                 <p className="mb-3 text-lg text-muted-foreground">{role.tagline}</p>
                 <p className="mb-4 text-muted-foreground">{role.description}</p>
-                <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-sm font-medium text-foreground">
+                <span className="inline-flex items-center gap-2 rounded-full border border-rule bg-card px-3 py-1 text-sm font-medium text-foreground">
                   {roleWorkflows.length}{" "}
                   {roleWorkflows.length === 1 ? "workflow" : "workflows"}
                 </span>
@@ -105,7 +105,7 @@ const RolePage = () => {
           </p>
 
           {filtered.length === 0 ? (
-            <div className="rounded-xl border border-border bg-card p-10 text-center text-muted-foreground">
+            <div className="border border-rule bg-card p-10 text-center text-muted-foreground">
               No workflow matches this combination yet. Reset a filter to see more.
             </div>
           ) : (
@@ -119,7 +119,7 @@ const RolePage = () => {
 
         <section className="container mx-auto px-6 pb-16">
           <div className="grid gap-8 lg:grid-cols-2">
-            <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+            <div className="border border-rule bg-card p-8 shadow-card">
               <h2 className="mb-4 text-xl font-semibold text-foreground">Related roles</h2>
               <ul className="space-y-3">
                 {relatedRoles.map((r) => (
@@ -139,7 +139,7 @@ const RolePage = () => {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
+            <div className="border border-rule bg-card p-8 shadow-card">
               <h2 className="mb-4 text-xl font-semibold text-foreground">
                 Related workflows from other roles
               </h2>
@@ -189,7 +189,7 @@ function FilterRow({ label, options, active, onSelect }: FilterRowProps) {
           className={
             active === o.value
               ? "rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground"
-              : "rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+              : "rounded-full border border-rule bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
           }
         >
           {o.label}

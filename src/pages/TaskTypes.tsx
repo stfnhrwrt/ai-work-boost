@@ -9,7 +9,7 @@ const TaskTypes = () => (
   <div className="flex min-h-screen flex-col bg-background">
     <SiteHeader />
     <main id="main" className="flex-1">
-      <section className="border-b border-border bg-hero-gradient">
+      <section className="border-b border-rule">
         <div className="container mx-auto px-6 py-12">
           <h1 className="mb-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Workflows by task type
@@ -30,7 +30,7 @@ const TaskTypes = () => (
               <Link
                 key={task.id}
                 to={`/workflows?task=${task.id}`}
-                className="hover-lift fade-in-up group flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-card"
+                className="hover-lift fade-in-up group flex h-full flex-col border border-rule bg-card p-6 shadow-card"
                 style={{ ["--i" as string]: idx }}
               >
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-primary text-primary-foreground">
@@ -38,7 +38,7 @@ const TaskTypes = () => (
                 </div>
                 <h2 className="mb-1 text-lg font-semibold text-foreground">{task.name}</h2>
                 <p className="mb-4 text-sm text-muted-foreground">{task.description}</p>
-                <div className="mt-auto flex items-center justify-between border-t border-border pt-4 text-sm">
+                <div className="mt-auto flex items-center justify-between border-t border-rule pt-4 text-sm">
                   <span className="text-muted-foreground">{taskTypeCountLabel(counts)}</span>
                   <span className="inline-flex items-center gap-1 font-medium text-primary transition-transform group-hover:translate-x-0.5">
                     Browse
