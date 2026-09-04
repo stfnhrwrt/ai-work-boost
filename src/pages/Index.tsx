@@ -14,6 +14,7 @@ import {
   taskTypeCountLabel,
 } from "@/data/discovery";
 import { SituationFinder } from "@/components/SituationFinder";
+import { Workbench } from "@/components/Workbench";
 import { copilotAppWorkflowCount } from "@/data/copilotApps";
 
 const STACK = [
