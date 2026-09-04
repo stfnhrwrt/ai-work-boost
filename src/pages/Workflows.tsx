@@ -178,7 +178,7 @@ function FilterRow({ label, options, active, onSelect }: FilterRowProps) {
       <span className="shrink-0 text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:w-24">
         {label}
       </span>
-      <div className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+      <div className="flex max-w-full gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
         {options.map((option) => {
           const isActive = active === option.id;
           const disabled = option.count === 0 && !isActive;
