@@ -14,6 +14,7 @@ import {
   taskTypeCountLabel,
 } from "@/data/discovery";
 import { SituationFinder } from "@/components/SituationFinder";
+import { Workbench } from "@/components/Workbench";
 import { copilotAppWorkflowCount } from "@/data/copilotApps";
 
 const STACK = [
@@ -104,6 +105,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* The AI Workbench — animated inputs → instructions → outputs */}
+        <Workbench />
 
         {/* Situation finder */}
         <section className="container mx-auto px-6 py-12">

@@ -254,6 +254,27 @@
   }
 }
 
+/* Workbench — input cards assemble from different directions */
+.workbench-hidden {
+  opacity: 0;
+  transform: translate(-16px, -10px);
+}
+li:nth-child(even) > .workbench-hidden {
+  transform: translate(-16px, 12px);
+}
+li:nth-child(3) > .workbench-hidden {
+  transform: translate(-10px, -14px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workbench-card,
+  .workbench-hidden {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
