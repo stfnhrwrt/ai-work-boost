@@ -174,11 +174,11 @@ interface FilterRowProps {
 
 function FilterRow({ label, options, active, onSelect }: FilterRowProps) {
   return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+    <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
       <span className="shrink-0 text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:w-24">
         {label}
       </span>
-      <div className="flex max-w-full gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
+      <div className="flex w-full min-w-0 gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0">
         {options.map((option) => {
           const isActive = active === option.id;
           const disabled = option.count === 0 && !isActive;
