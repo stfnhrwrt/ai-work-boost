@@ -316,3 +316,93 @@ li:nth-child(3) > .workbench-hidden {
     scroll-behavior: auto !important;
   }
 }
+
+/* ───────────────────────────────────────────────────────────────
+   Launch narrative — deep ink scene that hands over to warm paper
+   ─────────────────────────────────────────────────────────────── */
+
+.scene-ink {
+  --ink: 222 30% 7%;
+  --ink-rule: 222 18% 22%;
+  --ink-fg: 40 26% 94%;
+  --ink-muted: 220 10% 66%;
+  background-color: hsl(var(--ink));
+  color: hsl(var(--ink-fg));
+  background-image:
+    radial-gradient(120% 80% at 50% 0%, hsl(222 70% 22% / 0.55) 0%, transparent 62%),
+    radial-gradient(hsl(0 0% 100% / 0.05) 0.5px, transparent 0.5px);
+  background-size: auto, 3px 3px;
+}
+
+.scene-ink-fade {
+  background-image: linear-gradient(180deg, hsl(222 30% 7%) 0%, hsl(var(--background)) 100%);
+}
+
+.ink-rule {
+  border-color: hsl(var(--ink-rule));
+}
+.ink-muted {
+  color: hsl(var(--ink-muted));
+}
+
+.scene-ink h1,
+.scene-ink h2,
+.scene-ink h3 {
+  color: hsl(var(--ink-fg));
+}
+
+.headline-xl {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 0.98;
+  font-size: clamp(2.5rem, 7.2vw, 5.75rem);
+}
+
+.headline-lg {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+}
+
+.numeral-xl {
+  font-family: var(--font-mono);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: hsl(var(--ink-fg) / 0.14);
+}
+
+/* Scroll-linked stage transitions (driven by inline --p, 0 → 1) */
+.stage-layer {
+  transition:
+    opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 420ms ease;
+  will-change: opacity, transform;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-layer,
+  .reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
