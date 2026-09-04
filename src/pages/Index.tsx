@@ -125,12 +125,12 @@ const Index = () => {
                 className="fade-in-up mx-auto mt-5 max-w-xl text-xs leading-relaxed text-muted-foreground"
                 style={{ ["--i" as string]: 5 }}
               >
-                Each workflow shows a conservative{" "}
+                Each workflow lists its typical effort and an{" "}
                 <span className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-2 py-0.5 font-semibold text-accent-foreground">
                   <TrendingDown className="h-3 w-3" />
-                  time-saved
+                  estimated manual effort avoided
                 </span>{" "}
-                estimate vs. doing it manually. Use 3–5 per week and most people gain 2–4 hours back.
+                figure. These are indicative estimates for a typical case, not guaranteed savings.
               </p>
             </div>
           </div>

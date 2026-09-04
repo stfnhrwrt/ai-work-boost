@@ -51,7 +51,7 @@ export function WorkflowCard({ workflow }: WorkflowCardProps) {
       {workflow.timeSaved && (
         <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-accent-soft px-2.5 py-0.5 text-xs font-semibold text-accent-foreground">
           <TrendingDown className="h-3 w-3" />
-          {workflow.timeSaved}
+          Avoids approx. {workflow.timeSaved.replace(/^~/, "")}
         </span>
       )}
       <div className="flex items-center justify-between border-t border-border pt-4 text-sm">
