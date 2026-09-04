@@ -13,7 +13,7 @@ const FOOTER_LINKS = [
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-24 border-t border-rule/60 bg-background">
+    <footer className="mt-20 border-t border-rule bg-card/50">
       <div className="container mx-auto px-6 py-6">
         <div className="flex items-start gap-3 rounded-lg border border-accent/40 bg-accent-soft p-4 text-sm text-foreground">
           <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-accent-foreground" />
