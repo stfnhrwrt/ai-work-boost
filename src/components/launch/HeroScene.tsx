@@ -45,7 +45,7 @@ export function HeroScene() {
               style={{
                 borderColor: "hsl(var(--ink-rule))",
                 background: "hsl(222 26% 11% / 0.85)",
-                transform: `translate(-50%, ${plate.offset * 2.4}px) rotate(${plate.offset * 0.12}deg)`,
+                transform: `translate(-50%, ${plate.offset * 5.6}px) rotate(${plate.offset * 0.09}deg)`,
                 animation: reduced ? undefined : `plate-drift 9s ease-in-out ${idx * 0.9}s infinite`,
               }}
             >

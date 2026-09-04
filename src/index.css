@@ -345,6 +345,12 @@ li:nth-child(3) > .workbench-hidden {
   color: hsl(var(--ink-muted));
 }
 
+.scene-ink h1,
+.scene-ink h2,
+.scene-ink h3 {
+  color: hsl(var(--ink-fg));
+}
+
 .headline-xl {
   font-family: var(--font-display);
   font-weight: 600;

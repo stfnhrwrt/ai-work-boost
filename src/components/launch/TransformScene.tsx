@@ -25,6 +25,7 @@ export function TransformScene() {
   const sectionRef = useRef<HTMLElement>(null);
   const progress = useScrollProgress(sectionRef);
   const [selectedId, setSelectedId] = useState(launchInputs[0].id);
+  const isNarrow = typeof window !== "undefined" && window.matchMedia("(max-width: 640px)").matches;
 
   const selected = useMemo(
     () => launchInputs.find((i) => i.id === selectedId) ?? launchInputs[0],
@@ -83,7 +84,7 @@ export function TransformScene() {
             <div className="relative h-[22rem] sm:h-[26rem]">
               {launchInputs.map((input, idx) => {
                 const isSelected = input.id === selected.id;
-                const scattered = stage === 0 && !reduced;
+                const scattered = stage === 0 && !reduced && !isNarrow;
                 const style = scattered
                   ? {
                       left: `${input.scatter.x}%`,
@@ -100,7 +101,7 @@ export function TransformScene() {
                 return (
                   <article
                     key={input.id}
-                    className="stage-layer absolute w-[46%] min-w-[9.5rem] border p-3.5"
+                    className="stage-layer absolute w-[46%] min-w-0 border p-3.5"
                     style={{
                       ...style,
                       borderColor: isSelected && !scattered ? "hsl(var(--primary))" : "hsl(var(--ink-rule))",
