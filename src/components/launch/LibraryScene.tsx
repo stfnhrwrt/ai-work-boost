@@ -46,7 +46,7 @@ export function LibraryScene() {
 
         <Axis index="02" title="By role" visible={visible} action={{ to: "/roles", label: "All roles" }}>
           {roles.map((role) => (
-            <Chip key={role.id} to={`/roles/${role.id}`} label={role.name}>
+            <Chip key={role.id} to={`/role/${role.id}`} label={role.name}>
               {getWorkflowsByRole(role.id).length} workflows
             </Chip>
           ))}
@@ -72,8 +72,8 @@ export function LibraryScene() {
           action={{ to: "/workflows", label: "Browse everything" }}
         >
           {workflowFormats.map((format) => (
-            <Chip key={format.id} to={`/workflows?format=${format.id}`} label={format.name}>
-              {format.tagline ?? format.description}
+            <Chip key={format.id} to={`/workflows?format=${format.id}`} label={format.label}>
+              {format.shortLabel}
             </Chip>
           ))}
         </Axis>
