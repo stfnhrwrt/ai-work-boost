@@ -190,16 +190,17 @@ const buildReason = (
   roleMatched: boolean,
   outputMatched: boolean,
 ): string => {
-  const parts: string[] = [];
-  parts.push(
+  const lead =
     taskRank === 0
-      ? `A ${item.tags[1]?.toLowerCase() ?? "core"} workflow that ${situation.fitPhrase}`
-      : `Supports the same goal — it ${situation.fitPhrase}`,
-  );
-  if (roleMatched) parts.push(`written for your role (${item.sourceLabel})`);
-  if (outputMatched) parts.push("produces the output type you picked");
-  if (!item.roleId) parts.push("uses Microsoft 365 context directly");
-  return `${parts.join(", ")}.`;
+      ? `Directly ${situation.fitPhrase}`
+      : `A close fit — it ${situation.fitPhrase}`;
+  const detail = item.description.replace(/\.$/, "");
+  const extras: string[] = [];
+  if (roleMatched) extras.push(`written for the ${item.sourceLabel} role`);
+  if (outputMatched) extras.push("produces the output type you picked");
+  if (!item.roleId) extras.push("uses Microsoft 365 context directly");
+  const tail = extras.length > 0 ? ` It is ${extras.join(", ")}.` : "";
+  return `${lead}: ${detail}.${tail}`;
 };
 
 export const recommendWorkflows = (
