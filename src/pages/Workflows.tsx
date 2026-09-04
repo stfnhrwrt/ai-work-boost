@@ -182,11 +182,7 @@ const Workflows = () => {
           ) : view === "list" ? (
             <div className="border-t border-rule">
               {results.map((item, idx) => (
-                <div
-                  key={item.key}
-                  className="fade-in-up"
-                  style={{ ["--i" as string]: Math.min(idx, 12) }}
-                >
+                <div key={item.key} className={idx < 8 ? "fade-in-up" : undefined} style={{ ["--i" as string]: idx }}>
                   <DiscoveryCard item={item} variant="row" />
                 </div>
               ))}
@@ -194,11 +190,7 @@ const Workflows = () => {
           ) : (
             <div className="grid grid-cols-1 gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-3">
               {results.map((item, idx) => (
-                <div
-                  key={item.key}
-                  className="fade-in-up bg-card"
-                  style={{ ["--i" as string]: Math.min(idx, 12) }}
-                >
+                <div key={item.key} className={idx < 8 ? "fade-in-up bg-card" : "bg-card"} style={{ ["--i" as string]: idx }}>
                   <DiscoveryCard item={item} />
                 </div>
               ))}

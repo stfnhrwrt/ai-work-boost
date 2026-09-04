@@ -132,7 +132,7 @@ const Index = () => {
                   key={task.id}
                   to={`/workflows?task=${task.id}`}
                   className="fade-in-up group flex h-full flex-col bg-card p-6 transition-colors hover:bg-primary-soft/50"
-                  style={{ ["--i" as string]: idx }}
+                  style={{ ["--i" as string]: Math.min(idx, 8) }}
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <Icon className="h-5 w-5 text-primary" />
@@ -168,7 +168,7 @@ const Index = () => {
           </div>
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {roles.map((role, idx) => (
-              <div key={role.id} className="fade-in-up h-full" style={{ ["--i" as string]: idx }}>
+              <div key={role.id} className="fade-in-up h-full" style={{ ["--i" as string]: Math.min(idx, 8) }}>
                 <RoleCard role={role} workflowCount={getWorkflowsByRole(role.id).length} />
               </div>
             ))}
