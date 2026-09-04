@@ -13,7 +13,9 @@ import {
   discoveryItems,
   filterDiscoveryItems,
   DiscoveryFilters,
+  libraryCounts,
 } from "@/data/discovery";
+import { SituationFinder } from "@/components/SituationFinder";
 
 const FILTER_KEYS = ["role", "task", "format", "app", "skill", "environment"] as const;
 type FilterKey = (typeof FILTER_KEYS)[number];
@@ -87,10 +89,16 @@ const Workflows = () => {
             <p className="label-eyebrow mb-3">The index</p>
             <h1 className="font-display text-4xl text-foreground sm:text-5xl">Browse workflows</h1>
             <p className="mt-3 max-w-measure text-base text-muted-foreground">
-              Search {discoveryItems.length} practical workflows by task, role, format, app or skill
-              level. Most work with Copilot, ChatGPT, Claude, Gemini or an approved internal AI
-              tool; the Microsoft 365 app workflows are Copilot-specific.
+              Search {libraryCounts.general} general workflows and {libraryCounts.microsoft365}{" "}
+              Microsoft 365 specialist workflows by task, role, format, app or skill level. Most
+              general workflows run in Copilot, ChatGPT, Claude, Gemini or an approved internal AI
+              tool; the Microsoft 365 workflows are Copilot-specific.
             </p>
+            <p className="mt-2 max-w-measure text-xs text-muted-foreground">
+              {libraryCounts.shared} workflows appear in both collections, so the two counts
+              overlap. The index below lists {discoveryItems.length} unique entries.
+            </p>
+            <SituationFinder eyebrow="Not sure where to start" className="mt-8" />
           </div>
         </section>
 

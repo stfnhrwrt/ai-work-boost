@@ -472,6 +472,15 @@ const WorkflowPage = () => {
             </Section>
           )}
 
+          {chain && (
+            <Section
+              title="Build a workflow chain"
+              subtitle="How this workflow feeds the next one"
+            >
+              <WorkflowChain chain={chain} />
+            </Section>
+          )}
+
           {related.length > 0 && (
             <Section title="Related workflows" subtitle="Often used alongside this one">
               <div className="grid gap-4 sm:grid-cols-2">
