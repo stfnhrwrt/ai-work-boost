@@ -152,6 +152,9 @@ const FALLBACK_FOLLOW_UPS = [
   "List anything you were unsure about or could not verify.",
 ];
 
+const normaliseEffort = (value?: string): string | undefined =>
+  value?.replace(/\s*saved\s*$/i, "").replace(/^~\s*/, "approx. ").trim();
+
 export function resolveWorkflow(workflow: Workflow): ResolvedWorkflow {
   const taskType = getTaskType(workflow.id);
   const taskId: TaskTypeId = (taskType?.id as TaskTypeId) ?? "planning";
@@ -175,7 +178,7 @@ export function resolveWorkflow(workflow: Workflow): ResolvedWorkflow {
     privacyNote: workflow.privacyNote ?? DEFAULT_PRIVACY_NOTE,
     followUpPrompts: followUps.slice(0, 5),
     typicalEffort: workflow.timeRange,
-    manualEffortAvoided: workflow.timeSaved,
+    manualEffortAvoided: normaliseEffort(workflow.timeSaved),
     lastReviewed: workflow.lastReviewed ?? DEFAULT_LAST_REVIEWED,
   };
 }
