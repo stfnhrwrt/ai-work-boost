@@ -64,7 +64,7 @@ const TOOL_NOTES = [
 const ResponsibleAI = () => (
   <div className="flex min-h-screen flex-col bg-background">
     <SiteHeader />
-    <main className="flex-1">
+    <main id="main" className="flex-1">
       <section className="border-b border-border bg-hero-gradient">
         <div className="container mx-auto px-6 py-12">
           <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">

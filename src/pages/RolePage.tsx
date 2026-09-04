@@ -45,7 +45,7 @@ const RolePage = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         <section className="border-b border-border bg-hero-gradient">
           <div className="container mx-auto px-6 py-12">
             <nav className="mb-6 flex items-center gap-1.5 text-sm text-muted-foreground">

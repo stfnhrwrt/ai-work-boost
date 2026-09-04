@@ -68,7 +68,7 @@ const WorkflowPage = () => {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
-      <main className="flex-1">
+      <main id="main" className="flex-1">
         {/* Header */}
         <section className="border-b border-border bg-hero-gradient">
           <div className="container mx-auto max-w-4xl px-6 py-10">
