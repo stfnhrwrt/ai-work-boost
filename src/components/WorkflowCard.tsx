@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { Workflow } from "@/data/workflows";
 import { getFormat } from "@/data/formats";
-import { getTaskTypeMeta } from "@/data/taskTypes";
 import { getTaskType } from "@/data/taskTypes";
 
 interface WorkflowCardProps {
@@ -11,7 +10,7 @@ interface WorkflowCardProps {
 
 export function WorkflowCard({ workflow }: WorkflowCardProps) {
   const format = getFormat(workflow.level);
-  const task = getTaskTypeMeta(getTaskType(workflow.id))?.name;
+  const task = getTaskType(workflow.id)?.name;
 
   return (
     <Link
