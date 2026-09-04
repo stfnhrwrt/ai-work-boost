@@ -9,7 +9,7 @@ export function PromptBlock({ prompt }: PromptBlockProps) {
     <div className="overflow-hidden rounded-lg border border-code-border bg-code">
       <div className="flex items-center justify-between border-b border-code-border px-4 py-2.5">
         <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          Prompt
+          Instructions
         </span>
         <CopyButton text={prompt} size="sm" variant="default" />
       </div>
