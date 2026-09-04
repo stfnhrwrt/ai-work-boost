@@ -29,7 +29,7 @@ export const launchInputs: LaunchInput[] = [
     id: "meeting-notes",
     label: "Meeting notes",
     hint: "Decisions, open questions",
-    scatter: { x: 6, y: 10, rotate: -3 },
+    scatter: { x: 2, y: 10, rotate: -3 },
     instruction:
       "Create a concise, decision-ready update from these meeting notes. Separate facts, assumptions, risks, and next steps.",
     output: {
@@ -49,7 +49,7 @@ export const launchInputs: LaunchInput[] = [
     id: "inbox",
     label: "Inbox",
     hint: "Threads needing replies",
-    scatter: { x: 68, y: 4, rotate: 2.5 },
+    scatter: { x: 46, y: 4, rotate: 2.5 },
     instruction:
       "Read this inbox extract and produce a decision-ready summary. Separate what is confirmed, what is assumed, what is at risk, and what I must answer today.",
     output: {
@@ -69,7 +69,7 @@ export const launchInputs: LaunchInput[] = [
     id: "spreadsheet",
     label: "Spreadsheet",
     hint: "Numbers, trends, gaps",
-    scatter: { x: 12, y: 58, rotate: 3.5 },
+    scatter: { x: 4, y: 58, rotate: 3.5 },
     instruction:
       "Explain what changed in this data in plain language. Separate the facts, the assumptions behind them, the risks, and the next steps.",
     output: {
@@ -89,7 +89,7 @@ export const launchInputs: LaunchInput[] = [
     id: "project-plan",
     label: "Project plan",
     hint: "Milestones, owners, dates",
-    scatter: { x: 72, y: 54, rotate: -2 },
+    scatter: { x: 48, y: 54, rotate: -2 },
     instruction:
       "Turn this project plan into a concise status update for stakeholders. Separate facts, assumptions, risks, and next steps.",
     output: {
@@ -109,7 +109,7 @@ export const launchInputs: LaunchInput[] = [
     id: "rough-document",
     label: "Rough document",
     hint: "Half-written, unstructured",
-    scatter: { x: 40, y: 76, rotate: 1.5 },
+    scatter: { x: 26, y: 76, rotate: 1.5 },
     instruction:
       "Rewrite this rough draft as a structured stakeholder update. Separate facts, assumptions, risks, and next steps, and keep it to one page.",
     output: {
