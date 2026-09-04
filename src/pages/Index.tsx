@@ -15,13 +15,14 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RoleCard } from "@/components/RoleCard";
 import { Button } from "@/components/ui/button";
-import { roles, getWorkflowsByRole, workflows } from "@/data/workflows";
+import { roles, getWorkflowsByRole } from "@/data/workflows";
 import { taskTypes, getWorkflowsByTaskType, microsoft365Workflows } from "@/data/taskTypes";
+import { discoveryItems } from "@/data/discovery";
 
 const TOOLS = ["Microsoft Copilot", "ChatGPT", "Claude", "Gemini", "Approved internal AI tools"];
 
 const Index = () => {
-  const totalWorkflows = workflows.length;
+  const totalWorkflows = discoveryItems.length;
   const location = useLocation();
 
   useEffect(() => {
