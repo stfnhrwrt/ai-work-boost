@@ -1,8 +1,11 @@
 import {
   BarChart3,
   CalendarCheck,
+  ClipboardList,
+  FileSignature,
   ListChecks,
   MessageSquareText,
+  PieChart,
   Search,
   Workflow as WorkflowIcon,
   LucideIcon,
@@ -11,10 +14,13 @@ import { workflows, Workflow } from "@/data/workflows";
 
 export type TaskTypeId =
   | "meetings"
+  | "writing"
   | "communication"
-  | "knowledge"
   | "planning"
+  | "analysis"
   | "reporting"
+  | "research"
+  | "administration"
   | "automation";
 
 export interface TaskType {
@@ -28,47 +34,71 @@ export interface TaskType {
 export const taskTypes: TaskType[] = [
   {
     id: "meetings",
-    name: "Meetings & follow-ups",
+    name: "Meetings",
     tagline: "Prepare, capture and close the loop.",
     description:
       "Turn agendas, transcripts and notes into decisions, actions and follow-ups people actually act on.",
     icon: CalendarCheck,
   },
   {
-    id: "communication",
-    name: "Writing & communication",
-    tagline: "Draft faster, sound like yourself.",
+    id: "writing",
+    name: "Writing",
+    tagline: "Get to a good first draft faster.",
     description:
-      "Emails, updates, difficult messages and inbox triage — drafted in your tone and reviewed by you before sending.",
+      "Documents, proposals, summaries and responses drafted from your own notes and source material.",
+    icon: FileSignature,
+  },
+  {
+    id: "communication",
+    name: "Communication",
+    tagline: "Say it clearly, to the right audience.",
+    description:
+      "Updates, difficult messages and stakeholder communication adapted to who is reading them.",
     icon: MessageSquareText,
   },
   {
-    id: "knowledge",
-    name: "Research & knowledge",
-    tagline: "Find answers inside your own documents.",
-    description:
-      "Retrieve, compare and summarize policies, documents and prior decisions using the sources you are allowed to access.",
-    icon: Search,
-  },
-  {
     id: "planning",
-    name: "Planning & prioritization",
-    tagline: "Decide what matters this week.",
+    name: "Planning",
+    tagline: "Decide what happens next, and in what order.",
     description:
-      "Weekly priorities, kick-offs, risk reviews and business cases — structured thinking instead of a blank page.",
+      "Priorities, plans, task breakdowns, risks and dependencies made explicit before work starts.",
     icon: ListChecks,
   },
   {
-    id: "reporting",
-    name: "Reporting & analysis",
-    tagline: "From raw numbers to a clear story.",
+    id: "analysis",
+    name: "Analysis",
+    tagline: "Understand what the numbers are doing.",
     description:
-      "Status reports, KPI narratives, variance commentary and management summaries built from data you already have.",
+      "Variances, trends, business cases and data structuring, with a clear line between fact and interpretation.",
+    icon: PieChart,
+  },
+  {
+    id: "reporting",
+    name: "Reporting",
+    tagline: "From raw material to a clear status.",
+    description:
+      "Status reports, KPI narratives and management summaries built from data you already maintain.",
     icon: BarChart3,
   },
   {
+    id: "research",
+    name: "Research",
+    tagline: "Find and verify what already exists.",
+    description:
+      "Policy questions, document retrieval and knowledge lookups with traceable sources.",
+    icon: Search,
+  },
+  {
+    id: "administration",
+    name: "Administration",
+    tagline: "Keep the day-to-day under control.",
+    description:
+      "Inbox, calendar and coordination work that has to happen reliably every day.",
+    icon: ClipboardList,
+  },
+  {
     id: "automation",
-    name: "Automation & recurring work",
+    name: "Automation",
     tagline: "Set it up once, let it run.",
     description:
       "Recurring briefings, triage rules and scheduled prompts that handle repetitive work in the background.",
@@ -78,10 +108,10 @@ export const taskTypes: TaskType[] = [
 
 const TASK_TYPE_BY_WORKFLOW: Record<string, TaskTypeId> = {
   "daily-executive-briefing": "planning",
-  "summarize-inbox": "communication",
+  "summarize-inbox": "administration",
   "prepare-meeting-notes": "meetings",
-  "manage-multi-mailbox": "communication",
-  "draft-executive-responses": "communication",
+  "manage-multi-mailbox": "administration",
+  "draft-executive-responses": "writing",
   "meeting-brief-full-context": "meetings",
   "agent-daily-briefing": "automation",
   "agent-email-triage": "automation",
@@ -90,14 +120,14 @@ const TASK_TYPE_BY_WORKFLOW: Record<string, TaskTypeId> = {
   "scheduled-weekly-prep": "automation",
   "ea-talking-points": "meetings",
   "ea-detect-escalations": "communication",
-  "ea-draft-followups": "communication",
+  "ea-draft-followups": "writing",
   "ea-auto-accept-meetings": "automation",
   "ea-prioritize-leadership-emails": "automation",
-  "ea-calendar-optimization": "automation",
+  "ea-calendar-optimization": "administration",
   "ea-auto-prepare-meetings": "automation",
-  "ea-delegate-meetings": "automation",
+  "ea-delegate-meetings": "administration",
   "prepare-1-1-meeting": "meetings",
-  "write-feedback": "communication",
+  "write-feedback": "writing",
   "define-weekly-priorities": "planning",
   "draft-difficult-message": "communication",
   "plan-team-offsite": "planning",
@@ -106,13 +136,13 @@ const TASK_TYPE_BY_WORKFLOW: Record<string, TaskTypeId> = {
   "stakeholder-update": "communication",
   "steering-committee-update": "reporting",
   "project-kickoff": "planning",
-  "build-business-case": "planning",
-  "policy-qa": "knowledge",
-  "compliance-document-summary": "knowledge",
-  "governance-search": "knowledge",
+  "build-business-case": "analysis",
+  "policy-qa": "research",
+  "compliance-document-summary": "research",
+  "governance-search": "research",
   "kpi-summary": "reporting",
-  "variance-summary": "reporting",
-  "forecast-prep": "reporting",
+  "variance-summary": "analysis",
+  "forecast-prep": "analysis",
 };
 
 export const getTaskType = (workflowId: string): TaskType | undefined => {
