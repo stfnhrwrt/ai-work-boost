@@ -4,15 +4,16 @@ import { RoleCard } from "@/components/RoleCard";
 import { getWorkflowsByRole, roles } from "@/data/workflows";
 
 const Roles = () => (
-  <div className="flex min-h-screen flex-col bg-background">
+  <div className="flex min-h-screen flex-col bg-paper">
     <SiteHeader />
     <main id="main" className="flex-1">
       <section className="border-b border-rule">
         <div className="container mx-auto px-6 py-12">
-          <h1 className="mb-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <p className="label-eyebrow mb-3">Browse by role</p>
+          <h1 className="mb-3 font-display text-4xl text-foreground sm:text-5xl">
             Workflows by role
           </h1>
-          <p className="max-w-2xl text-lg text-muted-foreground">
+          <p className="max-w-measure text-lg text-muted-foreground">
             Each library is built around the real tasks that role does every week — independent of
             which AI assistant your company has approved.
           </p>
