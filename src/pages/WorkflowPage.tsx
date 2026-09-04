@@ -104,6 +104,11 @@ const WorkflowPage = () => {
               <Chip>{role.name}</Chip>
               <Chip>{model.taskTypeName}</Chip>
               <Chip>{model.format.shortLabel}</Chip>
+              {model.copilotOnly && (
+                <span className="inline-flex items-center gap-1.5 border border-primary/40 bg-primary-soft px-2.5 py-1 text-xs font-semibold text-primary">
+                  Copilot-specific
+                </span>
+              )}
               <Chip icon={Clock}>Typical effort {model.typicalEffort}</Chip>
               {model.manualEffortAvoided && (
                 <span className="inline-flex items-center gap-1.5 border border-accent/40 bg-accent-soft px-2.5 py-1 text-xs font-semibold text-accent-foreground">
@@ -304,7 +309,7 @@ const WorkflowPage = () => {
             </div>
             <p className="mt-3 max-w-measure text-xs text-muted-foreground">
               Estimated manual effort avoided is an indicative figure for a typical case, not a
-              guaranteed saving. Effort figures are indicative estimates for a typical case, not guaranteed savings.
+              guaranteed saving.
             </p>
           </Section>
 
