@@ -2178,35 +2178,35 @@ export const LEVEL_META: Record<
   { label: string; shortLabel: string; description: string; cardBadge: string }
 > = {
   essential: {
-    label: "Essentials",
-    shortLabel: "Essentials",
+    label: "Core workflows",
+    shortLabel: "Core",
     description: "Core, ready-to-run prompts you can copy and use today.",
     cardBadge: "Essential",
   },
   advanced: {
-    label: "Level 1 — Advanced workflows",
+    label: "Advanced workflows",
     shortLabel: "Advanced",
     description:
       "Multi-source prompts that depend on the access and delegate permissions you already have.",
     cardBadge: "Advanced",
   },
   agent: {
-    label: "Level 2 — Build your own agent",
-    shortLabel: "Agents",
+    label: "Multi-step workflows — build your own agent",
+    shortLabel: "Multi-step",
     description:
       "Reusable Copilot agents (built in Copilot Studio) that turn a recurring task into a one-click workflow.",
     cardBadge: "Agent",
   },
   scheduled: {
-    label: "Level 3 — Scheduled prompts",
-    shortLabel: "Scheduled",
+    label: "Repeatable workflows — scheduled prompts",
+    shortLabel: "Repeatable",
     description:
       "Native Microsoft 365 Copilot Scheduled Prompts that run a prompt automatically every morning, evening or week — no Copilot Studio required.",
     cardBadge: "Scheduled",
   },
   automation: {
-    label: "Level 4 — Outlook + Copilot automation",
-    shortLabel: "Automation",
+    label: "Multi-step workflows — Outlook + Copilot automation",
+    shortLabel: "Multi-step",
     description:
       "Combine Outlook rules, Copilot intelligence and (optionally) Power Automate to handle inbox triage, calendar decisions and meeting prep automatically.",
     cardBadge: "Automation",

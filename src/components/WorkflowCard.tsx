@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Bot, Calendar, Clock, ShieldAlert, Sparkles, TrendingDown, Workflow as WorkflowIcon } from "lucide-react";
-import { Workflow, LEVEL_META } from "@/data/workflows";
+import { Workflow } from "@/data/workflows";
+import { getFormat } from "@/data/formats";
 
 interface WorkflowCardProps {
   workflow: Workflow;
@@ -15,7 +16,7 @@ const levelIcon = {
 } as const;
 
 export function WorkflowCard({ workflow }: WorkflowCardProps) {
-  const meta = LEVEL_META[workflow.level];
+  const format = getFormat(workflow.level);
   const LevelIcon = levelIcon[workflow.level];
   const isAdvanced = workflow.level !== "essential";
 
@@ -28,7 +29,7 @@ export function WorkflowCard({ workflow }: WorkflowCardProps) {
         {isAdvanced ? (
           <span className="inline-flex items-center gap-1 rounded-full bg-primary text-primary-foreground px-2.5 py-0.5 text-xs font-semibold">
             <LevelIcon className="h-3 w-3" />
-            {meta.cardBadge}
+            {format.shortLabel}
           </span>
         ) : (
           <>
