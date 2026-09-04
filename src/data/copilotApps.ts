@@ -509,7 +509,7 @@ export const copilotApps: CopilotApp[] = [
     usefulFor: [
       "Breaking a goal or deliverable into buckets, tasks and milestones",
       "Spotting overdue, blocked or high-risk tasks across a plan",
-      "Drafting weekly status and prioritisation from live task data",
+      "Drafting weekly status and prioritization from live task data",
       "Turning meeting outcomes into assigned tasks without retyping",
     ],
     sourceMaterial: [
