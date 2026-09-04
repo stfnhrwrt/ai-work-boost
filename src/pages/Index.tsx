@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { roles, getWorkflowsByRole } from "@/data/workflows";
 import { taskTypes, getWorkflowsByTaskType, microsoft365Workflows } from "@/data/taskTypes";
 import { discoveryItems } from "@/data/discovery";
+import { copilotAppWorkflowCount } from "@/data/copilotApps";
 
 const TOOLS = ["Microsoft Copilot", "ChatGPT", "Claude", "Gemini", "Approved internal AI tools"];
 
@@ -274,8 +275,9 @@ const Index = () => {
                   Copilot in Microsoft 365 apps
                 </h2>
                 <p className="text-muted-foreground">
-                  {microsoft365Workflows.length} workflows that use Microsoft-specific mechanics:
-                  Copilot agents, scheduled prompts, Outlook rules and Power Automate. Optional — the
+                  {copilotAppWorkflowCount + microsoft365Workflows.length} workflows that use
+                  Microsoft-specific mechanics: Copilot in Word, Excel, PowerPoint and Planner,
+                  plus agents, scheduled prompts, Outlook rules and Power Automate. Optional — the
                   rest of the library is tool-agnostic.
                 </p>
               </div>
