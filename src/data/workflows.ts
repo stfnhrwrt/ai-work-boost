@@ -29,6 +29,14 @@ export type WorkflowLevel =
   | "scheduled"
   | "automation";
 
+/** Recommended execution environments (see workflowModel.ts for details) */
+export type ExecutionEnvironmentId =
+  | "any-approved"
+  | "copilot"
+  | "chatgpt"
+  | "claude"
+  | "internal";
+
 export type AutomationLayer = "outlook-rule" | "copilot" | "power-automate";
 export type SharedMailboxSupport = "yes" | "limited" | "no";
 
@@ -55,9 +63,21 @@ export interface Workflow {
   chatgptPrompt: string;
   improvementPrompts: string[];
   realWorldAction: string;
+  /** Typical effort to complete the workflow, e.g. "5–10 min" */
   timeRange: string;
-  /** Conservative time saved per use, e.g. "~25 min". Compared to doing it manually. */
+  /** Estimated manual effort avoided per use, e.g. "~25 min". Indicative, not guaranteed. */
   timeSaved?: string;
+  /** What a good result looks like. Falls back to a task-type default. */
+  expectedOutput?: string;
+  /** What to verify before using the output. Falls back to a task-type default. */
+  reviewChecklist?: string[];
+  /** Workflow-specific privacy and confidentiality guidance. */
+  privacyNote?: string;
+  /** Recommended execution environments. Defaults are derived in workflowModel.ts */
+  environments?: ExecutionEnvironmentId[];
+  /** ISO date (YYYY-MM-DD) this workflow content was last reviewed. */
+  lastReviewed?: string;
+
   /** Optional micro-tip shown under the prompt block */
   promptTip?: string;
   /** Optional micro-tip shown under the improvement prompts */

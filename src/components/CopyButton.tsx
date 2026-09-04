@@ -14,7 +14,7 @@ interface CopyButtonProps {
 
 export function CopyButton({
   text,
-  label = "Copy prompt",
+  label = "Copy instructions",
   size = "default",
   variant = "default",
   className,
@@ -25,7 +25,9 @@ export function CopyButton({
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      toast.success("Prompt copied", { description: "Paste it into Copilot or ChatGPT." });
+      toast.success("Instructions copied", {
+        description: "Paste them into your approved AI assistant.",
+      });
       setTimeout(() => setCopied(false), 2000);
     } catch {
       toast.error("Couldn't copy. Please try again.");

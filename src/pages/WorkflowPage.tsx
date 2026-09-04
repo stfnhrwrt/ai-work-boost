@@ -7,8 +7,11 @@ import {
   CalendarClock,
   CheckCircle2,
   ChevronRight,
+  ClipboardCheck,
   Clock,
   FileText,
+  Gauge,
+  Lock,
   Mail,
   MessageSquare,
   Settings2,
@@ -33,6 +36,7 @@ import {
   getWorkflowsByRole,
   LEVEL_META,
 } from "@/data/workflows";
+import { resolveWorkflow, formatReviewDate } from "@/data/workflowModel";
 
 const sourceIconFor = (source: string) => {
   const s = source.toLowerCase();
@@ -56,6 +60,7 @@ const WorkflowPage = () => {
   const next = siblings[(currentIndex + 1) % siblings.length];
   const meta = LEVEL_META[workflow.level];
   const isAdvanced = workflow.level !== "essential";
+  const model = resolveWorkflow(workflow);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -93,21 +98,14 @@ const WorkflowPage = () => {
               {workflow.description}
             </p>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-foreground">
-                <Sparkles className="h-3.5 w-3.5" />
-                Copilot recommended
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-                ChatGPT alternative
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
-                <Clock className="h-3.5 w-3.5" />
-                {workflow.timeRange}
-              </span>
-              {workflow.timeSaved && (
+              <Chip>{role.name}</Chip>
+              <Chip>{model.taskTypeName}</Chip>
+              <Chip>{model.format.shortLabel}</Chip>
+              <Chip icon={Clock}>Typical effort {model.typicalEffort}</Chip>
+              {model.manualEffortAvoided && (
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent-foreground">
                   <TrendingDown className="h-3.5 w-3.5" />
-                  {workflow.timeSaved}
+                  Manual effort avoided {model.manualEffortAvoided}
                 </span>
               )}
             </div>
@@ -115,15 +113,19 @@ const WorkflowPage = () => {
         </section>
 
         <article className="container mx-auto max-w-4xl px-6 py-12">
-          {/* Situation */}
-          <Section title="Situation">
+          {/* Step 1 — Understand the situation */}
+          <Section step={1} title="Understand the situation">
             <div className="rounded-xl border border-border bg-secondary/50 p-5 text-base leading-relaxed text-foreground">
               {workflow.situation}
             </div>
           </Section>
 
-          {/* Context Source */}
-          <Section title="Context source" subtitle="What Copilot can pull in automatically">
+          {/* Step 2 — Prepare the inputs */}
+          <Section
+            step={2}
+            title="Prepare the inputs"
+            subtitle="What the assistant needs before it can help"
+          >
             <ul className="grid gap-2 sm:grid-cols-2">
               {workflow.contextSources.map((src) => {
                 const Icon = sourceIconFor(src);
@@ -138,10 +140,32 @@ const WorkflowPage = () => {
                 );
               })}
             </ul>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Copilot accesses these for you when used inside Microsoft 365. With ChatGPT,
-              you'll paste the relevant context manually.
-            </p>
+
+            <div className="mt-5 rounded-xl border border-border bg-card p-5">
+              <h3 className="mb-1 flex items-center gap-2 text-sm font-semibold text-foreground">
+                <Sparkles className="h-4 w-4 text-primary" />
+                Recommended execution environment
+              </h3>
+              <p className="mb-4 text-xs text-muted-foreground">
+                {model.copilotOnly
+                  ? "This workflow depends on Microsoft 365 mechanics, so it runs in Copilot only."
+                  : "Use whichever of these your organisation has approved. They do not behave the same way."}
+              </p>
+              <ul className="space-y-3">
+                {model.environments.map((env) => (
+                  <li key={env.id} className="border-l-2 border-border pl-4">
+                    <div className="text-sm font-semibold text-foreground">{env.name}</div>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {env.contextBehaviour}
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                      {env.governanceNote}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             {workflow.contextTip && (
               <div className="mt-3">
                 <Tip>{workflow.contextTip}</Tip>
@@ -152,31 +176,29 @@ const WorkflowPage = () => {
           {/* Access Matters callout */}
           {workflow.accessNote && <AccessNote note={workflow.accessNote} />}
 
-          {/* Tool Mode + Prompts */}
+          {/* Step 3 — Copy or adapt the instructions */}
           <Section
-            title={
-              workflow.agent
-                ? "Prompt for the agent"
-                : workflow.scheduled
-                  ? "Prompt for the scheduled flow"
-                  : "Run the workflow"
-            }
-            subtitle="Pick the tool you have access to"
+            step={3}
+            title="Copy or adapt the instructions"
+            subtitle="Adjust the placeholders before you run it"
           >
             <Tabs defaultValue="copilot" className="w-full">
               <TabsList className="mb-4 grid w-full max-w-md grid-cols-2">
-                <TabsTrigger value="copilot">Copilot (Recommended)</TabsTrigger>
-                <TabsTrigger value="chatgpt">ChatGPT</TabsTrigger>
+                <TabsTrigger value="copilot">Microsoft Copilot</TabsTrigger>
+                <TabsTrigger value="other">ChatGPT, Claude or internal tool</TabsTrigger>
               </TabsList>
               <TabsContent value="copilot" className="space-y-3">
                 <p className="text-sm text-muted-foreground">
-                  Uses your real company data — emails, Teams, calendar, documents — automatically.
+                  Copilot can use the Microsoft 365 content you are already authorized to
+                  access, so you rarely need to paste anything.
                 </p>
                 <PromptBlock prompt={workflow.copilotPrompt} />
               </TabsContent>
-              <TabsContent value="chatgpt" className="space-y-3">
+              <TabsContent value="other" className="space-y-3">
                 <p className="text-sm text-muted-foreground">
-                  Paste the relevant notes, emails or context where the prompt indicates.
+                  These tools have no access to your company systems. Paste or attach the
+                  inputs where the instructions indicate, and remove anything you are not
+                  allowed to share.
                 </p>
                 <PromptBlock prompt={workflow.chatgptPrompt} />
               </TabsContent>
@@ -188,14 +210,54 @@ const WorkflowPage = () => {
             )}
           </Section>
 
-          {/* Improve Output */}
+          {/* Step 4 — Review the output */}
           <Section
-            title="Improve the output"
-            subtitle="Short follow-up prompts to refine the result"
+            step={4}
+            title="Review the output"
+            subtitle="You stay accountable for the result"
+            icon={ClipboardCheck}
+          >
+            <div className="mb-4 rounded-xl border border-border bg-card p-5">
+              <h3 className="mb-1.5 text-sm font-semibold text-foreground">Expected output</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {model.expectedOutput}
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-border bg-card p-5">
+              <h3 className="mb-3 text-sm font-semibold text-foreground">Review checklist</h3>
+              <ul className="space-y-2">
+                {model.reviewChecklist.map((item) => (
+                  <li key={item} className="flex gap-2.5 text-sm text-foreground">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span className="leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-4 flex gap-3 rounded-xl border border-border bg-secondary/50 p-5">
+              <Lock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+              <div>
+                <h3 className="mb-1 text-sm font-semibold text-foreground">
+                  Privacy and confidentiality
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {model.privacyNote}
+                </p>
+              </div>
+            </div>
+          </Section>
+
+          {/* Step 5 — Refine the result */}
+          <Section
+            step={5}
+            title="Refine the result"
+            subtitle="Follow-up instructions to sharpen the output"
             icon={Wand2}
           >
             <ul className="space-y-2.5">
-              {workflow.improvementPrompts.map((p) => (
+              {model.followUpPrompts.map((p) => (
                 <li
                   key={p}
                   className="flex items-center justify-between gap-4 rounded-lg border border-border bg-card p-4"
@@ -226,18 +288,19 @@ const WorkflowPage = () => {
             </div>
           </Section>
 
-          {/* Time */}
-          <Section title="Time" icon={Clock}>
-            <div className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-3 text-sm font-medium text-foreground">
-              <Clock className="h-4 w-4 text-primary" />
-              {workflow.timeRange}
-              {workflow.timeSaved && (
-                <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-accent-soft px-2 py-0.5 text-xs font-semibold text-accent-foreground">
-                  <TrendingDown className="h-3 w-3" />
-                  Saves {workflow.timeSaved}
-                </span>
-              )}
+          {/* Effort */}
+          <Section title="Effort" icon={Gauge}>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <InfoBox label="Typical effort" value={model.typicalEffort} />
+              <InfoBox
+                label="Estimated manual effort avoided"
+                value={model.manualEffortAvoided ?? "Varies by task"}
+              />
+              <InfoBox label="Last reviewed" value={formatReviewDate(model.lastReviewed)} />
             </div>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Effort figures are indicative estimates for a typical case, not guaranteed savings.
+            </p>
           </Section>
 
           {/* ===== Level-specific sections ===== */}
@@ -280,7 +343,7 @@ const WorkflowPage = () => {
             </Section>
           )}
 
-          {/* Agent setup (Level 2) — Interaction Mode first, Studio setup collapsible */}
+          {/* Agent setup (Level 2) */}
           {workflow.agent && (
             <Section title="Use the agent" subtitle="How the conversation works" icon={Bot}>
               <div className="mb-4 grid gap-3 sm:grid-cols-2">
@@ -399,7 +462,6 @@ const WorkflowPage = () => {
             </Section>
           )}
 
-
           {/* Bottom nav */}
           <div className="mt-14 flex flex-col items-stretch justify-between gap-3 border-t border-border pt-8 sm:flex-row sm:items-center">
             <Button asChild variant="outline">
@@ -424,19 +486,40 @@ const WorkflowPage = () => {
   );
 };
 
+function Chip({
+  children,
+  icon: Icon,
+}: {
+  children: React.ReactNode;
+  icon?: React.ComponentType<{ className?: string }>;
+}) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">
+      {Icon && <Icon className="h-3.5 w-3.5" />}
+      {children}
+    </span>
+  );
+}
+
 interface SectionProps {
   title: string;
   subtitle?: string;
+  step?: number;
   icon?: React.ComponentType<{ className?: string }>;
   children: React.ReactNode;
 }
 
-function Section({ title, subtitle, icon: Icon, children }: SectionProps) {
+function Section({ title, subtitle, step, icon: Icon, children }: SectionProps) {
   return (
     <section className="mb-10">
-      <div className="mb-4 flex items-baseline gap-3">
+      <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <h2 className="flex items-center gap-2 text-xl font-semibold text-foreground">
-          {Icon && <Icon className="h-5 w-5 text-primary" />}
+          {step && (
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+              {step}
+            </span>
+          )}
+          {Icon && !step && <Icon className="h-5 w-5 text-primary" />}
           {title}
         </h2>
         {subtitle && <p className="text-sm text-muted-foreground">{subtitle}</p>}
