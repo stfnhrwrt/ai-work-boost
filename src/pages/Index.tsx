@@ -1,11 +1,24 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, Clock, Copy, Lock, MousePointerClick, ShieldCheck, Sparkles, TrendingDown, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  Copy,
+  Lock,
+  MousePointerClick,
+  ShieldCheck,
+  Sparkles,
+  TrendingDown,
+  Zap,
+} from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RoleCard } from "@/components/RoleCard";
 import { Button } from "@/components/ui/button";
 import { roles, getWorkflowsByRole, workflows } from "@/data/workflows";
+import { taskTypes, getWorkflowsByTaskType, microsoft365Workflows } from "@/data/taskTypes";
+
+const TOOLS = ["Microsoft Copilot", "ChatGPT", "Claude", "Gemini", "Approved internal AI tools"];
 
 const Index = () => {
   const totalWorkflows = workflows.length;
@@ -26,7 +39,6 @@ const Index = () => {
       <main className="flex-1">
         {/* Hero */}
         <section className="relative overflow-hidden bg-hero-gradient">
-          {/* Animated grid + blobs */}
           <div className="absolute inset-0 bg-grid-soft" aria-hidden />
           <div
             className="blob animate-blob bg-primary/30"
@@ -51,61 +63,64 @@ const Index = () => {
                 style={{ ["--i" as string]: 0 }}
               >
                 <Sparkles className="h-3 w-3 text-accent" />
-                Microsoft 365 Copilot · Enterprise workflows
+                A practical library for people at work
               </span>
 
               <h1
                 className="fade-in-up mb-5 text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl"
                 style={{ ["--i" as string]: 1 }}
               >
-                AI-powered enterprise workflows —{" "}
-                <span className="text-gradient-animated">integrated into Microsoft 365</span>
+                Practical AI workflows for{" "}
+                <span className="text-gradient-animated">the work you do every day</span>
               </h1>
 
               <p
-                className="fade-in-up mb-9 text-lg leading-relaxed text-muted-foreground sm:text-xl"
+                className="fade-in-up mb-6 text-lg leading-relaxed text-muted-foreground sm:text-xl"
                 style={{ ["--i" as string]: 2 }}
               >
-                Practical Microsoft 365 Copilot workflows for meeting intelligence,
-                knowledge retrieval and reporting — built to operate within your
-                existing permissions, sensitivity labels and governance controls.
+                Pick a task or your role, copy a prompt, get the job done in 5–10 minutes. Every
+                workflow works with Copilot, ChatGPT, Claude or the AI tools your company has
+                approved.
               </p>
 
-              <p
-                className="fade-in-up mb-9 text-base leading-relaxed text-muted-foreground"
+              <div
+                className="fade-in-up mb-9 flex flex-wrap items-center justify-center gap-2"
                 style={{ ["--i" as string]: 2 }}
               >
-                Pick a role, copy a prompt, get the work done in Copilot — with ChatGPT
-                provided as a manual fallback. All workflows operate within existing
-                Microsoft 365 permissions and security controls.
-              </p>
+                {TOOLS.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-border bg-card/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-sm"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
 
               <div
                 className="fade-in-up flex flex-wrap items-center justify-center gap-3"
                 style={{ ["--i" as string]: 3 }}
               >
                 <Button asChild size="lg" className="h-12 px-7 text-base">
-                  <a href="#roles">
-                    Start a Workflow
+                  <Link to="/workflows">
+                    Browse workflows
                     <ArrowRight className="h-5 w-5" />
-                  </a>
+                  </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="h-12 px-6 text-base">
                   <Link to="/basics">Learn the basics</Link>
                 </Button>
               </div>
 
-              {/* Floating stat chips */}
               <div
                 className="fade-in-up mt-12 flex flex-wrap items-center justify-center gap-3 text-sm"
                 style={{ ["--i" as string]: 4 }}
               >
                 <StatChip value={totalWorkflows.toString()} label="ready-to-run workflows" />
-                <StatChip value={roles.length.toString()} label="roles covered" />
+                <StatChip value={taskTypes.length.toString()} label="task types" />
                 <StatChip value="5–10" label="minutes per task" />
               </div>
 
-              {/* Time-savings note */}
               <p
                 className="fade-in-up mx-auto mt-5 max-w-xl text-xs leading-relaxed text-muted-foreground"
                 style={{ ["--i" as string]: 5 }}
@@ -128,7 +143,7 @@ const Index = () => {
               How it works
             </span>
             <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-              Three steps. No setup.
+              Three steps. No setup, no account.
             </h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-3">
@@ -136,20 +151,20 @@ const Index = () => {
               {
                 icon: MousePointerClick,
                 step: "1",
-                title: "Pick your role",
-                desc: "Executive Assistant, Manager, or Project Manager.",
+                title: "Start with a task or role",
+                desc: "Browse by what you need to get done, or by the job you do.",
               },
               {
                 icon: Clock,
                 step: "2",
-                title: "Choose a task",
+                title: "Choose a workflow",
                 desc: "Real, daily workflows ready to run in under 10 minutes.",
               },
               {
                 icon: Copy,
                 step: "3",
                 title: "Copy the prompt",
-                desc: "Paste into Copilot or ChatGPT and get usable output instantly.",
+                desc: "Paste it into your approved AI assistant and get usable output.",
               },
             ].map((s, idx) => {
               const Icon = s.icon;
@@ -159,7 +174,6 @@ const Index = () => {
                   className="hover-lift fade-in-up group relative flex items-start gap-4 overflow-hidden rounded-xl border border-border bg-card p-6 shadow-card"
                   style={{ ["--i" as string]: idx }}
                 >
-                  {/* Step number watermark */}
                   <span
                     className="pointer-events-none absolute -right-2 -top-4 select-none text-[88px] font-bold leading-none text-primary/5 transition-colors group-hover:text-primary/10"
                     aria-hidden
@@ -173,14 +187,49 @@ const Index = () => {
                     <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                       Step {s.step}
                     </div>
-                    <h3 className="mb-1 text-base font-semibold text-foreground">
-                      {s.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {s.desc}
-                    </p>
+                    <h3 className="mb-1 text-base font-semibold text-foreground">{s.title}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
                   </div>
                 </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Task types */}
+        <section id="tasks" className="container mx-auto scroll-mt-20 px-6 py-16">
+          <div className="mb-10 max-w-2xl">
+            <span className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary">
+              <Zap className="h-3 w-3 text-accent" />
+              Browse by task
+            </span>
+            <h2 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              What do you need to get done?
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              The task comes first. The AI tool is just how you run it.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {taskTypes.map((task, idx) => {
+              const Icon = task.icon;
+              const count = getWorkflowsByTaskType(task.id).length;
+              return (
+                <Link
+                  key={task.id}
+                  to={`/workflows?task=${task.id}`}
+                  className="hover-lift fade-in-up group flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-card"
+                  style={{ ["--i" as string]: idx }}
+                >
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-soft text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mb-1 text-base font-semibold text-foreground">{task.name}</h3>
+                  <p className="mb-4 text-sm text-muted-foreground">{task.tagline}</p>
+                  <span className="mt-auto text-sm text-muted-foreground">
+                    {count} {count === 1 ? "workflow" : "workflows"}
+                  </span>
+                </Link>
               );
             })}
           </div>
@@ -202,102 +251,64 @@ const Index = () => {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {roles.map((role, idx) => (
-              <div
-                key={role.id}
-                className="fade-in-up h-full"
-                style={{ ["--i" as string]: idx }}
-              >
-                <RoleCard
-                  role={role}
-                  workflowCount={getWorkflowsByRole(role.id).length}
-                />
+              <div key={role.id} className="fade-in-up h-full" style={{ ["--i" as string]: idx }}>
+                <RoleCard role={role} workflowCount={getWorkflowsByRole(role.id).length} />
               </div>
             ))}
           </div>
         </section>
 
-        {/* Workflow categories */}
+        {/* Microsoft 365 collection */}
         <section className="container mx-auto px-6 py-16">
-          <div className="mb-10 max-w-2xl">
-            <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-wider text-primary">
-              Core capabilities
-            </span>
-            <h2 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Three workflow areas, one Microsoft 365 backbone
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Every workflow on this site falls into one of these enterprise areas — built on the Copilot capabilities your tenant already supports.
-            </p>
-          </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {[
-              {
-                title: "Meeting Intelligence",
-                desc: "Transform meetings into actionable outcomes using summaries, task extraction and decision tracking.",
-                bullets: [
-                  "Teams transcript summaries",
-                  "Follow-up generation",
-                  "Action-item tracking",
-                ],
-              },
-              {
-                title: "Enterprise Knowledge Retrieval",
-                desc: "Retrieve organizational knowledge across Microsoft 365 while respecting existing permissions and governance controls.",
-                bullets: [
-                  "SharePoint & Teams search",
-                  "Decision retrieval",
-                  "Cross-source summarization",
-                ],
-              },
-              {
-                title: "Workflow Automation",
-                desc: "Connect meetings, documents, reporting and task management into streamlined enterprise workflows.",
-                bullets: [
-                  "Meeting → Planner task",
-                  "Weekly digest creation",
-                  "Reporting automation",
-                ],
-              },
-            ].map((c) => (
-              <div
-                key={c.title}
-                className="hover-lift flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-card"
-              >
-                <h3 className="mb-2 text-lg font-semibold text-foreground">{c.title}</h3>
-                <p className="mb-4 text-sm text-muted-foreground">{c.desc}</p>
-                <ul className="mt-auto space-y-1.5 text-sm text-foreground/80">
-                  {c.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2">
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary" />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
+          <Link
+            to="/copilot-microsoft-365"
+            className="group relative block overflow-hidden rounded-2xl border border-border bg-card p-8 shadow-card transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card-hover sm:p-10"
+          >
+            <div className="relative grid items-center gap-6 sm:grid-cols-3">
+              <div className="sm:col-span-2">
+                <span className="mb-3 inline-block rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+                  Collection
+                </span>
+                <h2 className="mb-2 text-xl font-semibold text-foreground">
+                  Copilot in Microsoft 365 apps
+                </h2>
+                <p className="text-muted-foreground">
+                  {microsoft365Workflows.length} workflows that use Microsoft-specific mechanics:
+                  Copilot agents, scheduled prompts, Outlook rules and Power Automate. Optional — the
+                  rest of the library is tool-agnostic.
+                </p>
               </div>
-            ))}
-          </div>
+              <div className="flex justify-start sm:justify-end">
+                <span className="inline-flex items-center gap-2 font-medium text-primary transition-transform group-hover:translate-x-0.5">
+                  Open the collection
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </div>
+            </div>
+          </Link>
         </section>
 
-        {/* Governance & Security */}
+        {/* Responsible AI */}
         <section id="governance" className="container mx-auto scroll-mt-20 px-6 py-16">
           <div className="grid gap-8 lg:grid-cols-2">
             <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
               <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
                 <ShieldCheck className="h-3 w-3" />
-                Governance &amp; Security
+                Responsible AI
               </span>
               <h2 className="mb-3 text-2xl font-bold tracking-tight text-foreground">
-                Built within your Microsoft 365 controls
+                Built for the rules you already work with
               </h2>
               <p className="mb-5 text-muted-foreground">
-                Microsoft 365 Copilot respects existing permissions, sensitivity labels, governance rules and tenant security policies. Copilot only accesses information users are already authorized to view.
+                Enterprise AI assistants respect existing permissions, sensitivity labels and
+                security policies. They only access information you are already authorized to view.
               </p>
               <ul className="space-y-2.5 text-sm text-foreground/85">
                 {[
                   "Existing permissions remain enforced",
                   "Sensitivity labels remain active",
                   "Compliance policies remain active",
-                  "Tenant isolation remains active",
+                  "Tenant and workspace isolation remains active",
                   "Access controls are inherited",
                 ].map((b) => (
                   <li key={b} className="flex items-start gap-2.5">
@@ -307,39 +318,42 @@ const Index = () => {
                 ))}
               </ul>
               <p className="mt-5 rounded-lg border border-accent/40 bg-accent-soft p-4 text-sm text-foreground">
-                <strong>Copilot does not expand user permissions or bypass organizational security controls.</strong>
+                <strong>AI does not expand your permissions or bypass security controls.</strong>
               </p>
             </div>
 
             <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
               <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold uppercase tracking-wider text-accent-foreground">
                 <ShieldCheck className="h-3 w-3" />
-                Responsible Deployment
+                Use it responsibly
               </span>
               <h2 className="mb-3 text-2xl font-bold tracking-tight text-foreground">
-                Copilot reflects how your tenant is governed
+                A few habits that keep AI usage safe
               </h2>
               <p className="mb-5 text-muted-foreground">
-                Microsoft 365 Copilot reflects existing organizational permissions and governance structures. Overshared environments or poorly managed permissions may increase visibility of existing data exposure risks.
+                AI reflects how your organization is governed. These practices keep results useful
+                and compliant.
               </p>
               <ul className="space-y-2.5 text-sm text-foreground/85">
-                <li className="flex items-start gap-2.5">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  Review SharePoint and OneDrive sharing scopes before rollout.
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  Apply sensitivity labels to confidential and restricted content.
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  Use Microsoft Purview to monitor Copilot interactions and data access.
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  Always require a human review before sending Copilot output externally.
-                </li>
+                {[
+                  "Use only AI tools your organization has approved for work data.",
+                  "Never paste confidential data into a consumer AI tool.",
+                  "Apply sensitivity labels to confidential and restricted content.",
+                  "Always require a human review before sending output externally.",
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    <span>{b}</span>
+                  </li>
+                ))}
               </ul>
+              <Link
+                to="/responsible-ai"
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+              >
+                Read the Responsible AI guidance
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </section>
@@ -359,19 +373,19 @@ const Index = () => {
               <div className="sm:col-span-2">
                 <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
                   <Sparkles className="h-3 w-3 text-accent" />
-                  New · 2-minute read
+                  2-minute read
                 </span>
                 <h3 className="mb-2 text-xl font-semibold text-foreground">
-                  AI Basics — How to Use AI Effectively
+                  AI basics — how to use AI effectively
                 </h3>
                 <p className="text-muted-foreground">
-                  Five short blocks. Learn how to structure a prompt, why Copilot is
-                  different and the common mistakes that ruin results.
+                  Five short blocks. Learn how to structure a prompt, what happens inside an AI model
+                  and the common mistakes that ruin results.
                 </p>
               </div>
               <div className="flex justify-start sm:justify-end">
                 <span className="inline-flex items-center gap-2 font-medium text-primary transition-transform group-hover:translate-x-0.5">
-                  Read AI Basics
+                  Read AI basics
                   <ArrowRight className="h-4 w-4" />
                 </span>
               </div>
